@@ -1,0 +1,725 @@
+<!doctype html>
+<html class="theme-next use-motion">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc4"/>
+
+
+
+
+
+
+    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.3.0rc4" />
+
+
+
+
+  <title> turbo.css -- 高质量css模块化设计 // Hexo </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+    <a href="/" class="brand">
+        <span class="logo">
+          <i class="icon-logo"></i>
+        </span>
+        <span class="site-title">Hexo</span>
+    </a>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          Home
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          Archives
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          Tags
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              turbo.css -- 高质量css模块化设计
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+          <span class="post-time">
+            
+              Posted on 2015-03-09
+            
+          </span>
+        
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <h2 id="css也要模块化？"><a href="#css也要模块化？" class="headerlink" title="css也要模块化？"></a><strong>css也要模块化？</strong></h2><p>css命名对html的模块化，标准化与网站维护成本起到决定性的作用，特别对于很多大型复杂站点来说，在经过大量的后期需求变更与维护后，css已然变得面目全非。没有前期合理的架构，导致后期无法灵活的适应需求变更，让维护工作成为“打补丁”、“填漏洞”。还在为 <code>box_right</code>，<code>color_yellow</code>这种命名方式头疼吗？ html模块化，从css模块化开始！</p>
+<h2 id="css模块化优点"><a href="#css模块化优点" class="headerlink" title="css模块化优点"></a><strong>css模块化优点</strong></h2><ol>
+<li>减少页面样式与通用或外部插件样式冲突的几率</li>
+<li>分组管理，解放命名局限性</li>
+<li>提高多人协作时代码可阅读性</li>
+<li>仅通过css结构即可大致了解html结构与模块划分</li>
+<li>降低后期维护成本</li>
+<li>解放html，用css掌控一切！</li>
+</ol>
+<h2 id="命名分隔符"><a href="#命名分隔符" class="headerlink" title="命名分隔符"></a><strong>命名分隔符</strong></h2><p>首先，严格规范分隔符用法，可以用-或_作为命名分隔符，以下以-为例：</p>
+<pre><code>.[分组]-[类型]-[描述]
+</code></pre><p>在turboCSS中，分隔符不再随意的用来做单词分隔，而是赋予了关键性作用。例如：</p>
+<pre><code>.f-search-md
+</code></pre><p><code>[f]</code>表示该样式所处的分组（后面会详细介绍），<code>[search]</code> 表示该样式的类型，<code>[md]</code>则为该类型的描述。在同一个类型出现第一次时，我们一般只需使用 <code>f-search</code> 即可。而中间的 <code>[类型]</code> 尽量避免使用一些具体的业务命名，如</p>
+<pre><code>.g-newslist //错误写法，如果同样的样式用在攻略，排行榜等，则与news新闻意义不符
+</code></pre><p>尽量使用描述该类型最本质的单词</p>
+<pre><code>.g-textlist //文字列表 
+</code></pre><p>第二个-后的 <code>[描述]</code> 也尽量不要用到具体的业务命名，如</p>
+<pre><code>.f-search-hot //错误写法，当前搜索模块用于热门搜索，可同样的样式后期可能用于任何地方
+</code></pre><p>使用数字或字母区分多种不同的search类型，摆脱业务限制，如</p>
+<pre><code>.f-search-2
+</code></pre><p>或者</p>
+<pre><code>.f-search-a
+</code></pre><p>当你十分确定一个样式只可能用于一个具体业务时，才可使用 <code>f-search-hot</code> 这样的命名（不推荐）</p>
+<a id="more"></a>
+<h2 id="如何进行模块化"><a href="#如何进行模块化" class="headerlink" title="如何进行模块化"></a><strong>如何进行模块化</strong></h2><p>首先，将页面样式以通用性为指标进行分组，根据页面复杂程度，适当调整分组细分力度，以下详细介绍各分组作用（通用性由高到低排列）</p>
+<p><strong><code>[f-]</code> frame(跨页面级通用框架样式)</strong></p>
+<p>以[f-]为前缀的样式，代表该结构为页面级别框架结构，例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.f-topbar</span>&#123;</span><br><span class="line">	<span class="comment">/*通用顶部条*/</span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="selector-class">.f-header</span>&#123;</span><br><span class="line">	<span class="comment">/*通用头部*/</span></span><br><span class="line">&#125;  </span><br><span class="line"><span class="selector-class">.f-nav</span>&#123;</span><br><span class="line">	<span class="comment">/*通用导航*/</span></span><br><span class="line">&#125;     </span><br><span class="line"><span class="selector-class">.f-categroy</span>&#123;</span><br><span class="line">	<span class="comment">/*通用分类导航*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.f-crumb</span>&#123;</span><br><span class="line">	<span class="comment">/*通用面包屑导航*/</span></span><br><span class="line">&#125;     </span><br><span class="line"><span class="selector-class">.f-footer</span>&#123;</span><br><span class="line">	<span class="comment">/*通用底部*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.f-box</span>&#123;</span><br><span class="line">	<span class="comment">/*通用盒子*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>[w-]</code> widget(页面级通用组件样式)</strong></p>
+<p>以[w-]为前缀的样式，代表该结构为页面通用组件或小挂件，通常绑定JS交互操作，例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.w-slide</span>&#123;</span><br><span class="line">	<span class="comment">/*幻灯片组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-paging</span>&#123;</span><br><span class="line">	<span class="comment">/*静态分页组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-tab</span>&#123;</span><br><span class="line">	<span class="comment">/*标签切换组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-modal</span>&#123;</span><br><span class="line">	<span class="comment">/*模态框组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-dialog</span>&#123;</span><br><span class="line">	<span class="comment">/*对话框组件，模态框组件其中一种*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-scroll</span>&#123;</span><br><span class="line">	<span class="comment">/*自定义滚动条组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-select</span>&#123;</span><br><span class="line">	<span class="comment">/*自定义下拉框组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-toggle</span>&#123;</span><br><span class="line">	<span class="comment">/*折叠组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-share</span>&#123;</span><br><span class="line">	<span class="comment">/*分享组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-bookmark</span>&#123;</span><br><span class="line">	<span class="comment">/*收藏组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-copy</span>&#123;</span><br><span class="line">	<span class="comment">/*复制组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-backtop</span>&#123;</span><br><span class="line">	<span class="comment">/*回到顶部组件*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.w-loadmore</span>&#123;</span><br><span class="line">	<span class="comment">/*加载更多组件*/</span>	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>[g-]</code> global(页面级通用内容样式)</strong></p>
+<p>以[g-]为前缀的样式，代表该结构为页面级通用 <code>内容</code> 模块，多数为数据通过 <code>后台输出</code> 的模块，常用于循环输出的ul列表上，如：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.g-textlist</span>&#123;</span><br><span class="line">	<span class="comment">/*通用文字列表*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-imglist</span>&#123;</span><br><span class="line">	<span class="comment">/*通用图文列表*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-medialist</span>&#123;</span><br><span class="line">	<span class="comment">/*富媒体（复杂图文）列表*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-icon</span>&#123;</span><br><span class="line">	<span class="comment">/*通用图标*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-icon-16x</span>&#123;</span><br><span class="line">	<span class="comment">/*16x16图标组*/</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="selector-class">.g-btn</span>&#123;</span><br><span class="line">	<span class="comment">/*通用按钮*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-btn-a</span>&#123;</span><br><span class="line">	<span class="comment">/*a类型按钮*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-btn-submit</span>&#123;</span><br><span class="line">	<span class="comment">/*提交按钮*/</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="selector-class">.g-group</span>&#123;</span><br><span class="line">	<span class="comment">/*元件组*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-panel</span>&#123;</span><br><span class="line">	<span class="comment">/*面板组*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-form</span>&#123;</span><br><span class="line">	<span class="comment">/*通用表单*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-table</span>&#123;</span><br><span class="line">	<span class="comment">/*通用表格*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-itext</span>&#123;</span><br><span class="line">	<span class="comment">/*通用单行文本框*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-iarea</span>&#123;</span><br><span class="line">	<span class="comment">/*通用多行文本框*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-tags</span>&#123;</span><br><span class="line">	<span class="comment">/*通用标签*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.g-tips</span>&#123;</span><br><span class="line">	<span class="comment">/*通用提示标签*/</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><strong><code>[m-]</code> module(业务级模块样式)</strong></p>
+<p>上诉<code>[f-]</code>、<code>[w-]</code>、<code>[g-]</code>均不能受具体业务影响命名，而以[m-]为前缀的样式，代表该结构为普通 <code>业务</code> 模块，可以使用具体的业务命名来划分网站模块，<code>[m-]</code>作为一个灵活的模块载体，可以包容组件模块，内容模块，也可与其他小模块组建成大模块，常见的命名：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.m-search</span>&#123;</span><br><span class="line">	<span class="comment">/*搜索模块*/</span></span><br><span class="line">	<span class="comment">/*注意:f-search为跨页面级别搜索模块，通用性更强，而m-search即为普通搜索模块，尚不知其后期通用性*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-topic</span>&#123;</span><br><span class="line">	<span class="comment">/*头条新闻模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-article</span>&#123;</span><br><span class="line">	<span class="comment">/*文章模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-rank</span>&#123;</span><br><span class="line">	<span class="comment">/*排行榜模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-vote</span>&#123;</span><br><span class="line">	<span class="comment">/*投票模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-special</span>&#123;</span><br><span class="line">	<span class="comment">/*专题模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-video</span>&#123;</span><br><span class="line">	<span class="comment">/*视频模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-comment</span>&#123;</span><br><span class="line">	<span class="comment">/*评论模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-popular</span>&#123;</span><br><span class="line">	<span class="comment">/*热门搜索模块*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.m-feedback</span>&#123;</span><br><span class="line">	<span class="comment">/*意见反馈模块*/</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><strong><code>[l-]</code> layout(页面布局样式)</strong></p>
+<p>当一个页面的布局十分复杂时，如果你还在使用 <code>main</code>、<code>section</code>、<code>aside</code>这样的命名来划分列，往往是不够用的，这时可引入 <code>[l-]</code> 布局分组，若与设计师协商参与，将页面按照栅格化标准设计，那么 <code>[l-]</code> 将升级为栅格化布局体系，例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.l-grid</span>&#123;</span><br><span class="line">	<span class="comment">/*栅格主体，表示子元素采用栅格布局*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.l-row</span>&#123;</span><br><span class="line">	<span class="comment">/*行（用来包裹混合列，清除浮动）*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.l-col</span>&#123;</span><br><span class="line">	<span class="comment">/*列（可设置默认值，常带有宽度命名）*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.l-col-320</span>&#123;</span><br><span class="line">	<span class="comment">/*宽度为320px的列*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.l-col-6</span>&#123;</span><br><span class="line">	<span class="comment">/*栅格系统中的6格宽度列，如使用的是960栅格系统，该列宽度则为460px*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>[c-]</code> control(脚本控制与状态样式)</strong></p>
+<p>以[c-]为前缀的样式，代表该样式为脚本交互控制的样式，例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.c-fluid</span>&#123;</span><br><span class="line">	<span class="comment">/*响应式布局切换*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-active</span>&#123;</span><br><span class="line">	<span class="comment">/*激活状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-focus</span>&#123;</span><br><span class="line">	<span class="comment">/*聚焦状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-blur</span>&#123;</span><br><span class="line">	<span class="comment">/*失焦状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-disabled</span>&#123;</span><br><span class="line">	<span class="comment">/*不可用状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-info</span>&#123;</span><br><span class="line">	<span class="comment">/*普通状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-success</span>&#123;</span><br><span class="line">	<span class="comment">/*成功状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-error</span>&#123;</span><br><span class="line">	<span class="comment">/*错误，失败状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-warning</span>&#123;</span><br><span class="line">	<span class="comment">/*警告*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-loading</span>&#123;</span><br><span class="line">	<span class="comment">/*加载中状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-static</span>&#123;</span><br><span class="line">	<span class="comment">/*静态定位*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-fixed</span>&#123;</span><br><span class="line">	<span class="comment">/*固定定位*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-open</span>&#123;</span><br><span class="line">	<span class="comment">/*打开状态*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.c-close</span>&#123;</span><br><span class="line">	<span class="comment">/*关闭状态*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>[p-]</code> patch(补丁样式)</strong></p>
+<p>当页面需要大量不同类型的补丁样式时，可引入 <code>[p-]</code> 分组，例：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.p-left</span>&#123;</span><br><span class="line">	<span class="comment">/*左浮动*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.p-right</span>&#123;</span><br><span class="line">	<span class="comment">/*右浮动*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.p-mt10</span>&#123;</span><br><span class="line">	<span class="comment">/*margin-top:10px*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.p-pl20</span>&#123;</span><br><span class="line">	<span class="comment">/*padding-left:20*/</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>未完待续…</p>
+
+        
+
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc">
+          Table Of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          Overview
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="John Doe" />
+        <p class="site-author-name">John Doe</p>
+      </div>
+      <p class="site-description motion-element"></p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">0</span>
+            <span class="site-state-item-name">tags</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">1</span>
+            <span class="site-state-item-name">pages</span>
+        </div>
+      </div>
+
+      
+
+      <div class="social-info motion-element">
+        
+      </div>
+
+    </div>
+
+    
+      <div class="post-toc sidebar-panel-active">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#css也要模块化？"><span class="nav-number">1.</span> <span class="nav-text">css也要模块化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css模块化优点"><span class="nav-number">2.</span> <span class="nav-text">css模块化优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命名分隔符"><span class="nav-number">3.</span> <span class="nav-text">命名分隔符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何进行模块化"><span class="nav-number">4.</span> <span class="nav-text">如何进行模块化</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">John Doe</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function isDesktop () {
+    return screen.width > 991;
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767;
+  }
+
+  function isMobile () {
+    return screen.width < 767;
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.show', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.hide', function () {
+
+      });
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, SIDEBAR_DISPLAY_DURATION);
+      sidebar.trigger('sidebar.show');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.trigger('sidebar.hide');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      $('.post').velocity('transition.slideDownIn', {stagger: 300, drag: true});
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if ($('.post-toc').html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var activeCurrentSelector = '.active-current';
+
+    $(tocSelector)
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass()
+        $currentActiveElement.addClass('active-current');
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass()
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    $('body').scrollspy({ target: tocSelector });
+  });
+</script>
+
+
+
+  
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:""};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+  
+</body>
+</html>

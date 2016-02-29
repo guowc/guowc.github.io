@@ -1,0 +1,801 @@
+<!doctype html>
+<html class="theme-next use-motion">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc4"/>
+
+
+
+
+
+
+    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.3.0rc4" />
+
+
+
+
+  <title> ReactJS 快速入门 // Hexo </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+    <a href="/" class="brand">
+        <span class="logo">
+          <i class="icon-logo"></i>
+        </span>
+        <span class="site-title">Hexo</span>
+    </a>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          Home
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          Archives
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          Tags
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              ReactJS 快速入门
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+          <span class="post-time">
+            
+              Posted on 2015-03-04
+            
+          </span>
+        
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <p><a href="http://facebook.github.io/react/" target="_blank" rel="external">React</a> 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。</p>
+<p>相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：</p>
+<blockquote>
+<p>Less is more.</p>
+</blockquote>
+<p>但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不多说，让我们进入正题。首先，让我们来了解下 React 中使用到的一些术语。</p>
+<h2 id="React-术语"><a href="#React-术语" class="headerlink" title="React 术语"></a><strong>React 术语</strong></h2><ul>
+<li><p>React Elements</p>
+<p>  代表 HTML 元素的 JavaScript 对象。 这些 JavaScript 对象最后被编译成对应的 HTML 元素。</p>
+</li>
+<li><p>Components</p>
+<p>  封装 React Elements， 包含一个或者多个 React Elements。 Components 用于创建可以复用的 UI 模块，例如 分页，侧栏导航等。</p>
+</li>
+</ul>
+<ul>
+<li><p>JSX</p>
+<p>  JSX 是 React 定义的一种 JavaScript 语法扩展，类似于 XML 。 JSX 是可选的， 我们完全可以使用 JavaScript 来编写 React 应用， 不过 JSX 提供了一套更为简便的方式来写 React 应用。</p>
+</li>
+</ul>
+<ul>
+<li><p>Virtual DOM</p>
+<p>  Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。 React 使用 Virtual DOM 来渲染 UI， 同时监听 Virtual DOM 上数据的变化并自动迁移这些变化到 UI 上。</p>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="demo-环境准备"><a href="#demo-环境准备" class="headerlink" title="demo 环境准备"></a><strong>demo 环境准备</strong></h2><p>首先，在 React Download 页面 下载 Starter Kit，解压到某个地方。</p>
+<p>进入到解压后的 <code>build</code> 目录，新建一个 <code>index.html</code> 文件，并且引用 <code>react.js</code> 和 <code>JSXTransformer.js</code> 后就可以开始编写 React 应用了。需要注意如果使用 JSX， 那么 <code>script</code> 标签的 <code>type</code> 应该更改为 <code>text/jsx</code>。</p>
+<pre><code>&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot; &gt;
+&lt;title&gt;demo&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script src=&quot;react.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;JSXTransformer.js&quot;&gt;&lt;/script&gt;
+    &lt;script type=&quot;text/jsx&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+</code></pre><h2 id="第一个-React-Element"><a href="#第一个-React-Element" class="headerlink" title="第一个 React Element"></a><strong>第一个 React Element</strong></h2><p>创建一个 Element 只需调用 React.createElement 方法，并传入元素信息即可。例如：</p>
+<pre><code>var div = React.createElement(&apos;div&apos;, null, &quot;Hello React&quot;);
+
+// 使用 JSX
+var div = &lt;div&gt;Hello React&lt;/div&gt;
+</code></pre><p>创建之后就可以调用 <code>React.render</code> 方法渲染到页面上：</p>
+<pre><code>React.render(div, document.body);
+</code></pre><h2 id="第一个-React-Component"><a href="#第一个-React-Component" class="headerlink" title="第一个 React Component"></a><strong>第一个 React Component</strong></h2><p>React Component 抽象出相同 UI 组件的结构和逻辑。 通过调用 <code>React.createClass</code> 方法来创建一个 Component，并传入一个带有 <code>render</code> 方法的对象类型的参数。</p>
+<pre><code>var HelloMessage = React.createClass({
+  render: function () {
+    return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;
+  }
+});
+
+React.render(&lt;HelloMessage name=&quot;iissnan&quot; /&gt;, document.body);
+</code></pre><p>我们看到 <code>React.createClass</code> 接收了一个对象，并将这个方法返回赋值给 <code>HelloMessage</code>， 最后调用 <code>React.render</code> 方法将这个新建的 Component 渲染到页面上。从这个例子看来，一个 Component 与 Element 并无太大的差别。 事实上， Component 已经准备好了，我们可以增添一些结构和功能来扩展这个 Component 。</p>
+<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a><strong>Props</strong></h2><p>在上一个例子中，可以看到有一个特殊的引用： <code>this.props.name</code>。 这个引用称之为 <code>Props</code>，可以将他想象成 Component 的设置选项。</p>
+<p>在使用上， <code>Props</code> 类似于 HTML 中的属性：</p>
+<pre><code>React.render(&lt;HelloMessage name=&quot;foo&quot; /&gt;, document.body);
+</code></pre><p>在 Component 内部，通过 <code>this.props.name</code> 来引用这个 <code>Props</code>：</p>
+<pre><code>var HelloMessage = React.createClass({
+  render: function () {
+    return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;
+  }
+});
+</code></pre><p>需要注意的是， Props 仅用来定制 Component， 这些数据不应该被改动。 如果涉及到需要做改动的数据， 得考虑使用 <code>state</code>。</p>
+<h2 id="Stateful-Component"><a href="#Stateful-Component" class="headerlink" title="Stateful Component"></a><strong>Stateful Component</strong></h2><p>State 数据代表 Component 的状态， 用于维护 Component 内部的状态。 当 State 发生改变之后， React 将会重新渲染 UI 。调用 与 <code>Props</code> 类似， State 数据通过 <code>this.state</code> 访问：</p>
+<pre><code>var Greeting = React.createClass({
+  getInitialState: function () {
+    return { greeted: false };
+  },
+  greet: function () {
+    this.setState({
+      greeted: true
+    });
+  },
+  render: function () {
+    var response = this.state.greeted ? &apos;Hi&apos; : &apos;&apos;;
+
+    return (
+      &lt;div&gt;
+        &lt;div&gt;Hello {this.props.name}&lt;/div&gt;
+        &lt;span&gt;{response}&lt;/span&gt;
+        &lt;button onClick={this.greet}&gt;Hi&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+});
+
+React.render(&lt;Greeting name=&quot;foo&quot; /&gt;, document.body);
+</code></pre><p>这个例子中加了几个函数，我们一一来看下。 首先是 <code>getInitialState</code> ， 这个方法在 Component 初始化的时候被调用， 返回 Component 初始时的状态数据。例子中，我们设置了 Component 初始时的 <code>greeted</code> 为 <code>false</code>。<br>然后是 <code>greet</code> 方法，这个方法被调用之后将修改状态数据 <code>greeted</code> 为 <code>true</code>。</p>
+<p>当 State 发生改变后， React 将 Component 渲染到 Virtual DOM，新的 Virtual DOM 与 旧版本的进行比对，检查出改变的部分并更新浏览器的 DOM。 在这个例子中，当按钮被点击后， <code>greeted</code>状态数据发生了变化，UI 跟随着更新。</p>
+<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a><strong>组合</strong></h2><p>结合 Props 和 State，我们就可以使用 Component 来创建完整的应用。</p>
+<pre><code>var Greeting = React.createClass({
+  getInitialState: function () {
+    return { greeted: false };
+  },
+  greet: function () {
+    this.setState({
+      greeted: true
+    });
+  },
+  render: function () {
+    var response = this.state.greeted ? &apos;Hi&apos; : &apos;&apos;;
+
+    return (
+      &lt;div&gt;
+        &lt;div&gt;Hello {this.props.name}&lt;/div&gt;
+        &lt;span&gt;{response}&lt;/span&gt;
+        &lt;button onClick={this.greet}&gt;Hi&lt;/button&gt;
+      &lt;/div&gt;
+    );
+  }
+});
+
+var users = [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;];
+
+var GreetingApp = React.createClass({
+  render: function () {
+    var greetings = this.props.users.map(function (user) {
+      return &lt;Greeting name={user} /&gt;;
+    });
+
+    return &lt;div&gt;{greetings}&lt;/div&gt;;
+  }
+});
+
+React.render(&lt;GreetingApp users={users} /&gt;, document.body);
+</code></pre>
+        
+
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc">
+          Table Of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          Overview
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="John Doe" />
+        <p class="site-author-name">John Doe</p>
+      </div>
+      <p class="site-description motion-element"></p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">0</span>
+            <span class="site-state-item-name">tags</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">1</span>
+            <span class="site-state-item-name">pages</span>
+        </div>
+      </div>
+
+      
+
+      <div class="social-info motion-element">
+        
+      </div>
+
+    </div>
+
+    
+      <div class="post-toc sidebar-panel-active">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-术语"><span class="nav-number">1.</span> <span class="nav-text">React 术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-环境准备"><span class="nav-number">2.</span> <span class="nav-text">demo 环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个-React-Element"><span class="nav-number">3.</span> <span class="nav-text">第一个 React Element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个-React-Component"><span class="nav-number">4.</span> <span class="nav-text">第一个 React Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Props"><span class="nav-number">5.</span> <span class="nav-text">Props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stateful-Component"><span class="nav-number">6.</span> <span class="nav-text">Stateful Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合"><span class="nav-number">7.</span> <span class="nav-text">组合</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">John Doe</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function isDesktop () {
+    return screen.width > 991;
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767;
+  }
+
+  function isMobile () {
+    return screen.width < 767;
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.show', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.hide', function () {
+
+      });
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, SIDEBAR_DISPLAY_DURATION);
+      sidebar.trigger('sidebar.show');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.trigger('sidebar.hide');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      $('.post').velocity('transition.slideDownIn', {stagger: 300, drag: true});
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if ($('.post-toc').html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var activeCurrentSelector = '.active-current';
+
+    $(tocSelector)
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass()
+        $currentActiveElement.addClass('active-current');
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass()
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    $('body').scrollspy({ target: tocSelector });
+  });
+</script>
+
+
+
+  
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:""};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+  
+</body>
+</html>
