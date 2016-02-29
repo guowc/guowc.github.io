@@ -25,13 +25,11 @@
 
 
 
-  <title> Hexo </title>
+  <title> Hello World // Hexo </title>
 </head>
 
 <body>
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <div id="header" class="header">
@@ -88,7 +86,6 @@
           <div id="posts" class="posts-expand">
             
   
-    
 
   <div class="post post-type-normal ">
     <div class="post-header">
@@ -99,345 +96,7 @@
           
           
             
-              <a class="post-title-link" href="/2015/03/09/pure-html-css/">
-                turbo.css -- 高质量css模块化设计
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-          <span class="post-time">
-            
-              Posted on 2015-03-09
-            
-          </span>
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/09/pure-html-css/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/09/pure-html-css/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    
-      <div class="post-body">
-
-        
-        
-
-        
-          <h2 id="css也要模块化？"><a href="#css也要模块化？" class="headerlink" title="css也要模块化？"></a><strong>css也要模块化？</strong></h2><p>css命名对html的模块化，标准化与网站维护成本起到决定性的作用，特别对于很多大型复杂站点来说，在经过大量的后期需求变更与维护后，css已然变得面目全非。没有前期合理的架构，导致后期无法灵活的适应需求变更，让维护工作成为“打补丁”、“填漏洞”。还在为 <code>box_right</code>，<code>color_yellow</code>这种命名方式头疼吗？ html模块化，从css模块化开始！</p>
-<h2 id="css模块化优点"><a href="#css模块化优点" class="headerlink" title="css模块化优点"></a><strong>css模块化优点</strong></h2><ol>
-<li>减少页面样式与通用或外部插件样式冲突的几率</li>
-<li>分组管理，解放命名局限性</li>
-<li>提高多人协作时代码可阅读性</li>
-<li>仅通过css结构即可大致了解html结构与模块划分</li>
-<li>降低后期维护成本</li>
-<li>解放html，用css掌控一切！</li>
-</ol>
-<h2 id="命名分隔符"><a href="#命名分隔符" class="headerlink" title="命名分隔符"></a><strong>命名分隔符</strong></h2><p>首先，严格规范分隔符用法，可以用-或_作为命名分隔符，以下以-为例：</p>
-<pre><code>.[分组]-[类型]-[描述]
-</code></pre><p>在turboCSS中，分隔符不再随意的用来做单词分隔，而是赋予了关键性作用。例如：</p>
-<pre><code>.f-search-md
-</code></pre><p><code>[f]</code>表示该样式所处的分组（后面会详细介绍），<code>[search]</code> 表示该样式的类型，<code>[md]</code>则为该类型的描述。在同一个类型出现第一次时，我们一般只需使用 <code>f-search</code> 即可。而中间的 <code>[类型]</code> 尽量避免使用一些具体的业务命名，如</p>
-<pre><code>.g-newslist //错误写法，如果同样的样式用在攻略，排行榜等，则与news新闻意义不符
-</code></pre><p>尽量使用描述该类型最本质的单词</p>
-<pre><code>.g-textlist //文字列表 
-</code></pre><p>第二个-后的 <code>[描述]</code> 也尽量不要用到具体的业务命名，如</p>
-<pre><code>.f-search-hot //错误写法，当前搜索模块用于热门搜索，可同样的样式后期可能用于任何地方
-</code></pre><p>使用数字或字母区分多种不同的search类型，摆脱业务限制，如</p>
-<pre><code>.f-search-2
-</code></pre><p>或者</p>
-<pre><code>.f-search-a
-</code></pre><p>当你十分确定一个样式只可能用于一个具体业务时，才可使用 <code>f-search-hot</code> 这样的命名（不推荐）</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/09/pure-html-css/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-
-      </div>
-    
-
-    
-      <div class="post-footer">
-        
-
-        
-
-        
-          <div class="post-eof the-shape"></div>
-        
-      </div>
-    
-  </div>
-
-
-  
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/06/build-hexo/">
-                手把手教你快速搭建Hexo+Github静态博客
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-          <span class="post-time">
-            
-              Posted on 2015-03-06
-            
-          </span>
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/06/build-hexo/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/06/build-hexo/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    
-      <div class="post-body">
-
-        
-        
-
-        
-          <h2 id="安装GIT"><a href="#安装GIT" class="headerlink" title="安装GIT"></a><strong>安装GIT</strong></h2><p>下载 <a href="http://code.google.com/p/msysgit/">msysgit</a> 安装。</p>
-<h2 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a><strong>安装Node.js</strong></h2><p>windows环境下，下载 <a href="http://nodejs.org/">nodeJS</a> 安装。</p>
-<h2 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a><strong>安装hexo</strong></h2><p>利用 npm 命令安装hexo。（在任意位置点击鼠标右键，选择Git bash）</p>
-<pre><code>npm install -g hexo
-</code></pre><h2 id="创建hexo文件夹"><a href="#创建hexo文件夹" class="headerlink" title="创建hexo文件夹"></a><strong>创建hexo文件夹</strong></h2><p>在你喜欢的位置新建hexo文件夹（如<code>F:/hexoblog</code>），在文件夹内右键Git Bash，初始化hexo</p>
-<pre><code>hexo init
-</code></pre><h2 id="安装依赖包"><a href="#安装依赖包" class="headerlink" title="安装依赖包"></a><strong>安装依赖包</strong></h2><pre><code>npm install
-</code></pre><h2 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a><strong>本地预览</strong></h2><p>至此hexo的全部本地环境已搭建完毕，在项目文件根目录执行以下命令，在localhost:4000预览效果</p>
-<pre><code>hexo generate
-hexo server
-</code></pre>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/06/build-hexo/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-
-      </div>
-    
-
-    
-      <div class="post-footer">
-        
-
-        
-
-        
-          <div class="post-eof the-shape"></div>
-        
-      </div>
-    
-  </div>
-
-
-  
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/05/yuanxiao/">
-                深夜的办公室
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-          <span class="post-time">
-            
-              Posted on 2015-03-05
-            
-          </span>
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/05/yuanxiao/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/05/yuanxiao/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    
-      <div class="post-body">
-
-        
-        
-
-        
-          <p><img src="/img/zaochun.jpg" alt="(拍摄于 2015/03/23 4399)"></p>
-<center>(2015/03/23 - 厦门 4399-UED)</center>
-        
-
-      </div>
-    
-
-    
-      <div class="post-footer">
-        
-
-        
-
-        
-          <div class="post-eof the-shape"></div>
-        
-      </div>
-    
-  </div>
-
-
-  
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/03/04/ReactJS/">
-                ReactJS 快速入门
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-          <span class="post-time">
-            
-              Posted on 2015-03-04
-            
-          </span>
-        
-          
-            <span class="post-comments-count">
-            &nbsp; | &nbsp;
-            <a href="/2015/03/04/ReactJS/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/04/ReactJS/"></span>
-            </a>
-          </span>
-          
-        
-      </div>
-    </div>
-
-    
-      <div class="post-body">
-
-        
-        
-
-        
-          <p><a href="http://facebook.github.io/react/">React</a> 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。</p>
-<p>相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：</p>
-<blockquote>
-<p>Less is more.</p>
-</blockquote>
-<p>但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不多说，让我们进入正题。首先，让我们来了解下 React 中使用到的一些术语。</p>
-<h2 id="React-术语"><a href="#React-术语" class="headerlink" title="React 术语"></a><strong>React 术语</strong></h2><ul>
-<li><p>React Elements</p>
-<p>  代表 HTML 元素的 JavaScript 对象。 这些 JavaScript 对象最后被编译成对应的 HTML 元素。</p>
-</li>
-<li><p>Components</p>
-<p>  封装 React Elements， 包含一个或者多个 React Elements。 Components 用于创建可以复用的 UI 模块，例如 分页，侧栏导航等。</p>
-</li>
-</ul>
-<ul>
-<li><p>JSX</p>
-<p>  JSX 是 React 定义的一种 JavaScript 语法扩展，类似于 XML 。 JSX 是可选的， 我们完全可以使用 JavaScript 来编写 React 应用， 不过 JSX 提供了一套更为简便的方式来写 React 应用。</p>
-</li>
-</ul>
-<ul>
-<li><p>Virtual DOM</p>
-<p>  Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。 React 使用 Virtual DOM 来渲染 UI， 同时监听 Virtual DOM 上数据的变化并自动迁移这些变化到 UI 上。</p>
-</li>
-</ul>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/04/ReactJS/#more">
-              Read more &raquo;
-            </a>
-          </div>
-        
-
-      </div>
-    
-
-    
-      <div class="post-footer">
-        
-
-        
-
-        
-          <div class="post-eof the-shape"></div>
-        
-      </div>
-    
-  </div>
-
-
-  
-    
-
-  <div class="post post-type-normal ">
-    <div class="post-header">
-
-      
-      
-        <h1 class="post-title">
-          
-          
-            
-              <a class="post-title-link" href="/2015/02/09/hello-world/">
-                Hello World
-              </a>
+              Hello World
             
           
         </h1>
@@ -491,13 +150,21 @@ hexo server
         
 
         
-          <div class="post-eof the-shape"></div>
-        
       </div>
     
   </div>
 
 
+
+  
+    <div class="comments" id="comments">
+      
+        <div class="ds-thread" data-thread-key="2015/02/09/hello-world/"
+             data-title="Hello World" data-url="http://yoursite.com/2015/02/09/hello-world/">
+        </div>
+
+      
+    </div>
   
 
           </div>
@@ -517,6 +184,15 @@ hexo server
 <div id="sidebar" class="sidebar">
   <div class="sidebar-inner">
 
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc">
+          Table Of Contents
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          Overview
+        </li>
+      </ul>
     
 
     <div class="site-overview">
@@ -548,6 +224,10 @@ hexo server
 
     </div>
 
+    
+      <div class="post-toc sidebar-panel-active">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+      </div>
     
   </div>
 </div>
@@ -620,17 +300,6 @@ hexo server
   <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
   
-  <script type="text/javascript" id="motion.page.home">
-    $(document).ready(function () {
-      $.Velocity.RunSequence([
-        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
-        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
-        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200, sequenceQueue: false } }
-      ]);
-      $('.menu-item').velocity('transition.slideDownIn', {display: null});
-    });
-  </script>
-
 
   <script type="text/javascript" id="motion.global">
   $(document).ready(function () {
@@ -743,6 +412,265 @@ hexo server
 
 
   
+  
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if ($('.post-toc').html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var activeCurrentSelector = '.active-current';
+
+    $(tocSelector)
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass()
+        $currentActiveElement.addClass('active-current');
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass()
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    $('body').scrollspy({ target: tocSelector });
+  });
+</script>
+
+
 
   
 
