@@ -52,7 +52,7 @@
       <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
-          Home
+          Accueil
         </a>
       </li>
     
@@ -99,6 +99,125 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/01/react-simple-game/">
+                用React编写一款简单的赛车游戏
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+          <span class="post-time">
+            
+              Posté le 2016-03-01
+            
+          </span>
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/01/react-simple-game/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/01/react-simple-game/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <p>最近研究egret引擎时，在论坛看到了用egret引擎写的一款<a href="http://xsstomy.com/egretprojects/courses/yilupingan/">赛车游戏</a><br>玩法其实很简单，双车道左右躲避来车，碰撞即游戏失败，用egret编写这样一款游戏较为复杂，我们尝试用React来编写这款简单的赛车游戏</p>
+<p>本教程更多在于展示React的特性和游戏编写过程中的思维逻辑，如有错误欢迎拍砖。<br>下面将为大家一步步讲解，如何用React写出一款纯js+css的小游戏。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>本教程游戏素材下载：<a href="http://htmljs.b0.upaiyun.com/uploads/1453125021031-d3d03a6b5c9462551de5edc4b2997a5b.gif">素材下载</a></p>
+<p>本教程使用React 0.14版本，对React不熟悉的童鞋可以先看下<a href="http://www.ruanyifeng.com/blog/2015/03/react.html">阮一峰React入门</a>，或者极客学院的<a href="http://www.jikexueyuan.com/course/reactjs/">视频教程</a></p>
+<p><strong>一、React基本结构</strong></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script src=&quot;../build/react.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../build/react-dom.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../build/browser.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;reactGame&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/babel&quot;&gt;
+     // ** code **
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>可以看到Html代码非常简单，我们只留了一个</p>
+<pre><code>&lt;div id=&quot;reactGame&quot;&gt;&lt;/div&gt;
+</code></pre><p>作为React渲染后插入的节点，所有的代码均写在JS中。<br>大家注意到script标签的type为text/babel，由于React使用JSX语法，browser.min.js用于将JSX语法转化为javascript语法。</p>
+<p><strong>二、创建第一个React组件</strong></p>
+<pre><code>&lt;script type=&quot;text/babel&quot;&gt;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0
+        }
+    },
+    render : function(){
+        return &lt;div className=&quot;board&quot;&gt;
+            &lt;div className=&quot;roadbed&quot;&gt;&lt;/div&gt;
+            &lt;div className=&quot;road&quot;}&gt;
+                &lt;div className=&quot;hero&quot;&gt;&lt;/div&gt;
+                &lt;div className=&quot;enemy&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span className=&quot;start&quot;&gt;&lt;/span&gt;
+            &lt;span className=&quot;kilo&quot;&gt;&lt;/span&gt;
+            &lt;div className=&quot;failbub&quot;&gt;
+                &lt;span className=&quot;failtext&quot;&gt;&lt;/span&gt;
+                &lt;span className=&quot;retry&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/01/react-simple-game/#more">
+              Lire la suite &raquo;
+            </a>
+          </div>
+        
+
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+
+        
+
+        
+          <div class="post-eof the-shape"></div>
+        
+      </div>
+    
+  </div>
+
+
+  
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2015/03/09/pure-html-css/">
                 turbo.css -- 高质量css模块化设计
               </a>
@@ -110,7 +229,7 @@
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-09
+              Posté le 2015-03-09
             
           </span>
         
@@ -159,7 +278,7 @@
 </code></pre><p>当你十分确定一个样式只可能用于一个具体业务时，才可使用 <code>f-search-hot</code> 这样的命名（不推荐）</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/09/pure-html-css/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -204,7 +323,7 @@
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-06
+              Posté le 2015-03-06
             
           </span>
         
@@ -240,7 +359,7 @@ hexo server
 </code></pre>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/06/build-hexo/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -285,7 +404,7 @@ hexo server
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-05
+              Posté le 2015-03-05
             
           </span>
         
@@ -352,7 +471,7 @@ hexo server
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-04
+              Posté le 2015-03-04
             
           </span>
         
@@ -401,7 +520,7 @@ hexo server
 </ul>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/04/ReactJS/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -446,7 +565,7 @@ hexo server
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-02-09
+              Posté le 2015-02-09
             
           </span>
         
@@ -527,8 +646,8 @@ hexo server
       <p class="site-description motion-element"></p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">5</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">articles</span>
         </div>
         <div class="site-state-item site-state-tags">
             <span class="site-state-item-count">0</span>
@@ -573,7 +692,7 @@ hexo server
 </div>
 
 <div class="theme-info">
-  Theme - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+  Thème - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
 </div>
 
 

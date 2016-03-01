@@ -1,0 +1,1162 @@
+<!doctype html>
+<html class="theme-next use-motion">
+<head>
+  
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.3.0rc4"/>
+
+
+
+
+
+
+    <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.3.0rc4" />
+
+
+
+
+  <title> 用React编写一款简单的赛车游戏 // Hexo </title>
+</head>
+
+<body>
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <div id="header" class="header">
+      <div class="header-inner">
+        <h1 class="site-meta">
+    <a href="/" class="brand">
+        <span class="logo">
+          <i class="icon-logo"></i>
+        </span>
+        <span class="site-title">Hexo</span>
+    </a>
+</h1>
+
+
+  <ul id="menu" class="menu">
+    
+      
+      <li class="menu-item menu-item-home">
+        <a href="/">
+          <i class="menu-item-icon icon-home"></i> <br />
+          Accueil
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-archives">
+        <a href="/archives">
+          <i class="menu-item-icon icon-archives"></i> <br />
+          Archives
+        </a>
+      </li>
+    
+      
+      <li class="menu-item menu-item-tags">
+        <a href="/tags">
+          <i class="menu-item-icon icon-tags"></i> <br />
+          Tags
+        </a>
+      </li>
+    
+  </ul>
+
+
+      </div>
+    </div>
+
+    <div id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+            
+          
+
+          <div id="posts" class="posts-expand">
+            
+  
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
+              用React编写一款简单的赛车游戏
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+          <span class="post-time">
+            
+              Posté le 2016-03-01
+            
+          </span>
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/01/react-simple-game/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/01/react-simple-game/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <p>最近研究egret引擎时，在论坛看到了用egret引擎写的一款<a href="http://xsstomy.com/egretprojects/courses/yilupingan/" target="_blank" rel="external">赛车游戏</a><br>玩法其实很简单，双车道左右躲避来车，碰撞即游戏失败，用egret编写这样一款游戏较为复杂，我们尝试用React来编写这款简单的赛车游戏</p>
+<p>本教程更多在于展示React的特性和游戏编写过程中的思维逻辑，如有错误欢迎拍砖。<br>下面将为大家一步步讲解，如何用React写出一款纯js+css的小游戏。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>本教程游戏素材下载：<a href="http://htmljs.b0.upaiyun.com/uploads/1453125021031-d3d03a6b5c9462551de5edc4b2997a5b.gif" target="_blank" rel="external">素材下载</a></p>
+<p>本教程使用React 0.14版本，对React不熟悉的童鞋可以先看下<a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank" rel="external">阮一峰React入门</a>，或者极客学院的<a href="http://www.jikexueyuan.com/course/reactjs/" target="_blank" rel="external">视频教程</a></p>
+<p><strong>一、React基本结构</strong></p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;script src=&quot;../build/react.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../build/react-dom.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;../build/browser.min.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;reactGame&quot;&gt;&lt;/div&gt;
+&lt;script type=&quot;text/babel&quot;&gt;
+     // ** code **
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>可以看到Html代码非常简单，我们只留了一个</p>
+<pre><code>&lt;div id=&quot;reactGame&quot;&gt;&lt;/div&gt;
+</code></pre><p>作为React渲染后插入的节点，所有的代码均写在JS中。<br>大家注意到script标签的type为text/babel，由于React使用JSX语法，browser.min.js用于将JSX语法转化为javascript语法。</p>
+<p><strong>二、创建第一个React组件</strong></p>
+<pre><code>&lt;script type=&quot;text/babel&quot;&gt;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0
+        }
+    },
+    render : function(){
+        return &lt;div className=&quot;board&quot;&gt;
+            &lt;div className=&quot;roadbed&quot;&gt;&lt;/div&gt;
+            &lt;div className=&quot;road&quot;}&gt;
+                &lt;div className=&quot;hero&quot;&gt;&lt;/div&gt;
+                &lt;div className=&quot;enemy&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span className=&quot;start&quot;&gt;&lt;/span&gt;
+            &lt;span className=&quot;kilo&quot;&gt;&lt;/span&gt;
+            &lt;div className=&quot;failbub&quot;&gt;
+                &lt;span className=&quot;failtext&quot;&gt;&lt;/span&gt;
+                &lt;span className=&quot;retry&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre><a id="more"></a>
+<p>我们通过样式创建了一个基础的游戏界面：游戏容器[board]，路面[roadbed]，路面范围[road]，主角车[hero]，敌车[enemy]，还有公里板[kilo]，失败提示[failbub]<br><img src="http://htmljs.b0.upaiyun.com/uploads/1453125683326-02cd6cb9670bdca91874b384f5ec4fdc.png" alt="enter image description here"></p>
+<p>我们创建了一个GameBoard的组件，用于建立整个游戏场景，你也可以建立多个子组件，比如主角赛车，敌方赛车，公里板，再在Gameboard中引入子组件。</p>
+<p>本教程案例相对简单，我们只创建一个组件，也能更容易理解代码逻辑。</p>
+<p>React自带了一些事件处理函数，如</p>
+<pre><code>getInitialState()    //组件初始化数据
+componentWillMount() //组件渲染前调用
+componentDidMount()  //组件渲染后调用
+render()             //组件渲染
+</code></pre><p>而render函数中，将返回我们页面所有的html结构</p>
+<p>下面我们用一个简单的例子帮助大家理解React的工作流程</p>
+<pre><code> &lt;script type=&quot;text/babel&quot;&gt;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0
+        }
+    },
+    gameStart : function(){
+        this.setState({
+            gameState : 1
+        })
+    },
+    render : function(){
+        return  &lt;span className = {this.state.gameState==0?&quot;start&quot;:&quot;start hide&quot;} onClick = {this.gameStart}&gt;&lt;/span&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre><p>在上面的例子中，我们在getInitialState函数中初始化了state.gameState:0，在render函数中，我们对div的className做了一个三元表达式的判断，如果gameState为0，表示游戏未开始，渲染出的html结构为</p>
+<pre><code>&lt;span class=&quot;start&quot;&gt;&lt;/div&gt;
+</code></pre><p>我们声明一个自定义的方法gameStart，在开始按钮上绑定onClick事件，调用gameState，执行了setState方法，将state对象中的gameState设置为1，由于调用了setState，render函数立即更新，此时gameState值为1，渲染出的html结构为（开始按钮隐藏）</p>
+<pre><code>&lt;span class=&quot;start hide&quot;&gt;&lt;/div&gt;
+</code></pre><p>简单来说，React有个全局的状态state，我们通过setState去改变state对象的值，一旦执行了setState，React立即触发render函数，通过内部的diff算法，判断当前DOM是否发生改变，<br>改变即更新到真实DOM中。</p>
+<h2 id="游戏开始！"><a href="#游戏开始！" class="headerlink" title="游戏开始！"></a>游戏开始！</h2><p>现在我们开始让游戏跑起来，为了避免频繁的操作DOM结点影响性能，所有动态效果均由css3实现。</p>
+<p><strong>第一步：马路移动</strong></p>
+<p>首先我们对游戏的动画效果进行分析，小车固定在屏幕底部，所以我们制作一个马路向下运动的循环动画，看起来就像小车在向上跑</p>
+<pre><code>.roadbed{
+    background:url(../resource/road.png) repeat-y;
+    width:480px;
+    height:1600px;
+    position:absolute;
+    left:0;
+    top:-800px;
+}
+.roadRun{
+    -webkit-transform:translateZ(0);
+    -webkit-animation:roadRun 1.2s linear infinite;
+}
+@-webkit-keyframes roadRun{
+    100%{ -webkit-transform:translateY(800px);}
+}
+</code></pre><p>我们也可以使用background-position动画，但使用transform动画更加流畅。</p>
+<p><strong>第二步：控制小车移动</strong></p>
+<p>我们通过控制键盘的左右方向键来控制赛车的左右位置，当按下左方向键，我们给hero节点加上left，按下右方向键，加上right，在css中控制hero.left和hero.right的位置</p>
+<p>在render渲染后，我们调用componentDidMount方法为游戏注册一个键盘事件</p>
+<pre><code>&lt;script type=&quot;text/babel&quot;&gt;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0,
+            heroLoc : 0,
+        }
+    },
+    gameStart : function(){
+        this.setState({
+            gameState : 1
+        })
+    },
+    gameHandle : function(e){
+        if(this.state.gameState ==1){
+            switch(e.keyCode){
+                case 37:
+                    this.setState({heroLoc : 0});
+                    break;
+                case 39:
+                    this.setState({heroLoc : 1});
+                    break;
+            }
+        }
+    },
+    componentDidMount:function(){
+        window.addEventListener(&quot;keydown&quot;, this.gameHandle, false);
+    },
+    render : function(){
+        var state = this.state;
+        return &lt;div className=&quot;board&quot;&gt;
+            &lt;div className=&quot;roadbed&quot;&gt;&lt;/div&gt;
+            &lt;div className=&quot;road&quot;}&gt;
+                &lt;div className={state.heroLoc==0?&quot;hero left&quot;:&quot;hero right&quot;}&gt;&lt;/div&gt;
+                &lt;div className=&quot;enemy&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span className=&quot;start&quot;&gt;&lt;/span&gt;
+            &lt;span className=&quot;kilo&quot;&gt;&lt;/span&gt;
+            &lt;div className=&quot;failbub&quot;&gt;
+                &lt;span className=&quot;failtext&quot;&gt;&lt;/span&gt;
+                &lt;span className=&quot;retry&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;span className = {state.gameState==0?&quot;start&quot;:&quot;start hide&quot;} onClick = {this.gameStart}&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre><p>我们componentDidMount注册监听了键盘事件</p>
+<pre><code>componentDidMount:function(){
+       window.addEventListener(&quot;keydown&quot;, this.gameHandle, false);
+}
+</code></pre><p>当按下键盘按键后，调用gameHandle方法，判断按键keyCode，如果按下了左方向键（keyCode:37），则设置heroLoc:0,<br>按下右方向键（keyCode:39），设置heroLoc:1，render方法再次更新，判断heroLoc值，如果heroLoc == 0，则主角结构为</p>
+<pre><code>&lt;div class=&quot;hero left&quot;&gt;&lt;/div&gt;
+</code></pre><p>heroLoc == 1 则结构为</p>
+<pre><code>&lt;div class=&quot;hero right&quot;&gt;&lt;/div&gt;
+</code></pre><p>至此，我们完成了小车的基本移动操作</p>
+<p><strong>第三步：创建敌人赛车</strong></p>
+<p>敌方车辆与主角运动方向一致，都是向上运动，由于主角相对固定，速度又比敌方车辆块，所以enemy的运动方向实际是向下运动，直至消失在屏幕之外<br>为了降低复杂度，我们规定屏幕上每次只会出现一辆敌方车辆，方向随机，所以我们只需一个div作为敌方小车，在小车运动离开屏幕后，马上随机给小车换上不同的车型和方向的class。<br>我们给enemy加上从0到1000px的运动动画,运动持续时间1s</p>
+<pre><code>.enemy{ -webkit-animation:enemy 1s linear; }
+@-webkit-keyframes enemy{
+    100%{ -webkit-transform:translateY(1000px);}
+}
+</code></pre><p>JS</p>
+<pre><code>&lt;script type=&quot;text/babel&quot;&gt;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0,
+            heroLoc : 0,
+            enemyLoc: 0,
+            enemyType : 0,
+            aniEnd : true,
+        }
+    },
+    gameStart : function(){
+        this.setState({
+            gameState : 1
+        });
+        createEnemy();
+    },
+    gameHandle : function(e){
+        if(this.state.gameState ==1){
+            switch(e.keyCode){
+                case 37:
+                    this.setState({heroLoc : 0});
+                    break;
+                case 39:
+                    this.setState({heroLoc : 1});
+                    break;
+            }
+        }
+    },
+    createEnemy : function(){
+        var that = this,
+        var enemyClass,enemyLoc,enemyType,
+              animationEnd = true;
+        setInterval(function(){
+            if(that.state.aniEnd &amp;&amp; that.state.gameState == 1){
+                that.setState({aniEnd : false});
+                enemyType = Math.floor(Math.random()*3);
+                enemyLoc = Math.round(Math.random());
+                that.setState({enemyLoc : enemyLoc});
+                that.setState({enemyType : enemyType});
+            }
+        },1000);
+        that.refs.enemy.addEventListener(&quot;webkitAnimationEnd&quot;,function(){
+            that.setState({aniEnd : true});
+        });
+    },
+    componentDidMount:function(){
+        window.addEventListener(&quot;keydown&quot;, this.gameHandle, false);
+    },
+    render : function(){
+        var state = this.state;
+        var enemyCls = state.gameStart == 0 ?&quot;enemy&quot;:(&quot;enemy enemy&quot;+ state.enemyType  + &quot; loc&quot; + state.enemyLoc);
+        return &lt;div className=&quot;board&quot;&gt;
+            &lt;div className=&quot;roadbed&quot;&gt;&lt;/div&gt;
+            &lt;div className=&quot;road&quot;}&gt;
+                &lt;div className={state.heroLoc==0?&quot;hero left&quot;:&quot;hero right&quot;}&gt;&lt;/div&gt;
+                &lt;div className={enemyCls}&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span className=&quot;start&quot;&gt;&lt;/span&gt;
+            &lt;span className=&quot;kilo&quot;&gt;&lt;/span&gt;
+            &lt;div className=&quot;failbub&quot;&gt;
+                &lt;span className=&quot;failtext&quot;&gt;&lt;/span&gt;
+                &lt;span className=&quot;retry&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;span className = {state.gameState==0?&quot;start&quot;:&quot;start hide&quot;} onClick = {this.gameStart}&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre><p>游戏开始后，调用createEnemy，每隔1s并确保动画执行完毕后，重新为enemy设置随机的方向和车型。<br>至此，我们已经完成马路的运动，主角的控制和敌方的创建。</p>
+<p><strong>第四步：碰撞检测</strong></p>
+<p>游戏已经成功跑起来了，但仅仅是一些控制操作和效果动画的运行，并没有核心的游戏逻辑，下面我们加入游戏的核心逻辑，碰撞检测<br>如何判断主角与敌方小车碰撞到一起了？其实思路很简单，我方小车与敌方小车位于同一车道，且敌方小车的运动距离大于舞台高度-我方小车高度，即两车相撞。<br>这个值我们计算出来写死就行，也可以通过js计算。</p>
+<p>大家都知道，大部分游戏都需要一个不断刷新的定时器实时获取和更新状态，即游戏刷新频率（正常为60HZ）<br>所以我们设置一个定时器Tick，来实时获取敌方小车与我方小车的方向与位置数据，判断小车是否相撞</p>
+<pre><code>&lt;script type=&quot;text/babel&quot;&gt;
+var Tick;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0,
+            heroLoc : 0,
+            enemyLoc: 0,
+            enemyType : 0,
+            aniEnd : true,
+        }
+    },
+    gameStart : function(){
+        this.setState({
+            gameState : 1
+        });
+        createEnemy();
+        this.gameTick();
+    },
+    gameHandle : function(e){
+        if(this.state.gameState ==1){
+            switch(e.keyCode){
+                case 37:
+                    this.setState({heroLoc : 0});
+                    break;
+                case 39:
+                    this.setState({heroLoc : 1});
+                    break;
+            }
+        }
+    },
+    createEnemy : function(){
+        var that = this,
+        var enemyClass,enemyLoc,enemyType,
+              animationEnd = true;
+        setInterval(function(){
+            if(that.state.aniEnd &amp;&amp; that.state.gameState == 1){
+                that.setState({aniEnd : false});
+                enemyType = Math.floor(Math.random()*3);
+                enemyLoc = Math.round(Math.random());
+                that.setState({enemyLoc : enemyLoc});
+                that.setState({enemyType : enemyType});
+            }
+        },1000);
+        that.refs.enemy.addEventListener(&quot;webkitAnimationEnd&quot;,function(){
+            that.setState({aniEnd : true});
+        });
+    },
+    gameTick : function(state){
+        var that = this,
+            crash = 620,
+            heroLoc,enemyLoc,trs,dis,kilometer = 0;
+        if(state){
+            Tick = setInterval(function(){
+                trs = window.getComputedStyle(that.refs.enemy,null).getPropertyValue(&quot;transform&quot;);
+                dis = trs.split(&quot;,&quot;)[5].replace(&quot;)&quot;,&quot;&quot;);
+                heroLoc = that.state.heroLoc;
+                enemyLoc = that.state.enemyLoc;
+                if(dis&gt;crash &amp;&amp;dis&lt;(crash+220) &amp;&amp; heroLoc == enemyLoc){
+                    that.gameOver();
+                }
+                kilometer ++;
+                that.setState({kilometer:kilometer});
+            },10);
+        }else{
+            clearInterval(Tick);
+        }
+    },
+    gameOver : function(){
+        this.setState({gameState : 0});
+        this.gameTick(false);
+    },
+    componentDidMount:function(){
+        window.addEventListener(&quot;keydown&quot;, this.gameHandle, false);
+    },
+    render : function(){
+        var state = this.state;
+        var enemyCls = state.gameStart == 0 ?&quot;enemy&quot;:(&quot;enemy enemy&quot;+ state.enemyType  + &quot; loc&quot; + state.enemyLoc);
+        return &lt;div className=&quot;board&quot;&gt;
+            &lt;div className=&quot;roadbed&quot;&gt;&lt;/div&gt;
+            &lt;div className=&quot;road&quot;}&gt;
+                &lt;div className={state.heroLoc==0?&quot;hero left&quot;:&quot;hero right&quot;}&gt;&lt;/div&gt;
+                &lt;div className={enemyCls}&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span className=&quot;start&quot;&gt;&lt;/span&gt;
+            &lt;span className=&quot;kilo&quot;&gt;{state.kilometer}&lt;/span&gt;
+            &lt;div className=&quot;failbub&quot;&gt;
+                &lt;span className=&quot;failtext&quot;&gt;&lt;/span&gt;
+                &lt;span className=&quot;retry&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;span className = {state.gameState==0?&quot;start&quot;:&quot;start hide&quot;} onClick = {this.gameStart}&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre><p>这里我们顺便把公里数实时更新</p>
+<pre><code>&lt;span className=&quot;kilo&quot;&gt;{state.kilometer}&lt;/span&gt;
+</code></pre><p>至此，我们已经完成了一个相对完整的小游戏<br>![enter image description here][8]</p>
+<h2 id="更多细节"><a href="#更多细节" class="headerlink" title="更多细节"></a>更多细节</h2><p>游戏仅仅是可玩远远不够，后续可以慢慢加入一些细节提高游戏性，比如让敌方车辆的速度随机，出现的频率随游戏难度增加，<br>每跑1000km获得一次无敌模式，开启后5s内可以随意碰撞：</p>
+<pre><code>&lt;script type=&quot;text/babel&quot;&gt;
+var Tick;
+var GameBoard = React.createClass({
+    getInitialState : function(){
+        return {
+            gameState : 0,
+            heroLoc : 0,
+            enemyLoc: 0,
+            enemyType : 0,
+            aniEnd : true,
+        }
+    },
+    gameStart : function(){
+        this.setState({
+            gameState : 1
+        });
+        createEnemy();
+        this.gameTick();
+    },
+    gameHandle : function(e){
+        if(this.state.gameState ==1){
+            switch(e.keyCode){
+                case 37:
+                    this.setState({heroLoc : 0});
+                    break;
+                case 39:
+                    this.setState({heroLoc : 1});
+                    break;
+                case 32:
+                    if(this.state.hasSuper==1){
+                        this.setState({superMode : 1});
+                        this.setState({hasSuper : 0});
+                    }
+                    break;
+            }
+        }
+    },
+    superBuff : function(){
+        var that = this;
+        that.setState({chunge : 1});
+        setTimeout(function(){
+            that.setState({chunge : 0});
+        },1000);
+    },
+    superMode : function(){
+        var that = this;
+        that.setState({hasSuper : 1});
+        setTimeout(function(){
+            that.setState({superMode : 0});
+        },5000);
+    },
+    createEnemy : function(){
+        var that = this,
+        var enemyClass,enemyLoc,enemyType,
+              animationEnd = true;
+        setInterval(function(){
+            if(that.state.aniEnd &amp;&amp; that.state.gameState == 1){
+                that.setState({aniEnd : false});
+                enemyType = Math.floor(Math.random()*3);
+                enemyLoc = Math.round(Math.random());
+                that.setState({enemyLoc : enemyLoc});
+                that.setState({enemyType : enemyType});
+            }
+        },1000);
+        that.refs.enemy.addEventListener(&quot;webkitAnimationEnd&quot;,function(){
+            that.setState({aniEnd : true});
+        });
+    },
+    gameTick : function(state){
+        var that = this,
+            crash = 620,
+            heroLoc,enemyLoc,trs,dis,kilometer = 0;
+        if(state){
+            Tick = setInterval(function(){
+                trs = window.getComputedStyle(that.refs.enemy,null).getPropertyValue(&quot;transform&quot;);
+                dis = trs.split(&quot;,&quot;)[5].replace(&quot;)&quot;,&quot;&quot;);
+                heroLoc = that.state.heroLoc;
+                enemyLoc = that.state.enemyLoc;
+                if(dis&gt;crash &amp;&amp;dis&lt;(crash+220) &amp;&amp; heroLoc == enemyLoc){
+                    that.gameOver();
+                }
+                kilometer ++;
+                that.setState({kilometer:kilometer});
+                if(kilometer%1000==0){
+                    that.superMode();
+                }
+            },10);
+        }else{
+            clearInterval(Tick);
+        }
+    },
+    gameOver : function(){
+        this.setState({gameState : 0});
+        this.gameTick(false);
+    },
+    componentDidMount:function(){
+        window.addEventListener(&quot;keydown&quot;, this.gameHandle, false);
+    },
+    render : function(){
+        var state = this.state;
+        var enemyCls = state.gameStart == 0 ?&quot;enemy&quot;:(&quot;enemy enemy&quot;+ state.enemyType  + &quot; loc&quot; + state.enemyLoc);
+        return &lt;div className=&quot;board&quot;&gt;
+            &lt;div className=&quot;roadbed&quot;&gt;&lt;/div&gt;
+            &lt;div className=&quot;road&quot;}&gt;
+                &lt;div className={state.heroLoc==0?&quot;hero left&quot;:&quot;hero right&quot;}&gt;&lt;/div&gt;
+                &lt;div className={enemyCls}&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;span className=&quot;start&quot;&gt;&lt;/span&gt;
+            &lt;span className=&quot;kilo&quot;&gt;&lt;/span&gt;
+            &lt;div className=&quot;failbub&quot;&gt;
+                &lt;span className=&quot;failtext&quot;&gt;{state.kilometer}&lt;/span&gt;
+                &lt;span className=&quot;retry&quot;&gt;&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;span className = {state.gameState==0?&quot;start&quot;:&quot;start hide&quot;} onClick = {this.gameStart}&gt;&lt;/span&gt;
+        &lt;/div&gt;
+    }
+});
+ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;));
+&lt;/script&gt;
+</code></pre><p>最后加入重力感应，控制小车运动，让游戏在移动端解放双手：</p>
+<pre><code>window.addEventListener(&quot;devicemotion&quot;, function(event) {
+            var eventaccelerationIncludingGravity = event.accelerationIncludingGravity;
+            if(that.state.gameState == 1){
+                if(eventaccelerationIncludingGravity.x &lt; -1){
+                    that.setState({heroLoc : 0});
+                }else if(eventaccelerationIncludingGravity.x &gt; 1){
+                    that.setState({heroLoc : 1});
+                }
+            }
+}, false);
+</code></pre><p>-发表于 2016/1月18日 厦门软件园</p>
+
+        
+
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+
+        
+
+        
+      </div>
+    
+  </div>
+
+
+
+  
+    <div class="comments" id="comments">
+      
+        <div class="ds-thread" data-thread-key="2016/03/01/react-simple-game/"
+             data-title="用React编写一款简单的赛车游戏" data-url="http://yoursite.com/2016/03/01/react-simple-game/">
+        </div>
+
+      
+    </div>
+  
+
+          </div>
+
+          
+        </div>
+
+        
+<div class="sidebar-toggle">
+  <div class="sidebar-toggle-line-wrap">
+    <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+    <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+  </div>
+</div>
+
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-inner">
+
+    
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc">
+          Table Des Matières
+        </li>
+        <li class="sidebar-nav-overview" data-target="site-overview">
+          Ensemble
+        </li>
+      </ul>
+    
+
+    <div class="site-overview">
+      <div class="site-author motion-element">
+        <img class="site-author-image" src="/images/default_avatar.jpg" alt="John Doe" />
+        <p class="site-author-name">John Doe</p>
+      </div>
+      <p class="site-description motion-element"></p>
+      <div class="site-state motion-element">
+        <div class="site-state-item site-state-posts">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">articles</span>
+        </div>
+        <div class="site-state-item site-state-tags">
+            <span class="site-state-item-count">0</span>
+            <span class="site-state-item-name">tags</span>
+        </div>
+        <div class="site-state-item site-state-pages">
+            <span class="site-state-item-count">5</span>
+            <span class="site-state-item-name">pages</span>
+        </div>
+      </div>
+
+      
+
+      <div class="social-info motion-element">
+        
+      </div>
+
+    </div>
+
+    
+      <div class="post-toc sidebar-panel-active">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游戏开始！"><span class="nav-number">2.</span> <span class="nav-text">游戏开始！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多细节"><span class="nav-number">3.</span> <span class="nav-text">更多细节</span></a></li></ol>
+      </div>
+    
+  </div>
+</div>
+
+
+      </div>
+    </div>
+
+    <div id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; &nbsp; 
+  2016
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author">John Doe</span>
+</div>
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="http://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+</div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".fancybox").fancybox();
+    });
+  </script>
+
+  <script type="text/javascript">
+  function isDesktop () {
+    return screen.width > 991;
+  }
+
+  function isTablet () {
+    return screen.width < 992 && screen.width > 767;
+  }
+
+  function isMobile () {
+    return screen.width < 767;
+  }
+
+  function escapeSelector (selector) {
+    return selector.replace(/[!"$%&'()*+,.\/:;<=>?@[\\\]^`{|}~]/g, "\\$&")
+  }
+</script>
+
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  
+
+  <script type="text/javascript" id="motion.global">
+  $(document).ready(function () {
+    var body = $('body');
+    var isSidebarVisible = false;
+    var sidebarToggle = $('.sidebar-toggle');
+    var sidebarToggleLine1st = $('.sidebar-toggle-line-first')
+    var sidebarToggleLine2nd = $('.sidebar-toggle-line-middle');
+    var sidebarToggleLine3rd = $('.sidebar-toggle-line-last');
+    var sidebar = $('.sidebar');
+
+    var SIDEBAR_WIDTH = '320px';
+    var SIDEBAR_DISPLAY_DURATION = 300;
+
+    var sidebarToogleLineStatusInit = {width: '100%', opacity: 1, left: 0, rotateZ: 0, top: 0};
+
+    var sidebarToggleLine1stStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine1stStatusArrow = {width: '50%', rotateZ: '-45deg', top: '2px'};
+    var sidebarToogleLine1stStatusClose = {width: '100%', rotateZ: '-45deg', top: '5px'};
+
+    var sidebarToggleLine2ndStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine2ndStatusArrow = {width: '90%'};
+    var sidebarToogleLine2ndStatusClose = {opacity: 0};
+
+    var sidebarToggleLine3rdStatusInit = sidebarToogleLineStatusInit;
+    var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
+    var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
+
+    sidebatToggleMotion();
+    postsListMotion();
+    backToTopMotion();
+
+
+    $(document)
+      .on('sidebar.show', function () {
+        isDesktop() && body.velocity(
+          {paddingRight: SIDEBAR_WIDTH},
+          SIDEBAR_DISPLAY_DURATION
+        );
+        sidebarContentMotion();
+      })
+      .on('sidebar.hide', function () {
+
+      });
+
+
+    function backToTopMotion () {
+      var b2top = $('.back-to-top');
+      b2top.on('click', function () {
+        body.velocity('scroll');
+      });
+    }
+
+    function sidebarShowMotion () {
+
+      sidebarToggleLine1st.velocity(sidebarToogleLine1stStatusClose);
+      sidebarToggleLine2nd.velocity(sidebarToogleLine2ndStatusClose);
+      sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
+
+      sidebar.velocity({width: SIDEBAR_WIDTH}, SIDEBAR_DISPLAY_DURATION);
+      sidebar.trigger('sidebar.show');
+    }
+
+    function sidebarHideMotion () {
+      isDesktop() && body.velocity({paddingRight: 0});
+      sidebar.velocity('reverse');
+
+      sidebarToggleLine1st.velocity(sidebarToggleLine1stStatusInit);
+      sidebarToggleLine2nd.velocity(sidebarToggleLine2ndStatusInit);
+      sidebarToggleLine3rd.velocity(sidebarToggleLine3rdStatusInit);
+
+      sidebar.trigger('sidebar.hide');
+    };
+
+    function sidebarContentMotion () {
+      $('.sidebar .motion-element').velocity(
+        'transition.slideRightIn',
+        {stagger: 50, drag: true}
+      );
+    }
+
+    function postsListMotion () {
+      $('.post').velocity('transition.slideDownIn', {stagger: 300, drag: true});
+    }
+
+    function sidebatToggleMotion () {
+      sidebarToggle.on('click', function () {
+        isSidebarVisible ? sidebarHideMotion() : sidebarShowMotion();
+        isSidebarVisible = !isSidebarVisible;
+      });
+
+      sidebarToggle.hover(function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusArrow);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusArrow);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusArrow);
+      }, function () {
+        if (isSidebarVisible) {return}
+        sidebarToggleLine1st.velocity('stop').velocity(sidebarToggleLine1stStatusInit);
+        sidebarToggleLine2nd.velocity('stop').velocity(sidebarToggleLine2ndStatusInit);
+        sidebarToggleLine3rd.velocity('stop').velocity(sidebarToggleLine3rdStatusInit);
+      });
+    }
+  });
+
+</script>
+
+
+
+
+
+  
+  
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      if ($('.post-toc').html().trim().length > 0 && isDesktop()) {
+        setTimeout(function () {
+          $('.sidebar-toggle').trigger('click');
+        }, 800);
+      }
+    });
+  </script>
+
+
+<script type="text/javascript" id="bootstrap.scrollspy.custom">
+  /* ========================================================================
+  * Bootstrap: scrollspy.js v3.3.2
+  * http://getbootstrap.com/javascript/#scrollspy
+  * ========================================================================
+  * Copyright 2011-2015 Twitter, Inc.
+  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+  * ======================================================================== */
+
+  /**
+   * Custom by iissnan
+   *
+   * - Add a `clear.bs.scrollspy` event.
+   * - Esacpe targets selector.
+   */
+
+
+  +function ($) {
+    'use strict';
+
+    // SCROLLSPY CLASS DEFINITION
+    // ==========================
+
+    function ScrollSpy(element, options) {
+      this.$body          = $(document.body)
+      this.$scrollElement = $(element).is(document.body) ? $(window) : $(element)
+      this.options        = $.extend({}, ScrollSpy.DEFAULTS, options)
+      this.selector       = (this.options.target || '') + ' .nav li > a'
+      this.offsets        = []
+      this.targets        = []
+      this.activeTarget   = null
+      this.scrollHeight   = 0
+
+      this.$scrollElement.on('scroll.bs.scrollspy', $.proxy(this.process, this))
+      this.refresh()
+      this.process()
+    }
+
+    ScrollSpy.VERSION  = '3.3.2'
+
+    ScrollSpy.DEFAULTS = {
+      offset: 10
+    }
+
+    ScrollSpy.prototype.getScrollHeight = function () {
+      return this.$scrollElement[0].scrollHeight || Math.max(this.$body[0].scrollHeight, document.documentElement.scrollHeight)
+    }
+
+    ScrollSpy.prototype.refresh = function () {
+      var that          = this
+      var offsetMethod  = 'offset'
+      var offsetBase    = 0
+
+      this.offsets      = []
+      this.targets      = []
+      this.scrollHeight = this.getScrollHeight()
+
+      if (!$.isWindow(this.$scrollElement[0])) {
+        offsetMethod = 'position'
+        offsetBase   = this.$scrollElement.scrollTop()
+      }
+
+      this.$body
+        .find(this.selector)
+        .map(function () {
+          var $el   = $(this)
+          var href  = $el.data('target') || $el.attr('href')
+          var $href = /^#./.test(href) && $(escapeSelector(href)) // Need to escape selector.
+
+          return ($href
+            && $href.length
+            && $href.is(':visible')
+            && [[$href[offsetMethod]().top + offsetBase, href]]) || null
+        })
+        .sort(function (a, b) { return a[0] - b[0] })
+        .each(function () {
+          that.offsets.push(this[0])
+          that.targets.push(this[1])
+        })
+
+
+    }
+
+    ScrollSpy.prototype.process = function () {
+      var scrollTop    = this.$scrollElement.scrollTop() + this.options.offset
+      var scrollHeight = this.getScrollHeight()
+      var maxScroll    = this.options.offset + scrollHeight - this.$scrollElement.height()
+      var offsets      = this.offsets
+      var targets      = this.targets
+      var activeTarget = this.activeTarget
+      var i
+
+      if (this.scrollHeight != scrollHeight) {
+        this.refresh()
+      }
+
+      if (scrollTop >= maxScroll) {
+        return activeTarget != (i = targets[targets.length - 1]) && this.activate(i)
+      }
+
+      if (activeTarget && scrollTop < offsets[0]) {
+        $(this.selector).trigger('clear.bs.scrollspy')  // Add a custom event.
+        this.activeTarget = null
+        return this.clear()
+      }
+
+      for (i = offsets.length; i--;) {
+        activeTarget != targets[i]
+          && scrollTop >= offsets[i]
+          && (!offsets[i + 1] || scrollTop <= offsets[i + 1])
+          && this.activate(targets[i])
+      }
+    }
+
+    ScrollSpy.prototype.activate = function (target) {
+      this.activeTarget = target
+
+      this.clear()
+
+      var selector = this.selector +
+        '[data-target="' + target + '"],' +
+        this.selector + '[href="' + target + '"]'
+
+      var active = $(selector)
+        .parents('li')
+        .addClass('active')
+
+      if (active.parent('.dropdown-menu').length) {
+        active = active
+          .closest('li.dropdown')
+          .addClass('active')
+      }
+
+      active.trigger('activate.bs.scrollspy')
+    }
+
+    ScrollSpy.prototype.clear = function () {
+      $(this.selector)
+        .parentsUntil(this.options.target, '.active')
+        .removeClass('active')
+    }
+
+
+    // SCROLLSPY PLUGIN DEFINITION
+    // ===========================
+
+    function Plugin(option) {
+      return this.each(function () {
+        var $this   = $(this)
+        var data    = $this.data('bs.scrollspy')
+        var options = typeof option == 'object' && option
+
+        if (!data) $this.data('bs.scrollspy', (data = new ScrollSpy(this, options)))
+        if (typeof option == 'string') data[option]()
+      })
+    }
+
+    var old = $.fn.scrollspy
+
+    $.fn.scrollspy             = Plugin
+    $.fn.scrollspy.Constructor = ScrollSpy
+
+
+    // SCROLLSPY NO CONFLICT
+    // =====================
+
+    $.fn.scrollspy.noConflict = function () {
+      $.fn.scrollspy = old
+      return this
+    }
+
+
+    // SCROLLSPY DATA-API
+    // ==================
+
+    $(window).on('load.bs.scrollspy.data-api', function () {
+      $('[data-spy="scroll"]').each(function () {
+        var $spy = $(this)
+        Plugin.call($spy, $spy.data())
+      })
+    })
+
+  }(jQuery);
+</script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var activeCurrentSelector = '.active-current';
+
+    $(tocSelector)
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass()
+        $currentActiveElement.addClass('active-current');
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass()
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    $('body').scrollspy({ target: tocSelector });
+  });
+</script>
+
+
+
+  
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"guowc"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+  
+</body>
+</html>
