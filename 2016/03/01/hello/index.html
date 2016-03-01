@@ -25,7 +25,7 @@
 
 
 
-  <title> ReactJS 快速入门 // Hexo </title>
+  <title> hello // Hexo </title>
 </head>
 
 <body>
@@ -96,7 +96,7 @@
           
           
             
-              ReactJS 快速入门
+              hello
             
           
         </h1>
@@ -105,15 +105,15 @@
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-04
+              Posted on 2016-03-01
             
           </span>
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/03/04/ReactJS/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/04/ReactJS/"></span>
+            <a href="/2016/03/01/hello/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/01/hello/"></span>
             </a>
           </span>
           
@@ -128,131 +128,8 @@
         
 
         
-          <p><a href="http://facebook.github.io/react/" target="_blank" rel="external">React</a> 是近期非常热门的一个前端开发框架。 这篇文章将介绍如何使用 React 来创建用户界面，希望能够起到抛砖引玉的效果。</p>
-<p>相对于其他框架来说，React 提供了非常少的 API， 如同 Gulp， 越是少量的 API 同时意味着越多的可能性。 正如那句名言所说：</p>
-<blockquote>
-<p>Less is more.</p>
-</blockquote>
-<p>但是，精简的 API 不是意味着没有一定的学习成本，我们还是需要对此框架进行一定的理解。 闲话不多说，让我们进入正题。首先，让我们来了解下 React 中使用到的一些术语。</p>
-<h2 id="React-术语"><a href="#React-术语" class="headerlink" title="React 术语"></a><strong>React 术语</strong></h2><ul>
-<li><p>React Elements</p>
-<p>  代表 HTML 元素的 JavaScript 对象。 这些 JavaScript 对象最后被编译成对应的 HTML 元素。</p>
-</li>
-<li><p>Components</p>
-<p>  封装 React Elements， 包含一个或者多个 React Elements。 Components 用于创建可以复用的 UI 模块，例如 分页，侧栏导航等。</p>
-</li>
-</ul>
-<ul>
-<li><p>JSX</p>
-<p>  JSX 是 React 定义的一种 JavaScript 语法扩展，类似于 XML 。 JSX 是可选的， 我们完全可以使用 JavaScript 来编写 React 应用， 不过 JSX 提供了一套更为简便的方式来写 React 应用。</p>
-</li>
-</ul>
-<ul>
-<li><p>Virtual DOM</p>
-<p>  Virtual DOM 是一个模拟 DOM 树的 JavaScript 对象。 React 使用 Virtual DOM 来渲染 UI， 同时监听 Virtual DOM 上数据的变化并自动迁移这些变化到 UI 上。</p>
-</li>
-</ul>
-<a id="more"></a>
-<h2 id="demo-环境准备"><a href="#demo-环境准备" class="headerlink" title="demo 环境准备"></a><strong>demo 环境准备</strong></h2><p>首先，在 React Download 页面 下载 Starter Kit，解压到某个地方。</p>
-<p>进入到解压后的 <code>build</code> 目录，新建一个 <code>index.html</code> 文件，并且引用 <code>react.js</code> 和 <code>JSXTransformer.js</code> 后就可以开始编写 React 应用了。需要注意如果使用 JSX， 那么 <code>script</code> 标签的 <code>type</code> 应该更改为 <code>text/jsx</code>。</p>
-<pre><code>&lt;head&gt;
-&lt;meta charset=&quot;utf-8&quot; &gt;
-&lt;title&gt;demo&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;script src=&quot;react.js&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;JSXTransformer.js&quot;&gt;&lt;/script&gt;
-    &lt;script type=&quot;text/jsx&quot; src=&quot;app.js&quot;&gt;&lt;/script&gt;
-&lt;/body&gt;
-</code></pre><h2 id="第一个-React-Element"><a href="#第一个-React-Element" class="headerlink" title="第一个 React Element"></a><strong>第一个 React Element</strong></h2><p>创建一个 Element 只需调用 React.createElement 方法，并传入元素信息即可。例如：</p>
-<pre><code>var div = React.createElement(&apos;div&apos;, null, &quot;Hello React&quot;);
+          <p>1111</p>
 
-// 使用 JSX
-var div = &lt;div&gt;Hello React&lt;/div&gt;
-</code></pre><p>创建之后就可以调用 <code>React.render</code> 方法渲染到页面上：</p>
-<pre><code>React.render(div, document.body);
-</code></pre><h2 id="第一个-React-Component"><a href="#第一个-React-Component" class="headerlink" title="第一个 React Component"></a><strong>第一个 React Component</strong></h2><p>React Component 抽象出相同 UI 组件的结构和逻辑。 通过调用 <code>React.createClass</code> 方法来创建一个 Component，并传入一个带有 <code>render</code> 方法的对象类型的参数。</p>
-<pre><code>var HelloMessage = React.createClass({
-  render: function () {
-    return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;
-  }
-});
-
-React.render(&lt;HelloMessage name=&quot;iissnan&quot; /&gt;, document.body);
-</code></pre><p>我们看到 <code>React.createClass</code> 接收了一个对象，并将这个方法返回赋值给 <code>HelloMessage</code>， 最后调用 <code>React.render</code> 方法将这个新建的 Component 渲染到页面上。从这个例子看来，一个 Component 与 Element 并无太大的差别。 事实上， Component 已经准备好了，我们可以增添一些结构和功能来扩展这个 Component 。</p>
-<h2 id="Props"><a href="#Props" class="headerlink" title="Props"></a><strong>Props</strong></h2><p>在上一个例子中，可以看到有一个特殊的引用： <code>this.props.name</code>。 这个引用称之为 <code>Props</code>，可以将他想象成 Component 的设置选项。</p>
-<p>在使用上， <code>Props</code> 类似于 HTML 中的属性：</p>
-<pre><code>React.render(&lt;HelloMessage name=&quot;foo&quot; /&gt;, document.body);
-</code></pre><p>在 Component 内部，通过 <code>this.props.name</code> 来引用这个 <code>Props</code>：</p>
-<pre><code>var HelloMessage = React.createClass({
-  render: function () {
-    return &lt;div&gt;Hello {this.props.name}&lt;/div&gt;;
-  }
-});
-</code></pre><p>需要注意的是， Props 仅用来定制 Component， 这些数据不应该被改动。 如果涉及到需要做改动的数据， 得考虑使用 <code>state</code>。</p>
-<h2 id="Stateful-Component"><a href="#Stateful-Component" class="headerlink" title="Stateful Component"></a><strong>Stateful Component</strong></h2><p>State 数据代表 Component 的状态， 用于维护 Component 内部的状态。 当 State 发生改变之后， React 将会重新渲染 UI 。调用 与 <code>Props</code> 类似， State 数据通过 <code>this.state</code> 访问：</p>
-<pre><code>var Greeting = React.createClass({
-  getInitialState: function () {
-    return { greeted: false };
-  },
-  greet: function () {
-    this.setState({
-      greeted: true
-    });
-  },
-  render: function () {
-    var response = this.state.greeted ? &apos;Hi&apos; : &apos;&apos;;
-
-    return (
-      &lt;div&gt;
-        &lt;div&gt;Hello {this.props.name}&lt;/div&gt;
-        &lt;span&gt;{response}&lt;/span&gt;
-        &lt;button onClick={this.greet}&gt;Hi&lt;/button&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-
-React.render(&lt;Greeting name=&quot;foo&quot; /&gt;, document.body);
-</code></pre><p>这个例子中加了几个函数，我们一一来看下。 首先是 <code>getInitialState</code> ， 这个方法在 Component 初始化的时候被调用， 返回 Component 初始时的状态数据。例子中，我们设置了 Component 初始时的 <code>greeted</code> 为 <code>false</code>。<br>然后是 <code>greet</code> 方法，这个方法被调用之后将修改状态数据 <code>greeted</code> 为 <code>true</code>。</p>
-<p>当 State 发生改变后， React 将 Component 渲染到 Virtual DOM，新的 Virtual DOM 与 旧版本的进行比对，检查出改变的部分并更新浏览器的 DOM。 在这个例子中，当按钮被点击后， <code>greeted</code>状态数据发生了变化，UI 跟随着更新。</p>
-<h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a><strong>组合</strong></h2><p>结合 Props 和 State，我们就可以使用 Component 来创建完整的应用。</p>
-<pre><code>var Greeting = React.createClass({
-  getInitialState: function () {
-    return { greeted: false };
-  },
-  greet: function () {
-    this.setState({
-      greeted: true
-    });
-  },
-  render: function () {
-    var response = this.state.greeted ? &apos;Hi&apos; : &apos;&apos;;
-
-    return (
-      &lt;div&gt;
-        &lt;div&gt;Hello {this.props.name}&lt;/div&gt;
-        &lt;span&gt;{response}&lt;/span&gt;
-        &lt;button onClick={this.greet}&gt;Hi&lt;/button&gt;
-      &lt;/div&gt;
-    );
-  }
-});
-
-var users = [&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;];
-
-var GreetingApp = React.createClass({
-  render: function () {
-    var greetings = this.props.users.map(function (user) {
-      return &lt;Greeting name={user} /&gt;;
-    });
-
-    return &lt;div&gt;{greetings}&lt;/div&gt;;
-  }
-});
-
-React.render(&lt;GreetingApp users={users} /&gt;, document.body);
-</code></pre>
         
 
       </div>
@@ -274,8 +151,8 @@ React.render(&lt;GreetingApp users={users} /&gt;, document.body);
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/03/04/ReactJS/"
-             data-title="ReactJS 快速入门" data-url="http://yoursite.com/2015/03/04/ReactJS/">
+        <div class="ds-thread" data-thread-key="2016/03/01/hello/"
+             data-title="hello" data-url="http://yoursite.com/2016/03/01/hello/">
         </div>
 
       
@@ -341,7 +218,7 @@ React.render(&lt;GreetingApp users={users} /&gt;, document.body);
 
     
       <div class="post-toc sidebar-panel-active">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-术语"><span class="nav-number">1.</span> <span class="nav-text">React 术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demo-环境准备"><span class="nav-number">2.</span> <span class="nav-text">demo 环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个-React-Element"><span class="nav-number">3.</span> <span class="nav-text">第一个 React Element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个-React-Component"><span class="nav-number">4.</span> <span class="nav-text">第一个 React Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Props"><span class="nav-number">5.</span> <span class="nav-text">Props</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stateful-Component"><span class="nav-number">6.</span> <span class="nav-text">Stateful Component</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#组合"><span class="nav-number">7.</span> <span class="nav-text">组合</span></a></li></ol>
+        
       </div>
     
   </div>
