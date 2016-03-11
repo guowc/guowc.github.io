@@ -25,7 +25,7 @@
 
 
 
-  <title> Hello World // Guowc's note </title>
+  <title> 第一个简单的APP：React-Native实践之路（一） // Guowc's note </title>
 </head>
 
 <body>
@@ -96,7 +96,7 @@
           
           
             
-              Hello World
+              第一个简单的APP：React-Native实践之路（一）
             
           
         </h1>
@@ -105,15 +105,15 @@
       <div class="post-meta">
           <span class="post-time">
             
-              Posté le 2015-02-09
+              Posté le 2016-03-11
             
           </span>
         
           
             <span class="post-comments-count">
             &nbsp; | &nbsp;
-            <a href="/2015/02/09/hello-world/#comments" >
-              <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/09/hello-world/"></span>
+            <a href="/2016/03/11/first-react-native-app-1/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/first-react-native-app-1/"></span>
             </a>
           </span>
           
@@ -128,15 +128,31 @@
         
 
         
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+          <h2 id="一、环境搭建"><a href="#一、环境搭建" class="headerlink" title="一、环境搭建"></a>一、环境搭建</h2><p>//注：本教程以mac环境下搭建ios开发环境为例</p>
+<p><strong>1、安装Xcode</strong><br>在app store中下载安装Xcode 7.0以上版本</p>
+<p><strong>2、安装homebrew</strong></p>
+<pre><code>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p>3、安装Node.js 4.0或更高版本</p>
+<pre><code>$ brew install node
+</code></pre><p>4、安装watchman</p>
+<pre><code>$ brew install watchman
+</code></pre><p>5、安装react-native全局依赖</p>
+<pre><code>$ npm install -g react-native-cli
+</code></pre><h2 id="二、快速开始"><a href="#二、快速开始" class="headerlink" title="二、快速开始"></a>二、快速开始</h2><p>选择一个目录，初始化一个react-native项目</p>
+<pre><code>$ react-native init MyProject
+</code></pre><p>由于网络原因，从npm官网源下载依赖包速度很慢，可以先将npm仓库源转为国内镜像，先在控制台执行</p>
+<pre><code>$ npm config set registry https://registry.npm.taobao.org
+$ npm config set disturl https://npm.taobao.org/dist
+</code></pre><p>然后在初始化项目</p>
+<pre><code>$ react-native init MyProject
+</code></pre><p>进入项目目录</p>
+<pre><code>$ cd Myproject
+</code></pre><p>运行</p>
+<pre><code>$ react-native run-ios
+</code></pre><p>成功编译后模拟器自动启动，如果看到以下界面，说明环境配置已经成功</p>
+<p><img src="http://ww1.sinaimg.cn/large/9ea13817gw1f1t051wv48j20ku12ata2.jpg" width="300"></p>
+<p>随意修改index.ios.js入口文件，在模拟器中按⌘+R刷新查看效果，也可⌘+D 在开发菜单中选择Enable Live Reload，开启模拟器自动刷新，这样保存代码时模拟器立即自动刷新</p>
+<p>至此已完成OS X环境下react-native ios项目环境的配置和项目初始化</p>
 
         
 
@@ -159,8 +175,8 @@
   
     <div class="comments" id="comments">
       
-        <div class="ds-thread" data-thread-key="2015/02/09/hello-world/"
-             data-title="Hello World" data-url="http://yoursite.com/2015/02/09/hello-world/">
+        <div class="ds-thread" data-thread-key="2016/03/11/first-react-native-app-1/"
+             data-title="第一个简单的APP：React-Native实践之路（一）" data-url="http://yoursite.com/2016/03/11/first-react-native-app-1/">
         </div>
 
       
@@ -226,7 +242,7 @@
 
     
       <div class="post-toc sidebar-panel-active">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境搭建"><span class="nav-number">1.</span> <span class="nav-text">一、环境搭建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、快速开始"><span class="nav-number">2.</span> <span class="nav-text">二、快速开始</span></a></li></ol>
       </div>
     
   </div>

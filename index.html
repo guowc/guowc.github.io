@@ -52,7 +52,7 @@
       <li class="menu-item menu-item-home">
         <a href="/">
           <i class="menu-item-icon icon-home"></i> <br />
-          Home
+          Accueil
         </a>
       </li>
     
@@ -99,6 +99,97 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/11/first-react-native-app-1/">
+                第一个简单的APP：React-Native实践之路（一）
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+          <span class="post-time">
+            
+              Posté le 2016-03-11
+            
+          </span>
+        
+          
+            <span class="post-comments-count">
+            &nbsp; | &nbsp;
+            <a href="/2016/03/11/first-react-native-app-1/#comments" >
+              <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11/first-react-native-app-1/"></span>
+            </a>
+          </span>
+          
+        
+      </div>
+    </div>
+
+    
+      <div class="post-body">
+
+        
+        
+
+        
+          <h2 id="一、环境搭建"><a href="#一、环境搭建" class="headerlink" title="一、环境搭建"></a>一、环境搭建</h2><p>//注：本教程以mac环境下搭建ios开发环境为例</p>
+<p><strong>1、安装Xcode</strong><br>在app store中下载安装Xcode 7.0以上版本</p>
+<p><strong>2、安装homebrew</strong></p>
+<pre><code>$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre><p>3、安装Node.js 4.0或更高版本</p>
+<pre><code>$ brew install node
+</code></pre><p>4、安装watchman</p>
+<pre><code>$ brew install watchman
+</code></pre><p>5、安装react-native全局依赖</p>
+<pre><code>$ npm install -g react-native-cli
+</code></pre><h2 id="二、快速开始"><a href="#二、快速开始" class="headerlink" title="二、快速开始"></a>二、快速开始</h2><p>选择一个目录，初始化一个react-native项目</p>
+<pre><code>$ react-native init MyProject
+</code></pre><p>由于网络原因，从npm官网源下载依赖包速度很慢，可以先将npm仓库源转为国内镜像，先在控制台执行</p>
+<pre><code>$ npm config set registry https://registry.npm.taobao.org
+$ npm config set disturl https://npm.taobao.org/dist
+</code></pre><p>然后在初始化项目</p>
+<pre><code>$ react-native init MyProject
+</code></pre><p>进入项目目录</p>
+<pre><code>$ cd Myproject
+</code></pre><p>运行</p>
+<pre><code>$ react-native run-ios
+</code></pre><p>成功编译后模拟器自动启动，如果看到以下界面，说明环境配置已经成功</p>
+<p><img src="http://ww1.sinaimg.cn/large/9ea13817gw1f1t051wv48j20ku12ata2.jpg" width="300"></p>
+<p>随意修改index.ios.js入口文件，在模拟器中按⌘+R刷新查看效果，也可⌘+D 在开发菜单中选择Enable Live Reload，开启模拟器自动刷新，这样保存代码时模拟器立即自动刷新</p>
+<p>至此已完成OS X环境下react-native ios项目环境的配置和项目初始化</p>
+
+        
+
+      </div>
+    
+
+    
+      <div class="post-footer">
+        
+
+        
+
+        
+          <div class="post-eof the-shape"></div>
+        
+      </div>
+    
+  </div>
+
+
+  
+    
+
+  <div class="post post-type-normal ">
+    <div class="post-header">
+
+      
+      
+        <h1 class="post-title">
+          
+          
+            
               <a class="post-title-link" href="/2016/03/01/react-simple-game/">
                 用React编写一款简单的赛车游戏
               </a>
@@ -110,7 +201,7 @@
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2016-03-01
+              Posté le 2016-03-01
             
           </span>
         
@@ -184,7 +275,7 @@ ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;
 </code></pre>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/01/react-simple-game/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -229,7 +320,7 @@ ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-09
+              Posté le 2015-03-09
             
           </span>
         
@@ -278,7 +369,7 @@ ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;
 </code></pre><p>当你十分确定一个样式只可能用于一个具体业务时，才可使用 <code>f-search-hot</code> 这样的命名（不推荐）</p>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/09/pure-html-css/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -323,7 +414,7 @@ ReactDOM.render(&lt;GameBoard/&gt;,document.getElementById(&quot;reactGame&quot;
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-06
+              Posté le 2015-03-06
             
           </span>
         
@@ -359,7 +450,7 @@ hexo server
 </code></pre>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/06/build-hexo/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -404,7 +495,7 @@ hexo server
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-05
+              Posté le 2015-03-05
             
           </span>
         
@@ -471,7 +562,7 @@ hexo server
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-03-04
+              Posté le 2015-03-04
             
           </span>
         
@@ -520,7 +611,7 @@ hexo server
 </ul>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/04/ReactJS/#more">
-              Read more &raquo;
+              Lire la suite &raquo;
             </a>
           </div>
         
@@ -565,7 +656,7 @@ hexo server
       <div class="post-meta">
           <span class="post-time">
             
-              Posted on 2015-02-09
+              Posté le 2015-02-09
             
           </span>
         
@@ -646,8 +737,8 @@ hexo server
       <p class="site-description motion-element"></p>
       <div class="site-state motion-element">
         <div class="site-state-item site-state-posts">
-          <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">articles</span>
         </div>
         <div class="site-state-item site-state-tags">
             <span class="site-state-item-count">0</span>
@@ -692,7 +783,7 @@ hexo server
 </div>
 
 <div class="theme-info">
-  Theme - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
+  Thème - <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT</a>
 </div>
 
 
