@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body style="display:none">
+<div class="stage_top">
+	<ul class="btnul">
+		<li>
+			<a href="" class="png">
+				<span class="png">4399手机游戏</span>
+			</a>
+		</li>
+		<li>
+			<a href="" class="png">
+				<span class="png">安卓游戏客户端</span>
+			</a>
+		</li>
+	</ul>
+	<div class="logo png">4399手机助手</div>
+	<a href="" class="downbtn_sm png" id="j-top-downbtn">立即下载 </a>
+</div>
+<div class="stage">
+	<ul class="stagelist">
+		<li class="stage1">
+			<div class="screen1">
+				<span class="gameicon png"></span>
+				<h2 class="slogan png">手机装游戏 就是这么简单</h2>
+				<p class="text">4399手机助手，完美支持所有Android设备</p>
+				<a href="" class="downbtn png">立即下载</a>
+			</div>
+		</li>
+		<li class="stage2">
+			<div class="screen2">
+				<div class="pcscreen png">
+					<h2 class="slogan png">一键安装</h2>
+					<p class="text">游戏快捷下载，从助手中一键安装到我的手机</p>
+				</div>
+				<div class="pcbase png">
+					<div class="pckeyboard png">
+						<div class="pcprobox png">
+							<div class="pcprobar">
+								<div class="propanel clearfix">
+									<span class="lt"></span>
+									<span class="ct"></span>
+									<span class="rt"></span>
+								</div>
+								<div class="pcprorun"></div>
+								<div class="propanel_static png"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li class="stage3">
+			<div class="screen3">
+				<h2 class="slogan png">拖拽安装</h2>
+				<p class="text">拖拉文件到手机助手，直接安装到我的手机</p>
+				<div class="tsboard">
+					<div class="tsboard_left png"></div>
+					<div class="tsboard_right png"></div>
+					<span class="file png"></span>
+					<span class="filesuccess png"></span>
+					<div class="lightwrap">
+						<div class="light1 png"></div>
+						<div class="light2 png"></div>
+					</div>
+				</div>
+			</div>
+		</li>
+		<li class="stage4">
+			<div class="screen4">
+				<div class="loopbox">
+					<div class="loopbase png"></div>
+					<div class="loop1"></div>
+					<div class="loop2"></div>
+					<div class="loopc png"></div>
+					<div class="loop3 png"></div>
+				</div>
+				<div class="introbox">
+					<h2 class="slogan png">特性介绍</h2>
+					<p class="text text1">支持从a.4399.cn上一键安装游戏到手机</p>
+					<p class="text text2">支持所有apk包安装到手机</p>
+					<p class="text text3">在电脑上找到apk包拖动到助手界面即可安装</p>
+					<a href="" class="downbtn png">立即下载</a>
+					<p class="info">版本：1.0.0  大小：7.1M  更新：2014/03/26  系统要求：XP/Win7/Win8</p>
+				</div>
+			</div>
+		</li>
+	</ul>
+	<span class="arrow png" id="j-arrow"></span>
+</div>
+<div class="stage_bot">
+	<div class="links">
+		<a href="">关于我们</a>
+		<span class="ln"></span>
+		<a href="">联系方式</a>
+		<span class="ln"></span>
+		<a href="">商务合作</a>
+		<span class="ln"></span>
+		<a href="">使用许可</a>
+	</div>
+	<div class="copyright">© 2014 4399</div>
+</div>
+<ul class="stage_num">
+	<li class="cur"><i class="png"></i></li>
+	<li><i class="png"></i></li>
+	<li><i class="png"></i></li>
+	<li><i class="png"></i></li>
+</ul>
+<script src="http://s1.img4399.com/base/js/jquery.min.1.6.1.js?10231"></script>
+<script src="js/ks.marquee.js"></script>
+<script>
+window.onload = function(){
+	$("body").show();
+}
+$(function(){
+
+	function resize(){
+		var wh = $(window).height();
+		$("body,.stage_bg,.stage,.stagelist li").css("height",wh);
+	}
+	resize();
+	$(window).bind("resize",function(){
+		resize();
+	});
+
+	//测试浏览器是否支持css
+	var testcss3 = (function () {
+        var div = document.createElement('div'),
+            vendors = 'Khtml Ms O Moz Webkit'.split(' '),
+            len = vendors.length;
+
+        return function (prop) {
+            if (prop in div.style) return true;
+
+            prop = prop.replace(/^[a-z]/, function (val) {
+                return val.toUpperCase();
+            });
+
+            while (len--) {
+                if (vendors[len] + prop in div.style) {
+                    return true;
+                }
+            }
+            return false;
+        };
+    })();
+
+    var css3support = testcss3("animation");
+    if(css3support){
+    	curclass = "css3spt";
+    }else{
+    	curclass = "cur";
+    	$(".stage").addClass("css2spt");
+    }
+	ue.marquee({
+		scrolltarget:".stage", //绑定滚轮切换的对象
+		hovertarget:".stage", //鼠标hover停止切换的对象
+		target:'.stage .stagelist', //滚动对象 一般为 ul
+		items:'.stage .stagelist li', //滚动的详细列表
+		gotobtn:".stage_num li",
+		gotobtn_activable : false,
+		gotobtn_currentclass : "cur",
+		speed:600, //切换速度
+		visiblenum:1,
+		scrollnull:1,
+		currentclass:curclass, //每滚动一个之前的回调函数
+		autoplay: false,
+		loop : 0,
+		mode:0, //1表示竖直方向滚动 0表示水平方向滚动
+		direction:0,
+		beforeSlide : function(){
+			var curindex = this.current.attr("data-index");
+			if(curindex>0){
+				$("#j-arrow").fadeOut();
+			}else{
+				$("#j-arrow").fadeIn();
+			}
+			if(curindex>0 && curindex<3){
+				$("#j-top-downbtn").fadeIn();
+			}else{
+				$("#j-top-downbtn").fadeOut();
+			}
+		}
+	});
+})
+
+</script>
+<!--[if IE 6]>
+<script type="text/javascript" src="http://s1.img4399.com/base/pngfilter.js?02"></script>
+<script>DD_belatedPNG.fix('.png');</script>
+<![endif]-->
+</body>
+</html>
