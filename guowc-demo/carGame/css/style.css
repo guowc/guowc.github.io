@@ -1,0 +1,307 @@
+/* reset */
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, legend, input, button, textarea, p, blockquote, th, td ,header, section, aside, nav, menu, hgroup, audio, video, figure, figcaption, footer, article{ margin:0; padding:0; }
+table { border-collapse:collapse; border-spacing:0; }
+em { font-style:normal; }
+fieldset, img { border:0; }
+address, caption, cite, code, dfn, em, th, var, optgroup { font-style:inherit; font-weight:inherit; }
+del, ins { text-decoration:none; }
+li { list-style:none; }
+caption, th { text-align:left; }
+h1, h2, h3, h4, h5, h6 { font-size:100%;}
+q:before, q:after { content:''; }
+abbr, acronym { border:0; font-variant:normal;}
+sup { vertical-align:baseline; }
+sub { vertical-align:baseline; }
+body,input, button, textarea, select {*font-size:100%;outline:none; }
+textarea { resize: none; outline:none; }
+i,cite{font-style:normal;} 
+.clearfix {  zoom:1; }
+.clearfix:after { content:""; display:block;clear:both;height: 0;visibility: hidden;}
+a {text-decoration:none; } 
+a:focus{outline: none;}    
+
+body{
+	background:#000;
+}
+
+.board{
+	width:480px;
+	height:800px;
+	position:absolute;
+	margin:auto;
+	left:0;
+	top:0;
+	bottom:0;
+	right:0;
+	overflow:hidden;
+	border:#fff 5px solid;
+}
+.roadbed{
+	background:url(../resource/road.png) repeat-y;
+	width:480px;
+	height:1600px;
+	position:absolute;
+	left:0;
+	top:-800px;
+}
+.road{
+	width:320px;
+	height:800px;
+	position:absolute;
+	left:50%;
+	top:0;
+	margin-left:-160px;
+}
+.roadRun{
+	-webkit-transform:translateZ(0);
+	-webkit-animation:roadRun 1.2s linear infinite;
+}
+@-webkit-keyframes roadRun{
+	100%{ -webkit-transform:translateY(800px);}
+}
+.hero{
+	-webkit-transition:-webkit-transform .5s ease;
+	width:142px;
+	height:162px;
+	position:absolute;
+	bottom:10px;
+	left:0;
+	display:none;
+}
+.hero .body{
+	background:url(../resource/hero.png) no-repeat 50% 0,
+	url(../resource/heroDied.png) no-repeat -1000% 0,
+	url(../resource/heroSuper.png) no-repeat -1000% 0;
+	height:100%;
+}
+.hero .light{
+	-webkit-animation:light .6s ease infinite;
+	background:url(../resource/carLight.png) no-repeat 50% 0;
+	width:142px;
+	height:57px;
+	position:absolute;
+	top:-35px;
+	left:-4px;
+}
+@-webkit-keyframes light{
+	0%{ opacity:1}
+	50%{ opacity:0.3}
+	100%{ opacity:1}
+}
+.start{
+	background:url(../resource/start.png) no-repeat;
+	width:260px;
+	height:86px;
+	position:absolute;
+	left:50%;
+	top:600px;
+	margin-left:-130px;
+	z-index:10;
+	cursor:pointer;
+}
+.kilo{
+	background:url(../resource/kilo.png) no-repeat;
+	width:83px;
+	height:100px;
+	line-height:100px;
+	text-align:right;
+	position:absolute;
+	right:0;
+	top:20px;
+	font-size:32px;
+	font-weight:700;
+	color:#FFEA00;
+	padding-right:50px;
+}
+.enemy{
+	-webkit-transform:translateZ(0);
+	width:142px;
+	position:absolute;
+}
+.enemy .body{
+	height:100%;
+	position:relative;
+}
+.enemy0{
+	height:160px;
+	top:-160px;
+}
+.enemy0 .body{
+	background:url(../resource/car0.png) no-repeat 50% 0;
+}
+.enemy1{
+	height:160px;
+	top:-160px;
+}
+.enemy1 .body{
+	background:url(../resource/car1.png) no-repeat 50% 0;
+}
+.enemy2{
+	height:220px;
+	top:-220px;
+}
+.enemy2 .body{
+	background:url(../resource/car2.png) no-repeat 50% 0;
+}
+
+.roadPlay .hero{
+	-webkit-animation:show .5s ease;
+	display:block;
+}
+@-webkit-keyframes show{
+	0%{ -webkit-transform:translateY(172px);}
+}
+.hide{
+	display:none;
+}
+
+.hero.left{
+	-webkit-transform:translateX(0);
+}
+.hero.right{
+	-webkit-transform:translateX(178px);
+}
+
+.enemy.speed0{
+	-webkit-animation:speed 1s linear;
+}
+.enemy.speed1{
+	-webkit-animation:speed 2s linear;
+}
+.enemy.speed2{
+	-webkit-animation:speed 2.5s linear;
+}
+@-webkit-keyframes speed{
+	100%{ -webkit-transform:translateY(1000px);}
+}
+.enemy.loc0{
+	left:0;
+}
+.enemy.loc1{
+	left:178px;
+}
+
+.failbub{
+	/*background:rgba(0,0,0,0.9);*/
+	width:380px;
+	height:240px;
+	border-radius:10px;
+	/*border:#fff 5px solid;*/
+	position:absolute;
+	left:50px;
+	top:50%;
+	margin-top:-130px;
+	z-index:111;
+	display:none;
+}
+.failbub .failtext{
+	background:url(../resource/failedNotice.png) no-repeat 50% 0;
+	width:100%;
+	height:116px;
+	display:block;
+}
+.failbub .retry{
+	background:url(../resource/playAgainBtn.png) no-repeat;
+	width:266px;
+	height:99px;
+	display:block;
+	margin:25px auto 0;
+}
+.help{
+	background:rgba(255,255,255,.8);
+	width:200px;
+	height:40px;
+	line-height:40px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-20px 0 0 -100px;
+	color:#66757d;
+	border-radius:30px;
+	text-align:center;
+	font-family:"microsoft yahei";
+	display:none;
+}
+.roadPlay .help{
+	-webkit-animation:help 2s ease forwards;
+	display:block;
+}
+
+.helpsp{
+	background:rgba(255,255,255,.8);
+	width:200px;
+	height:40px;
+	line-height:40px;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-20px 0 0 -100px;
+	color:#66757d;
+	border-radius:30px;
+	text-align:center;
+	font-family:"microsoft yahei";
+	display:none;
+}
+.helpsp.show{
+	-webkit-animation:help 2s ease forwards;
+	display:block;
+}
+@-webkit-keyframes help{
+	0%{ opacity:0;}
+	40%{ opacity:1;}
+	80%{ opacity:1;}
+	100%{ opacity:0;}
+}
+
+.crashed .enemy,
+.crashed .roadbed{
+	-webkit-animation-play-state:paused;
+}
+.crashed .hero .body{
+	background:url(../resource/heroDied.png) no-repeat;
+}
+.crashed .hero .light{
+	display:none;
+}
+.crashed .failbub{
+	-webkit-animation:failShow .5s ease;
+	display:block;
+}
+
+
+
+@-webkit-keyframes failShow{
+	0%{ -webkit-transform:translateY(250px);}
+	80%{ -webkit-transform:translateY(-12px);}
+	100%{ -webkit-transform:translateY(0);}
+}
+.superMode .hero .body{
+	-webkit-animation:heroSuper .1s ease infinite;
+	background:url(../resource/heroSuper.png) no-repeat 8px 0px;
+	height:176px;
+	bottom:4px;
+}
+.superMode .hero .light{
+	display:none;
+}
+@-webkit-keyframes heroSuper{
+	0%{ opacity:1;}
+	50%{ opacity:.7;}
+	100%{ opacity:1;}
+}
+
+.superMode .roadRun{
+	-webkit-animation: roadRun .8s linear infinite;
+}
+
+
+.superMode .enemy.loc0 .chunge{
+	-webkit-transition:-webkit-transform 1s ease-out;
+	-webkit-transform: translate3d(-80px,0,0) rotate(-280deg);
+	-webkit-transform-origin:left bottom;
+}
+.superMode .enemy.loc1 .chunge{
+	-webkit-transition:-webkit-transform 1s ease-out;
+	-webkit-transform: translate3d(80px,0,0) rotate(280deg);
+	-webkit-transform-origin:right bottom;
+}
