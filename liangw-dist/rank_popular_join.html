@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<title>粮王人气榜</title>
+<script>
+(function (doc, win) {
+var docEl = doc.documentElement,
+resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+    var clientWidth = docEl.clientWidth;
+    var fs = 100 * (clientWidth / 750);
+    fs = fs > 100?100:fs;
+    docEl.style.fontSize = fs + 'px';
+    };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+<body>
+<div class="View section">
+    <div class="Modal rankhead">
+        <p class="title">暂时排名</p>
+        <p class="number">99</p>
+        <a href="votecard_join.html" class="link">查看个人主页&gt;&gt;</a>
+    </div>
+    <div class="Module heading">
+        <span class="info">98/10000</span>
+        <h3 class="text">粮王人气榜</h3>
+    </div>
+    <div class="View box">
+        <ul class="List rank">
+            <li class="item">
+                <span class="num">1</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">2</span>
+                <span class="vote voted">已助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">3</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">4</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">5</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">6</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">7</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+            <li class="item">
+                <span class="num">8</span>
+                <span class="vote">投票助威</span>
+                <div class="user">
+                    <img class="ava" src="http://placehold.it/90x90" alt="avatar">
+                    <p class="uid"><span class="name">张三</span><span class="id">198号</span></p>
+                    <p class="vtn">10021票</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script src="js/zepto.min.js"></script>
+<script>
+$(function(){
+    //
+});
+</script>
+</body>
+</html>

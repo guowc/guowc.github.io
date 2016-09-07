@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<title>我的测产详情</title>
+<script>
+(function (doc, win) {
+var docEl = doc.documentElement,
+resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+    var clientWidth = docEl.clientWidth;
+    var fs = 100 * (clientWidth / 750);
+    fs = fs > 100?100:fs;
+    docEl.style.fontSize = fs + 'px';
+    };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+<body class="gray">
+<div class="View section">
+    <div class="Module form form-test form-test-detail">
+        <div class="Input text">
+            <label class="label">亩数<em class="star">*</em></label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">密度(株/亩)<em class="star">*</em></label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">水分<em class="star">*</em></label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">实打验收(干)(斤/亩)<em class="star">*</em></label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">株距(cm)</label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">行距(cm)</label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">亩产量(湿)(斤/亩)</label>
+            <span class="data">100</span>
+        </div>
+        <div class="Input text">
+            <label class="label">出籽率(%)</label>
+            <span class="data">100</span>
+        </div>
+        <div class="Widget uploadpic">
+            <ul class="piclist" id="J_upload_target">
+                <li>
+                    <div class="imgbox">
+                        <img src="http://placehold.it/200x200" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div class="imgbox">
+                        <img src="http://placehold.it/200x200" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div class="imgbox">
+                        <img src="http://placehold.it/200x200" alt="">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="js/zepto.min.js"></script>
+<script src="js/action.js"></script>
+<script>
+$(function(){
+    //
+});
+</script>
+</body>
+</html>

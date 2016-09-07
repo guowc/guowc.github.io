@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<title>我要当粮王</title>
+<script>
+(function (doc, win) {
+var docEl = doc.documentElement,
+resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+    var clientWidth = docEl.clientWidth;
+    var fs = 100 * (clientWidth / 750);
+    fs = fs > 100?100:fs;
+    docEl.style.fontSize = fs + 'px';
+    };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+<body>
+<div class="View section base">
+    <div class="Module form">
+        <p class="heading">上传我的靓照</p>
+        <div class="Widget upload">
+            <span class="text">我的靓照</span>
+            <div class="avatar">
+                <div class="imgbox">
+                    <img src="images/avatar_default.png" alt="avatar" id="J_avatar_target">
+                </div>
+            </div>
+            <i class="arrow"></i>
+            <input id="J_upload_avatar" class="file" type="file" name="" value="" accept="image/*">
+        </div>
+        <p class="heading">参赛地区</p>
+        <div class="Widget address">
+            <div class="hook" id="J_address"></div>
+            <span class="edit" id="J_btn_addr"></span>
+        </div>
+        <p class="heading">报名登记</p>
+        <div class="Input text">
+            <label class="label">真实姓名</label>
+            <input type="text" class="text" placeholder="请输入您的真实姓名">
+        </div>
+        <div class="Input text">
+            <label class="label">联系电话</label>
+            <input type="text" class="text" placeholder="请输入您的联系电话">
+        </div>
+        <div class="Input text">
+            <label class="label">详细地址</label>
+            <input type="text" class="text" placeholder="请输入您的详细地址">
+        </div>
+        <p class="heading">我要喊口号</p>
+        <div class="Input textarea">
+            <textarea class="textarea" placeholder="本届德当5号粮王非我莫属~谁敢与我一战"></textarea>
+        </div>
+        <div class="foot">
+            <input type="submit" class="Button submit" id="J_btn_join" value="我要当粮王">
+        </div>
+    </div>
+</div>
+<div class="Modal address" id="J_modal_address">
+    <div class="addrbox">
+        <dl class="addrlist">
+            <dt class="dt">选择参赛地区</dt>
+            <dd class="dd" id="J_city"></dd>
+        </dl>
+        <dl class="addrlist">
+            <dt class="dt">选择乡镇</dt>
+            <dd class="dd" id="J_towns"></dd>
+        </dl>
+    </div>
+    <span class="submit">确定</span>
+    <span class="close"></span>
+</div>
+<div class="Modal award" id="J_modal_join">
+    <div class="awardbox">
+        <div class="head">
+            <div class="crown"></div>
+            <p class="heading">恭喜获得粮王争霸资格!</p>
+        </div>
+        <div class="body">
+            <div class="btnbox">
+                <a href="join_info.html" class="btn redbtn">邀请我的助威团</a>
+                <a href="rank_power_join.html" class="btn orgbtn">去粮王实力榜</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/zepto.min.js"></script>
+<script src="js/canvasResize.js"></script>
+<script src="js/action.js"></script>
+<script>
+$(function(){
+    //
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" href="css/style.css">
+<title>谁是粮王助威活动</title>
+<script>
+(function (doc, win) {
+var docEl = doc.documentElement,
+resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+    var clientWidth = docEl.clientWidth;
+    var fs = 100 * (clientWidth / 750);
+    fs = fs > 100?100:fs;
+    docEl.style.fontSize = fs + 'px';
+    };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+<body>
+<div class="View section">
+    <div class="View index">
+        <div class="Module banner">
+            <div class="logo"></div>
+            <div class="house-l"></div>
+            <div class="house-r"></div>
+            <div class="glass"></div>
+            <div class="farmer"></div>
+        </div>
+        <div class="Module signbox">
+            <a href="join.html" class="Button orange">报名应战</a>
+            <a href="rank_popular.html" class="link">粮王人气榜&gt;&gt;</a>
+        </div>
+        <div class="Module rules">
+            <h2 class="heading">活动规则</h2>
+            <p class="text">1.活动时间：2016.09.01至2016.12.30</p>
+            <p class="text">2.活动对象：豫南地区有40户农户以上的乡镇</p>
+            <p class="text">3.在北京德农种业授权门店（安装农场帮APP终端）购买北京德农牌玉米5亩以上（含5亩），即可获得一次抽奖机会，赢取奖品</p>
+            <p class="text">4.奖品天天送，当天抽奖，次日以门店公示的形式发布中奖结果，一周内北京徳农种业将在所有抽奖人员（以县为单位）中抽取大奖一名，价值4999元电动三轮车</p>
+            <p class="text">5.购买越多，中奖机会越高；奖品多多，先买先得</p>
+        </div>
+    </div>
+</div>
+
+<script src="js/zepto.min.js"></script>
+<script>
+$(function(){
+    //
+});
+</script>
+</body>
+</html>
