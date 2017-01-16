@@ -1,0 +1,62 @@
+.canvas{
+    width:750rpx;
+    height:750rpx;
+    position:absolute;
+    top:0;
+}
+.texture-wrap{
+    padding:0 5rpx;
+}
+.texture-box{
+    height:180rpx;
+    white-space:nowrap;
+}
+
+.texture-item{
+    width:160rpx;
+    height:160rpx;
+    display:inline-block;
+    margin:0 5rpx;
+}
+.texture-img{
+    width:90%;
+    height:90%;
+    display:block;
+    margin:5% auto 0;
+}
+.control{
+    display:flex;
+    margin-top:10rpx;
+}
+.control-text{
+    width:80rpx;
+    line-height:80rpx;
+    font-size:30rpx;
+    text-align:right;
+}
+.control-slider{
+    flex:1;
+}
+.rotate{
+    position:absolute;
+    z-index:222;
+    left:0;
+    top:0;
+}
+.photo{
+    width:100%;
+}
+.board{
+    height:750rpx;
+    position:relative;
+    overflow:hidden;
+}
+.compose{
+    background:#000;
+    color:#fff;
+    margin:10rpx 20rpx;
+}
+.make{
+    width:100%;
+    position:fixed;
+}

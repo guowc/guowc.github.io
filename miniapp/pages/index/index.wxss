@@ -1,0 +1,12 @@
+/**index.wxss**/
+.face-file{
+  margin-top:240rpx;
+}
+.face-title{
+  font-size:50rpx;
+  font-weight:700;
+}
+.face-file-btn{
+  background:#000;
+  color:#fff;
+}

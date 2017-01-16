@@ -1,0 +1,19 @@
+<!--make.wxml-->
+<view class="make" >
+  <view class="board" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend">
+    <image class="photo" mode="widthFix" src="{{photo}}"></image>
+    <view style="top:{{top}}px;left:{{left}}px" class="rotate">
+        <image animation="{{animationData}}" mode="aspectFit" class="widget" src="{{widget}}" ></image>
+    </view>
+    
+    <canvas class="canvas" canvas-id="js-canvas"></canvas>
+  </view>
+  <view class="texture-wrap">
+    <scroll-view class="texture-box" scroll-x="true">
+      <view class="texture-item" wx:for="{{texture}}">
+        <image bindtap="select" mode="aspectFit" class="texture-img" data-src="{{item.src}}" src="{{item.src}}"></image>
+      </view>
+    </scroll-view>
+  </view>
+  <button bindtap="compose" class="compose">生成</button>
+</view>
