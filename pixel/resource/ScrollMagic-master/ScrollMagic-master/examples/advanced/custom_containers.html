@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=500" />
+	<meta name="keywords" content="ScrollMagic, example, scrolling, attaching, scrollbar, custom, containers, multiple" />
+	<meta name="author"	content="Jan Paepke (www.janpaepke.de)" />
+	<title>Custom Containers - Examples - ScrollMagic</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic|Josefin+Slab:400,700italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../css/normalize.css" type="text/css">
+	<link rel="stylesheet" href="../../css/style.css" type="text/css">
+	<link rel="stylesheet" href="../../css/examples.css" type="text/css">
+	<link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
+
+	<script type="text/javascript" src="../../js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/lib/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../js/lib/modernizr.custom.min.js"></script>
+	<script type="text/javascript" src="../../js/examples.js"></script>
+	
+	<script type="text/javascript" src="../../js/lib/greensock/TweenMax.min.js"></script>
+	<script type="text/javascript" src="../../scrollmagic/uncompressed/ScrollMagic.js"></script>
+	<script type="text/javascript" src="../../scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
+	<script type="text/javascript" src="../../scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+</head>
+<body>
+	<ul id="menu"></ul>
+	<div id="content-wrapper">
+		<div id="example-wrapper">
+			<section id="titlechart">
+				<div id="description">
+					<h1 class="badge gsap">Custom Containers</h1>
+					<h2>One page can have multiple scroll containers.</h2>
+					<p>
+						A scroll container can be any element (usually a div though), that has scrolling happening inside of it.
+					</p>
+					<p>
+						While textareas have scrolling enabled by default, it needs to be explicitly set for divs, using the css style <code>overflow: scroll</code>.
+					</p>
+					<a href="#" class="viewsource">view source</a>
+				</div>
+			</section>
+			<div class="spacer s2"></div>
+			<div class="spacer s0"></div>
+			<section class="demowrap">
+				<div id="container1" class="scrollContainer" style="width: 500px; height: 300px; border: 1px solid blue;">
+					<section class="demo">
+						<div class="spacer s2"></div>
+						<div class="spacer s0" id="trigger1"></div>
+						<div class="animated box1 red disablePointerEvents">
+							<p>Wait for green.</p>
+							<a href="#" class="viewsource">view source</a>
+						</div>
+						<div class="spacer s3"></div>
+						<script>
+							$(function () { // wait for document ready
+								// init controller
+								var controller1 = new ScrollMagic.Controller({container: "#container1"});
+
+								// build scene
+								var scene = new ScrollMagic.Scene({triggerElement: "#trigger1", duration: 300})
+									.addTo(controller1)
+									.setTween(TweenMax.to("#container1 .animated", 0.5, {backgroundColor: "green"}))
+									.addIndicators() // add indicators (requires plugin)
+									.setPin("#container1 .animated");
+							});
+						</script>
+					</section>
+			</div>
+			</section>
+			<div class="spacer s3"></div>
+			<div class="spacer s0"></div>
+			<section class="demowrap">
+				<div id="container2" class="scrollContainer horizontal" style="width: 500px; height: 300px; border: 1px solid blue;">
+					<section class="demo">
+						<div class="spacer s4"></div>
+						<div class="spacer s0" id="trigger2"></div>
+						<div class="animated box1 red disablePointerEvents">
+							<p>Wait for green.</p>
+							<a href="#" class="viewsource">view source</a>
+						</div>
+						<div class="spacer s4"></div>
+						<script>
+							$(function () { // wait for document ready
+								// init controller
+								var controller2 = new ScrollMagic.Controller({container: "#container2", vertical: false});
+
+								// build scene
+								var scene2 = new ScrollMagic.Scene({triggerElement: "#trigger2", duration: 300})
+									.addTo(controller2)
+									.addIndicators() // add indicators (requires plugin)
+									.setTween(TweenMax.to("#container2 .animated", 0.5, {backgroundColor: "green"}))
+									.setPin("#container2 .animated");
+							});
+						</script>
+					</section>
+				</div>
+			</section>
+			<div class="spacer s5"></div>
+		</div>
+	</div>
+	<script type="text/javascript" src="../../js/tracking.js"></script>
+</body>
+</html>

@@ -5,5 +5,6 @@
   </view>
   <view class="face-file">
     <button class="face-file-btn" bindtap="uploadFile">上传照片变表情</button>
+    <button bindtap="saveFile">保存</button>
   </view>
 </view>

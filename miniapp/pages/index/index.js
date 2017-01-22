@@ -13,6 +13,31 @@ Page({
       url: '../logs/logs'
     })
   },
+  saveFile: function(){
+    wx.downloadFile({
+      url: 'https://mtapplet.meitudata.com/586c953a0390b3ad724c4.jpg', 
+      type: 'image',
+      success: function(res) {
+        console.log(res)
+        wx.saveFile({
+          tempFilePath: res.tempFilePath,
+          success: function(res) {
+            var savedFilePath = res.savedFilePath
+            console.log(savedFilePath);
+            wx.showToast({
+              title: '图片保存成功',
+              icon: 'success',
+              duration: 2000
+            })
+          },
+          fail:function (res) {
+            console.log(res)
+          }
+        })
+      }
+    })
+    
+  },
   uploadFile: function () {
     var _this = this;
     
@@ -31,7 +56,6 @@ Page({
             title: '上传中',
             icon: 'loading',
           })
-          return false
           _this.refreshUploadToken(() => {
             var tokenObj = JSON.parse(_this.uploadToken);
             var key = tokenObj.key;
@@ -102,7 +126,11 @@ Page({
   onLoad: function () {
     console.log('onLoad')
     var that = this
-    
+    wx.getSavedFileList({
+  success: function(res) {
+    console.log(res.fileList)
+  }
+})
     //调用应用实例的方法获取全局数据
     app.getUserInfo(function(userInfo){
       //更新数据

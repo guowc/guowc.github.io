@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=500" />
+	<meta name="keywords" content="ScrollMagic, example, scrolling, attaching, scrollbar, mobile, support, scroll, event" />
+	<meta name="author"	content="Jan Paepke (www.janpaepke.de)" />
+	<title>Mobile Support (Basic) - ScrollMagic</title>
+
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic|Josefin+Slab:400,700italic' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="../../css/normalize.css" type="text/css">
+	<link rel="stylesheet" href="../../css/style.css" type="text/css">
+	<link rel="stylesheet" href="../../css/examples.css" type="text/css">
+	<link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
+
+	<script type="text/javascript" src="../../js/lib/jquery.min.js"></script>
+	<script type="text/javascript" src="../../js/lib/highlight.pack.js"></script>
+	<script type="text/javascript" src="../../js/lib/modernizr.custom.min.js"></script>
+	<script type="text/javascript" src="../../js/examples.js"></script>
+	
+	<script type="text/javascript" src="../../js/lib/greensock/TweenMax.min.js"></script>
+	<script type="text/javascript" src="../../scrollmagic/uncompressed/ScrollMagic.js"></script>
+	<script type="text/javascript" src="../../scrollmagic/uncompressed/plugins/animation.gsap.js"></script>
+	<script type="text/javascript" src="../../scrollmagic/uncompressed/plugins/debug.addIndicators.js"></script>
+</head>
+<body>
+	<ul id="menu"></ul>
+	<div id="content-wrapper">
+		<div id="example-wrapper" class="scrollContainer">
+			<div class="scrollContent">
+				<section id="titlechart">
+					<div id="description">
+						<h1 class="badge gsap">Mobile Support (Basic)</h1>
+						<h2>Try this page on your mobile device!</h2>
+						<p>
+							<i><b>Note:</b> This does not concern iOS  8+, as it finally supports real scroll events.</i>
+						</p>
+						<p>
+							ScrollMagic works just as well on mobile devices.<br>
+							One big drawback is that mobile devices dispatch the scroll event AFTER the scroll is complete and not DURING.<br>
+							To get support for on-the-fly updates the easiest way is to wrap all your content into a big container with the size of the viewport and scroll within it instead (like shown in this example).<br>
+							Unfortunately this also results in loosing the scroll momentum. To see how you can preserve it check "<a href="../expert/mobile_advanced.html">Mobile Support (advanced)</a>".
+						</p>
+					</div>
+				</section>
+				<section class="demo">
+					<div class="spacer s1"></div>
+					<div class="spacer s1" id="trigger"></div>
+					<div class="spacer s0"></div>
+					<div class="mario box2"></div>
+					<div class="goomba box3"></div>
+					<div class="spacer s7"></div>
+				</section>
+			</div>
+			<script>
+				// build tween
+				var tween = new TimelineMax ()
+					.add([
+						TweenMax.to(".mario", 1, {left: 50, ease: Circ.easeIn}),
+						TweenMax.to(".mario", 1, {top: -60, ease: Circ.easeOut})
+					])
+					.add([
+						TweenMax.to(".mario", 1, {top: 0, ease: Circ.easeIn}),
+						TweenMax.to(".mario", 1, {left: 70, ease: Circ.easeOut})
+					])
+					.add(
+						TweenMax.to(".goomba", 0.5, {scaleY: 0.1, "margin-top": 93, "margin-bottom": 7, ease: Circ.easeIn}), 1.5
+					);
+
+				// init controller
+				var controller = new ScrollMagic.Controller({container: "#example-wrapper"});
+
+				// build scene
+				var scene = new ScrollMagic.Scene({triggerElement: "#trigger", duration: 300})
+								.setTween(tween)
+								.addIndicators() // add indicators (requires plugin)
+								.addTo(controller);
+			</script>
+		</div>
+	</div>
+	<script type="text/javascript" src="../../js/tracking.js"></script>
+</body>
+</html>
