@@ -346,7 +346,10 @@ html,body{
 	height:82px;
 	margin:0 auto;
 	position:relative;
-	margin-bottom:-82px;
+	-webkit-transform:translateY(82px);
+	transform:translateY(82px);
+	-ms-transform:translateY(82px);
+	-moz-transform:translateY(82px);
 }
 .Widget.bricks .memb .girl-b{
 	background-position:-63px 0;
