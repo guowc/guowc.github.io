@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<link rel="stylesheet" href="css/style.css?50">
+<title></title>
+<script>
+	;(function(win, doc) {
+		var UA = navigator.userAgent,
+			isAndroid = /android|adr/gi.test(UA),
+			isIos = /iphone|ipod|ipad/gi.test(UA) && !isAndroid;
+		var docEl = doc.documentElement;
+		var refreshRem = function() {
+				var w = docEl.getBoundingClientRect().width || 320;
+				var fs = w / 375 * 50;
+				fs = fs > 100 ? 100 : fs;
+				docEl.style.fontSize = fs + 'px';
+			},
+			refreshRemId;
+		win.addEventListener('resize', function() {
+			clearTimeout(refreshRemId);
+			refreshRemId = setTimeout(refreshRem, 100);
+		}, false);
+		win.addEventListener('pageshow', function(e) {
+			if(e.persisted) {
+				clearTimeout(refreshRemId);
+				refreshRemId = setTimeout(refreshRem, 100);
+			}
+		}, false);
+		refreshRem();
+	})(window, document);
+	window.addEventListener('touchmove',function(e){
+		e.preventDefault();
+	},true)
+</script>
+</head>
+<body class="">
+<div class="W-loading" id="js-loading" style="display:none">
+	<div class="back"></div>
+	<div class="base"></div>
+	<div class="button">
+		<div class="light"></div>
+	</div>
+	<p class="text">加载中...<span id="js-perc">0</span>%</p>
+</div>
+<div class="V-stage js-stage">
+	<div class="V-page one js-page">
+		<div class="cover"></div>
+		<div class="codebox">
+			<div class="code">
+				<div class="code-1"></div>
+				<div class="code-2"></div>
+				<div class="code-3"></div>
+				<div class="code-4"></div>
+				<div class="code-5"></div>
+				<div class="code-6"></div>
+			</div>
+		</div>
+		<div class="light"></div>
+		<div class="slogan"></div>
+		<div class="slogan2"></div>
+		<div class="car"></div>
+		<div class="logo"></div>
+	</div>
+	<div class="V-page two js-page">
+		<div class="cover"></div>
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<div class="tagbox" id="js-tagbox">
+			<div class="tag"></div>
+		</div>
+		<div class="M-swiper" id="js-swiper">
+			<div class="detail">
+				<div class="car-1"></div>
+				<div class="car-2"></div>
+				<div class="car-3"></div>
+			</div>
+			<div class="thumb">
+				<div class="car-1"></div>
+				<div class="car-2"></div>
+				<div class="car-3"></div>
+			</div>
+		</div>
+	</div>
+	<div class="V-page three js-page">
+		<div class="cover"></div>
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<div class="screen">
+			<div class="shape shape-1"></div>
+			<div class="shape shape-2"></div>
+			<div class="carbox carbox-1">
+				<div class="inner">
+					<div class="car"></div>
+				</div>
+			</div>
+			<div class="carbox carbox-2">
+				<div class="inner">
+					<div class="car"></div>
+				</div>
+			</div>
+			<p class="text text-1">人体工程学座椅</p>
+			<p class="text text-2">多功能方向盘</p>
+		</div>
+
+	</div>
+	<div class="V-page four js-page">
+		<div class="album">
+			<img class="img js-album active" src="images/car-color-1.jpg" alt="">
+			<img class="img js-album" src="images/car-color-2.jpg" alt="">
+			<img class="img js-album" src="images/car-color-3.jpg" alt="">
+			<img class="img js-album" src="images/car-color-4.jpg" alt="">
+			<img class="img js-album" src="images/car-color-5.jpg" alt="">
+		</div>
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<div class="colors">
+			<span class="item js-item active"><b></b></span>
+			<span class="item js-item"><b></b></span>
+			<span class="item js-item"><b></b></span>
+			<span class="item js-item"><b></b></span>
+			<span class="item js-item"><b></b></span>
+		</div>
+	</div>
+	<div class="V-page js-page">
+		<p class="test">P5</p>
+	</div>
+	<div class="V-page six js-page show">
+		<div class="cover"></div>
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<div class="shape-1"></div>
+		<div class="shape-2"></div>
+		<div class="machine">
+			<div class="video"></div>
+			<div class="os"></div>
+		</div>
+		<div class="sign"></div>
+		<div class="car"></div>
+	</div>
+	<div class="V-page eleven js-page">
+		<div class="cover"></div>
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<p class="title"></p>
+		<div class="figure-1"></div>
+		<div class="figure-2">
+			<div class="reel"></div>
+		</div>
+	</div>
+	<div class="V-page eight js-page">
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<div class="text-1"></div>
+		<div class="text-2"></div>
+		<div class="cover">
+			<svg id="js-road" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"  width="363px" height="1606.417px">
+	            <path style="fill:none;" d="M256.689,1606.417c0,0,104.754-231.171-121.25-524.554
+					C5.298,912.924,24.437,676.29,171,416.369C343.896,109.749,336.185,0,336.185,0" id="plane-path"></path>
+	            <image xlink:href="images/runcar.png" id="plane" x="0" y="0" width="80" height="36">
+	                <animateMotion class="svg-anim" id="plane-motion" dur="2s" rotate="auto" fill="freeze" begin="0s" repeatCount="indefinite" restart="always">
+	                     <mpath xlink:href="#plane-path"></mpath>
+	                </animateMotion>
+	            </image>
+	        </svg>
+		</div>
+		<div class="car"></div>
+		<div class="shadow"></div>
+	</div>
+	<div class="V-page nine js-page">
+		<div class="cover"></div>
+		<div class="slogan"></div>
+		<div class="text"></div>
+		<div class="light"></div>
+		<div class="car-1">
+			<div class="weel"></div>
+		</div>
+		<div class="car-2">
+			<div class="weel"></div>
+		</div>
+		<div class="wlight"></div>
+	</div>
+	<div class="V-page ten js-page">
+		<div class="cover"></div>
+		<div class="light"></div>
+		<div class="slogan"></div>
+		<div class="car"></div>
+		<div class="action">
+			<span class="btn">进入官网</span>
+			<span class="btn">点击购买</span>
+		</div>
+	</div>
+</div>
+<div class="W-arrow" id="js-arrow"></div>
+<script src="js/zepto.min.js"></script>
+<script src="js/pxloader.js"></script>
+<script>
+var element = {
+	$body : $('body'),
+	$stage : $('.js-stage'),
+	$pages  : $('.js-page'),
+	$loading :$('#js-loading'),
+	$perc : $('#js-perc'),
+	$loadingBtn : $('#js-loading .button'),
+	$swiper : $('#js-swiper'),
+	$tagbox : $('#js-tagbox'),
+	$road : $('#js-road'),
+	$item : $('.js-item'),
+	$album : $('.js-album')
+}
+var state = {
+	curPage : 5,
+	pageCount : 9,
+	timer : {}
+}
+
+var files = [
+	'images/loading-1.jpg',
+	'images/base.png',
+	'images/loading-2.png',
+	'images/engine-light.png',
+	'images/sloganlight.png',
+	'images/logo.png',
+	'images/arrow.png',
+	'images/car.png',
+	'images/pagebg-1.jpg',
+	'images/code-1.png',
+	'images/code-2.png',
+	'images/code-3.png',
+	'images/code-4.png',
+	'images/code-5.png',
+	'images/code-6.png',
+	'images/pagebg-2.jpg',
+	'images/slogan-3.png',
+	'images/car-detail-1.png',
+	'images/car-detail-2.png',
+	'images/car-detail-3.png'
+]
+var perc = 0;
+var loader = new window.PxLoader();
+for(var i = 0; i < files.length; i++) {
+	loader.addImage(files[i]);
+}
+loader.addProgressListener(function(e) {
+	if(e.completedCount == 6){
+		element.$loading.addClass('show');
+	}
+	perc = parseInt((e.completedCount / e.totalCount) * 100)
+	element.$perc.text(perc);
+})
+loader.addCompletionListener(function(e) {
+	setTimeout(function(){
+		element.$loadingBtn.addClass('enable')
+		setTimeout(function(){
+			element.$loading.removeClass('show')
+			element.$pages.eq(state.curPage).addClass('show')
+			element.$body.addClass('loaded')
+		},5000)
+	},1000)
+});
+loader.start();
+element.$loadingBtn.bind('tap',function(){
+	if($(this).hasClass('enable')){
+		element.$loading.removeClass('show')
+		element.$pages.eq(state.curPage).addClass('show')
+		element.$body.addClass('loaded')
+	}
+})
+$(function(){
+	var Engine = function(){}
+	Engine.prototype = {
+		init : function(){
+			var self = this
+			this.initRoad()
+			this.events()
+		},
+		events : function(){
+			var self = this
+			element.$road[0].pauseAnimations()
+			element.$stage.bind('swipeUp swipeDown',function(e){
+				if(e.type == 'swipeUp'){
+					state.curPage = state.curPage == state.pageCount ? state.pageCount : state.curPage + 1
+				}else{
+					state.curPage = state.curPage == 0 ? 0 : state.curPage - 1
+				}
+			    self.goPage(state.curPage)
+			})
+			element.$item.bind('tap',function(){
+				var index = $(this).index();
+				$(this).addClass('active').siblings().removeClass('active');
+				element.$album.eq(index).addClass('active').siblings().removeClass('active');
+			})
+		},
+		goPage : function(index){
+			$('.js-page.show').addClass('hide')
+			element.$pages.removeClass('show')
+			element.$pages.eq(index).removeClass('hide').addClass('show')
+			switch(index){
+				case 1 :
+					this.swiper()
+					break;
+				case 7 :
+					setTimeout(function(){
+						element.$road[0].unpauseAnimations()
+						setTimeout(function(){
+							element.$road[0].pauseAnimations()
+						},2000)
+					},500)
+					console.log(element.$road[0])
+					break;
+				case 9 :
+					$("#js-arrow").hide()
+					break;
+				default :
+				$("#js-arrow").show()
+				setTimeout(function(){
+					element.$swiper.removeClass('swiper-1 swiper-2 swiper-3')
+					element.$tagbox.removeClass('tagbox-1 tagbox-2 tagbox-3')
+				},500)
+			}
+		},
+		swiper : function(){
+			var index = 1;
+			setTimeout(function(){
+				element.$swiper.addClass('swiper-1')
+				element.$tagbox.addClass('tagbox-1')
+			},200);
+
+			clearInterval(state.timer)
+			state.timer = setInterval(function(){
+				index = index == 3 ? 1 : index + 1
+				element.$swiper.removeClass('swiper-1 swiper-2 swiper-3').addClass('swiper-' + index)
+				element.$tagbox.removeClass('tagbox-1 tagbox-2 tagbox-3').addClass('tagbox-' + index)
+			},4000)
+		},
+		initRoad : function(){
+			var ww = $(window).width()
+			var rat = ww / 750
+			element.$road.css({
+				'-webkit-transform' : 'scale('+ rat +')',
+				'left' : 200 * rat,
+				'top'  : -124 * rat,
+			})
+		},
+	}
+	var app = new Engine()
+	app.init()
+})
+</script>
+</body>
+</html>
