@@ -140,6 +140,10 @@ body {
 	top:0;
 	opacity:0;
 	visibility:hidden;
+	display:none;
+}
+.loaded .V-page{
+	display:block;
 }
 .V-page .test{
 	font-size:1.6rem;
@@ -363,17 +367,17 @@ body {
 
 .V-page.one.show .cover,
 .V-page.one.show .codebox{
-	-webkit-animation:cover_1 1.6s ease .3s;
+	-webkit-animation:cover_1 1.8s ease;
 }
 @-webkit-keyframes cover_1{
-	0%,25%{ -webkit-transform:scale(1.5)}
+	0%,30%{ -webkit-transform:scale(1.5)}
 }
 
 .V-page.one.show .car{
-	-webkit-animation:car_1 1.6s ease .3s;
+	-webkit-animation:car_1 1.8s ease ;
 }
 @-webkit-keyframes car_1{
-	0%,25%{ -webkit-transform:scale(0.5) translateY(-1rem)}
+	0%,30%{ -webkit-transform:scale(0.5) translateY(-1rem)}
 }
 .V-page.one.hide .car{
 	-webkit-animation:car_2 .6s ease-out;
