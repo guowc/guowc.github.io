@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>口袋妖怪微信版-快来成为小精灵大师！</title>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<script src="http://api.map.baidu.com/api?v=2.0&ak=GFvs0wgtYmItYaY4OTaVhD8jVmKSlBrO"></script>
+<script>
+/*我司设计稿基准w:640 @2x
+ *前端计算时页面宽度基准320，font-size:20px
+ *依此递增iphone6: fs = 375/320*20
+*/
+;(function(win,doc){
+    var UA = navigator.userAgent,
+        isAndroid = /android|adr/gi.test(UA),
+        isIos = /iphone|ipod|ipad/gi.test(UA) && !isAndroid; //据说某些国产机的UA会同时包含android iphone 字符
+    var docEl = doc.documentElement;
+    var refreshRem =function (){
+        var w =docEl.getBoundingClientRect().width || 320;
+        var fs = w/320 * 20;
+        fs = fs > 40 ? 40 : fs;
+        docEl.style.fontSize = fs+'px';
+    },refreshRemId;
+    win.addEventListener('resize', function() {
+        clearTimeout(refreshRemId);
+        refreshRemId = setTimeout(refreshRem, 100);
+    }, false);
+    refreshRem();
+})(window,document);
+</script>
+</head>
+<body class="State">
+<div class="View section" id="J_section">
+    <div class="Frame map" id="gomap"></div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script>
+var Bmap = new BMap.Map("gomap",{ enableMapClick:false });
+var point = new BMap.Point(118.186968,24.496273);
+Bmap.centerAndZoom(point,18);
+</script>
+</html>

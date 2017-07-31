@@ -194,7 +194,7 @@ body {
 
 .W-loading .base{
 	-webkit-transition:all 1.1s cubic-bezier(0.215, 0.61, 0.355, 1) .1s;
-	background:url(../images/base.png) no-repeat;
+	background:url(../images/base.png?1) no-repeat;
 	background-size:100% auto;
 	width:5.4rem;
 	height:5.4rem;
@@ -207,7 +207,7 @@ body {
 }
 .W-loading .button{
 	-webkit-transition:all 1s cubic-bezier(0.19, 1, 0.22, 1);
-	background:url(../images/loading-2.png) no-repeat;
+	background:url(../images/loading-2.png?1) no-repeat;
 	background-size:100% auto;
 	width:3.28rem;
 	height:3.28rem;
@@ -220,7 +220,7 @@ body {
 }
 
 .W-loading .button .light{
-	background:url(../images/engine-light.png) no-repeat;
+	background:url(../images/engine-light.png?1) no-repeat;
 	background-size:100% auto;
 	width:.92rem;
 	height:.48rem;
@@ -278,7 +278,7 @@ body {
 }
 .V-page.one .car{
 	-webkit-transform-origin:50% 2rem;
-	background:url(../images/car.png) no-repeat;
+	background:url(../images/car.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:6.44rem;
@@ -302,30 +302,30 @@ body {
 }
 
 .V-page.one .code .code-1{
-	background-image:url(../images/code-1.png);
+	background-image:url(../images/code-1.png?1);
 	-webkit-transform:translate(1.66rem ,-2.6rem);
 }
 .V-page.one .code .code-2{
-	background-image:url(../images/code-2.png);
+	background-image:url(../images/code-2.png?1);
 	-webkit-transform:translate(1.22rem ,-2rem);
 }
 
 .V-page.one .code .code-3{
-	background-image:url(../images/code-3.png);
+	background-image:url(../images/code-3.png?1);
 	-webkit-transform:translate(0.54rem ,-1rem);
 }
 
 .V-page.one .code .code-4{
-	background-image:url(../images/code-4.png);
+	background-image:url(../images/code-4.png?1);
 	-webkit-transform:translate(0.3rem ,-1rem);
 }
 
 .V-page.one .code .code-5{
-	background-image:url(../images/code-5.png);
+	background-image:url(../images/code-5.png?1);
 	-webkit-transform:translate(0.34rem ,-2rem);
 }
 .V-page.one .code .code-6{
-	background-image:url(../images/code-6.png);
+	background-image:url(../images/code-6.png?1);
 	-webkit-transform:translate(-0.16rem ,-2rem);
 }
 
@@ -389,7 +389,7 @@ body {
 
 
 .V-page.one .slogan{
-	background:url(../images/slogan1.png) no-repeat;
+	background:url(../images/slogan1.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.42rem;
 	height:1.86rem;
@@ -399,7 +399,7 @@ body {
 }
 
 .V-page.one .slogan2{
-	background:url(../images/slogan2.png) no-repeat;
+	background:url(../images/slogan2.png?1) no-repeat;
 	background-size:100% auto;
 	width:2.7rem;
 	height:.64rem;
@@ -408,7 +408,7 @@ body {
 	position:absolute;
 }
 .V-page .light{
-	background:url(../images/sloganlight.png) no-repeat;
+	background:url(../images/sloganlight.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:3.52rem;
@@ -416,7 +416,7 @@ body {
 	top:.5rem;
 }
 .V-page.one .logo{
-	background:url(../images/logo.png) no-repeat;
+	background:url(../images/logo.png?1) no-repeat;
 	background-size:100% auto;
 	width:2.8rem;
 	height:1.4rem;
@@ -426,7 +426,7 @@ body {
 	bottom:1rem;
 }
 .W-arrow{
-	background:url(../images/arrow.png) no-repeat;
+	background:url(../images/arrow.png?1) no-repeat;
 	background-size:100% auto;
 	width:.92rem;
 	height:.62rem;
@@ -490,7 +490,7 @@ body {
 	0%{ -webkit-transform:scale(1.12)}
 }
 .V-page.two .slogan{
-	background:url(../images/slogan-3.png) no-repeat;
+	background:url(../images/slogan-3.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -531,7 +531,7 @@ body {
 }
 .V-page.two .tagbox .tag{
 	-webkit-transition:background .5s ;
-	background:url(../images/tag.png) no-repeat;
+	background:url(../images/tag.png?1) no-repeat;
 	background-size:100% auto;
 	height:100%;
 }
@@ -557,7 +557,7 @@ body {
 	position:relative;
 }
 .M-swiper .detail .car-1{
-	background:url(../images/car-detail-1.png) no-repeat;
+	background:url(../images/car-detail-1.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:5.38rem;
@@ -566,7 +566,7 @@ body {
 	bottom:2rem;
 }
 .M-swiper .detail .car-2{
-	background:url(../images/car-detail-2.png) no-repeat;
+	background:url(../images/car-detail-2.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:5.68rem;
@@ -575,7 +575,7 @@ body {
 	bottom:2rem;
 }
 .M-swiper .detail .car-3{
-	background:url(../images/car-detail-3.png) no-repeat;
+	background:url(../images/car-detail-3.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:7.54rem;
@@ -649,7 +649,7 @@ body {
 	top:0;
 }
 .M-swiper .thumb .car-1{
-	background:url(../images/car-thumb-1.png) no-repeat;
+	background:url(../images/car-thumb-1.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:3.26rem;
@@ -658,7 +658,7 @@ body {
 	bottom:0;
 }
 .M-swiper .thumb .car-2{
-	background:url(../images/car-thumb-2.png) no-repeat;
+	background:url(../images/car-thumb-2.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:3.38rem;
@@ -667,7 +667,7 @@ body {
 	bottom:0;
 }
 .M-swiper .thumb .car-3{
-	background:url(../images/car-thumb-3.png) no-repeat;
+	background:url(../images/car-thumb-3.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:3.4rem;
@@ -693,7 +693,7 @@ body {
 }
 
 .V-page.three .slogan{
-	background:url(../images/slogan-4.png) no-repeat;
+	background:url(../images/slogan-4.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -707,7 +707,7 @@ body {
 }
 
 .V-page.three .shape{
-	background:url(../images/shapes.png) no-repeat;
+	background:url(../images/shapes.png?1) no-repeat;
 	background-size:100% auto;
 	width:4.88rem;
 	height:7.4rem;
@@ -740,7 +740,7 @@ body {
 }
 .V-page.three .carbox-1 .car{
 	-webkit-transform-origin:100% 0%;
-	background:url(../images/carbox-1.png) no-repeat;
+	background:url(../images/carbox-1.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:6.54rem;
@@ -753,7 +753,7 @@ body {
 	left:4.9rem;
 }
 .V-page.three .carbox-2 .car{
-	background:url(../images/carbox-2.png) no-repeat;
+	background:url(../images/carbox-2.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:6.54rem;
@@ -833,7 +833,7 @@ body {
 }
 .V-page.four .colors .item b{
 	-webkit-transition:-webkit-transform .35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-	background:url(../images/colors.png) no-repeat;
+	background:url(../images/colors.png?1) no-repeat;
 	background-size:100% auto;
 	display:block;
 	height:.62rem;
@@ -891,7 +891,7 @@ body {
 	opacity:1;
 }
 .V-page.four .slogan{
-	background:url(../images/slogan-3.png) no-repeat;
+	background:url(../images/slogan-3.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -915,7 +915,7 @@ body {
 	-webkit-animation:coverZoom 2.2s ease-out;
 }
 .V-page.eleven .slogan{
-	background:url(../images/slogan-6.png) no-repeat;
+	background:url(../images/slogan-6.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -930,7 +930,7 @@ body {
 }
 
 .V-page.eleven .figure-1{
-	background:url(../images/p7-figure1.png) no-repeat;
+	background:url(../images/p7-figure1.png?1) no-repeat;
 	background-size:100% auto;
 	width:5.52rem;
 	height:6.84rem;
@@ -939,7 +939,7 @@ body {
 	left:0;
 }
 .V-page.eleven .figure-2{
-	background:url(../images/p7-figure2.png) no-repeat;
+	background:url(../images/p7-figure2.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.05rem;
 	height:6.84rem;
@@ -960,7 +960,7 @@ body {
 	0%,40%{ -webkit-transform:translate(7.52rem,-13.68rem)}
 }
 .V-page.eleven .reel{
-	background:url(../images/reel.png) no-repeat;
+	background:url(../images/reel.png?1) no-repeat;
 	background-size:100% auto;
 	width:2.12rem;
 	height:.92rem;
@@ -969,7 +969,7 @@ body {
 	top:5.54rem;
 }
 .V-page.eleven .title{
-	background:url(../images/text-2.png) no-repeat;
+	background:url(../images/text-2.png?1) no-repeat;
 	background-size:100% auto;
 	position:absolute;
 	width:7.5rem;
@@ -1004,7 +1004,7 @@ body {
 	position:absolute;
 }
 .V-page.eight .shadow{
-	background:url(../images/shadow.png) no-repeat;
+	background:url(../images/shadow.png?1) no-repeat;
 	background-size:100%;
 	width:3.42rem;
 	height:3.58rem;
@@ -1019,7 +1019,7 @@ body {
 	0%{ -webkit-transform:translateY(18rem);}
 }
 .V-page.eight .text-1{
-	background:url(../images/text-3.png) no-repeat;
+	background:url(../images/text-3.png?1) no-repeat;
 	background-size:100% auto;
 	width:2.88rem;
 	height:1.34rem;
@@ -1043,7 +1043,7 @@ body {
 	opacity:1!important;
 }
 .V-page.eight .text-2{
-	background:url(../images/text-4.png) no-repeat;
+	background:url(../images/text-4.png?1) no-repeat;
 	background-size:100% auto;
 	width:3.64rem;
 	height:.84rem;
@@ -1052,7 +1052,7 @@ body {
 	position:absolute;
 }
 .V-page.eight .car{
-	background:url(../images/frame.png) no-repeat;
+	background:url(../images/frame.png?1) no-repeat;
 	background-size:100% auto;
 	width:5.11rem;
 	height:3.25rem;
@@ -1067,7 +1067,7 @@ body {
 	0%,60%{ -webkit-transform:translate(6rem,-3rem);opacity:0;}
 }
 .V-page.eight .slogan{
-	background:url(../images/slogan-7.png) no-repeat;
+	background:url(../images/slogan-7.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -1089,7 +1089,7 @@ body {
 
 
 .V-page.nine .slogan{
-	background:url(../images/slogan-8.png) no-repeat;
+	background:url(../images/slogan-8.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -1107,7 +1107,7 @@ body {
 	-webkit-animation:coverZoomS 2.2s ease-out;
 }
 .V-page.nine .text{
-	background:url(../images/text-5.png) no-repeat;
+	background:url(../images/text-5.png?1) no-repeat;
 	background-size:100% auto;
 	height:1rem;
 	width:7.5rem;
@@ -1124,56 +1124,56 @@ body {
 	85%{ -webkit-transform:translateX(0.02rem);}
 }
 .V-page.nine .car-1{
-	background:url(../images/car-9-1.png) no-repeat;
+	background:url(../images/car-9-1.png?1) no-repeat;
 	background-size:100% auto;
-	width:4.78rem;
-	height:3rem;
+	width:4.47rem;
+	height:2.57rem;
 	position:absolute;
 	left:0;
-	top:5.96rem;
+	top:5.66rem;
 }
 .V-page.nine .car-1 .weel{
-	background:url(../images/weel-2.png) no-repeat;
+	background:url(../images/weel-2.png?1) no-repeat;
 	background-size:100% auto;
-	width:1.24rem;
-	height:.82rem;
+	width:.38rem;
+	height:.7rem;
 	position:absolute;
-	left:.34rem;
-	top:1.28rem;
+	left:1.3rem;
+	top:1.67rem;
 }
 .V-page.nine.show .car-1 .weel{
 	-webkit-animation:weel1 .05s steps(3) infinite;
 }
 @-webkit-keyframes weel1{
-	100%{ background-position:0 -2.76rem;}
+	100%{ background-position:0 -2.1rem;}
 }
 .V-page.nine .car-2{
-	background:url(../images/car-9-2.png) no-repeat;
+	background:url(../images/car-9-2.png?1) no-repeat;
 	background-size:100% auto;
-	width:5.24rem;
-	height:3.72rem;
+	width:5.45rem;
+	height:3.71rem;
 	position:absolute;
 	right:0;
-	top:7.98rem;
+	top:7.68rem;
 }
 .V-page.nine .car-2 .weel{
-	background:url(../images/weel-1.png) no-repeat;
+	background:url(../images/weel-1.png?1) no-repeat;
 	background-size:100% auto;
-	width:0.48rem;
-	height:1.12rem;
+	width:.36rem;
+	height:1.08rem;
 	position:absolute;
-	right:.7rem;
-	top:1.54rem;
+	right:.71rem;
+	top:2.16rem;
 }
 
 
 .V-page.nine .wlight{
-	background:url(../images/wlight.png) no-repeat;
+	background:url(../images/wlight.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
-	height:4.9rem;
+	height:4.36rem;
 	position:absolute;
-	top:6.5rem;
+	top:7.06rem;
 }
 .V-page.nine.show .wlight{
     -webkit-animation: light 2s linear infinite .8s;
@@ -1183,13 +1183,13 @@ body {
 	-webkit-animation:weel2 .1s steps(3) infinite;
 }
 @-webkit-keyframes weel2{
-	100%{ background-position:0 -3.72rem;}
+	100%{ background-position:0 -3.24rem;}
 }
 .V-page.nine.show .car-1{
 	-webkit-animation:carIn1 1.8s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 @-webkit-keyframes carIn1{
-	0%,40%{ -webkit-transform:translate(-5rem,-1.6rem) scale(0.2);opacity:0.6}
+	0%,40%{ -webkit-transform:translate(-5rem,-0.6rem) scale(0.8);opacity:0.6}
 }
 .V-page.nine.show .car-2{
 	-webkit-animation:carIn2 2.2s cubic-bezier(0.39, 0.575, 0.565, 1);
@@ -1205,7 +1205,7 @@ body {
 	height:100%;
 }
 .V-page.ten .slogan{
-	background:url(../images/slogan-10.png) no-repeat;
+	background:url(../images/slogan-10.png?1) no-repeat;
 	background-size:100% auto;
 	width:5.04rem;
 	height:2.28rem;
@@ -1218,7 +1218,7 @@ body {
 	-webkit-transform:rotateX(180deg);
 }
 .V-page.ten .car{
-	background:url(../images/car-over.png) no-repeat;
+	background:url(../images/car-over.png?1) no-repeat;
 	background-size:100% auto;
 	width:3.78rem;
 	height:5.82rem;
@@ -1292,21 +1292,95 @@ body {
 	top:4.54rem;
 }
 .V-page.six .machine .os{
-	background:url(../images/machine.png) no-repeat;
+	background:url(../images/machine.png?1) no-repeat;
 	background-size:100% auto;
 	width:5.44rem;
 	height:3.62rem;
 	position:absolute;
 	top:0;
 }
-.V-page.six .video{
-	background:url(../images/video.jpg) no-repeat;
-	background-size:100% auto;
-	width:4.48rem;
-	height:2.04rem;
+.V-page.six .videobox{
+	width:3.8rem;
+	height:2rem;
 	position:absolute;
-	left:0.4rem;
-	top:.72rem;
+	top:.78rem;
+	left:.78rem;
+	overflow:hidden;
+}
+.V-page.six .video{
+	background:url(../images/video.jpg?2) no-repeat;
+	background-size:100% auto;
+	width:6.04rem;
+	height:3.36rem;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin:-1.68rem 0 0 -3.08rem;
+}
+.V-page.six .videobox .line-1{
+	background:url(../images/line-1.png?1) no-repeat;
+	background-size:100% auto;
+	width:1.2rem;
+	height:.14rem;
+	position:absolute;
+	left:50%;
+	margin-left:-0.66rem;
+	top:.9rem;
+	opacity:0;
+}
+.V-page.six .videobox .line-2{
+	background:url(../images/line-2.png?1) no-repeat;
+	background-size:100% auto;
+	width:1.64rem;
+	height:.22rem;
+	left:50%;
+	margin-left:-0.86rem;
+	position:absolute;
+	top:1.03rem;
+	opacity:0;
+}
+.V-page.six .videobox .line-3{
+	background:url(../images/line-3.png?1) no-repeat;
+	background-size:100% auto;
+	width:2.46rem;
+	height:.4rem;
+	position:absolute;
+	left:50%;
+	margin-left:-1.23rem;
+	top:1.21rem;
+	opacity:0;
+}
+.V-page.six.hide .line-1,
+.V-page.six.hide .line-2,
+.V-page.six.hide .line-3{
+	opacity:1;
+}
+
+.V-page.six.show .videobox .line-1{
+	-webkit-animation:lineIn1 1s 1.2s forwards;
+}
+.V-page.six.show .videobox .line-2{
+	-webkit-animation:lineIn2 .8s ease-out 2.6s forwards;
+}
+.V-page.six.show .videobox .line-3{
+	-webkit-animation:lineIn3 .3s ease-out infinite 3.6s forwards;
+}
+@-webkit-keyframes lineIn1{
+	0%{ opacity:0;}
+	33%{ opacity:1;}
+	66%{ opacity:0;}
+	100%{ opacity:1;}
+}
+@-webkit-keyframes lineIn2{
+	0%{ opacity:0;}
+	20%{ opacity:1;}
+	40%{ opacity:0;}
+	60%{ opacity:1}
+	80%{ opacity:0;}
+	100%{ opacity:1;}
+}
+@-webkit-keyframes lineIn3{
+	50%{ opacity:1;}
 }
 .V-page.six .cover{
 	background:url(../images/pagebg-6.jpg) no-repeat;
@@ -1314,7 +1388,7 @@ body {
 	height:100%;
 }
 .V-page.six .slogan{
-	background:url(../images/slogan-9.png) no-repeat;
+	background:url(../images/slogan-9.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.36rem;
 	height:5.2rem;
@@ -1325,7 +1399,7 @@ body {
 }
 
 .V-page.six .shape-1{
-	background:url(../images/shape-1.png) no-repeat;
+	background:url(../images/shape-1.png?1) no-repeat;
 	background-size:100% auto;
 	width:5.86rem;
 	height:3.64rem;
@@ -1352,13 +1426,17 @@ body {
 	0% ,70%{ opacity:0; -webkit-transform:scale(0.7)}
 }
 .V-page.show.six .machine .video{
-	-webkit-animation:video 3.6s ease;
+	-webkit-animation:video 4.8s linear forwards;
+}
+.V-page.hide.six .machine .video{
+	margin-top:-1.46rem;
 }
 @-webkit-keyframes video{
-	0%,24%{ -webkit-transform:scale(0.88)}
+	0%,30%{ -webkit-transform: translateY(0) scale(0.52) }
+	100%{ -webkit-transform: translateY(0.22rem) scale(1)}
 }
 .V-page.six .car{
-	background:url(../images/car-thumb-3.png) no-repeat;
+	background:url(../images/car-thumb-3.png?1) no-repeat;
 	background-size:100% auto;
 	width:7.5rem;
 	height:2.7rem;
@@ -1368,10 +1446,10 @@ body {
 	-webkit-mask-image: -webkit-linear-gradient(top,rgba(0,0,0,1) 90%,rgba(0,0,0,0) 100%);
 }
 .V-page.six.show .car{
-	-webkit-animation:carback 2.6s;
+	-webkit-animation:carback 5.2s;
 }
 @-webkit-keyframes carback{
-	0%,25%{ -webkit-transform: translateY(5.4rem) scale(2); opacity:0.8}
+	0%,15%{ -webkit-transform: translateY(5.4rem) scale(2.6); opacity:0.6}
 }
 .V-page.six.show .sign{
 	-webkit-animation:sign 2.8s;
@@ -1381,7 +1459,7 @@ body {
 	0%,60%{  opacity:0; -webkit-transform:scale(0.8)}
 }
 .V-page.six .sign{
-	background:url(../images/sign.png) no-repeat;
+	background:url(../images/sign.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.37rem;
 	height:1.69rem;
@@ -1390,7 +1468,7 @@ body {
 	top:8.52rem;
 }
 .V-page.six .shape-2{
-	background:url(../images/shape-2.png) no-repeat;
+	background:url(../images/shape-2.png?1) no-repeat;
 	background-size:100% auto;
 	width:6.4rem;
 	height:3.16rem;
@@ -1400,4 +1478,150 @@ body {
 }
 .V-page.six.show .slogan{
 	-webkit-animation:zoomInRight 1s .2s forwards;
+}
+
+
+.V-page.five .cover{
+	background:url(../images/pagebg-2.jpg) no-repeat;
+	background-size:100% auto;
+	height:100%;
+}
+.V-page.five .cover-color{
+	background:url(../images/afterbg.jpg) no-repeat;
+	background-size:100% auto;
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+}
+.V-page.five.show .cover-color{
+	-webkit-animation:afterbg 3.4s;
+}
+@-webkit-keyframes afterbg{
+	0%,55%{ opacity:0; }
+}
+
+
+.V-page.five .slogan{
+	background:url(../images/slogan-11.png?1) no-repeat;
+	background-size:100% auto;
+	width:6.36rem;
+	height:5.2rem;
+	position:absolute;
+	left:.64rem;
+	top:.38rem;
+	opacity:0;
+	z-index:33;
+}
+.V-page.five.show .slogan{
+	-webkit-animation:zoomInRight 1s .2s forwards;
+}
+.V-page.five .sub{
+	background:url(../images/moofun.png?1) no-repeat;
+	background-size:100% auto;
+	width:2.79rem;
+	height:.83rem;
+	position:absolute;
+	left:4.08rem;
+	top:3.72rem;
+}
+.V-page.show.five .sub{
+	-webkit-animation: slogan 2.2s ease forwards -0.4s;
+}
+.V-page.five .text{
+	background:url(../images/text-6.png?1) no-repeat;
+	background-size:100% auto;
+	width:2.17rem;
+	height:.34rem;
+	position:absolute;
+	left:.64rem;
+	top:11rem;
+}
+.V-page.five.show .text {
+    -webkit-animation: p8t2 1.8s ease;
+}
+.V-page.five .car{
+	background:url(../images/car-5.png?1) no-repeat;
+	background-size:100% auto;
+	width:6.08rem;
+	height:3.32rem;
+	left:.78rem;
+	top:6.78rem;
+	position:absolute;
+}
+.V-page.five.show .car{
+	-webkit-animation:car5show 2.8s forwards;
+}
+.V-page.five.hide .car{
+	top:7.78rem;
+}
+.V-page.five.hide .phone{
+	top:4.96rem;
+}
+@-webkit-keyframes car5show{
+	0%,30%{ -webkit-transform:translate(-6rem,-2rem);opacity:0;}
+	50%{ -webkit-transform:translate(0.09rem,0.03rem);opacity:1;}
+	60%,70%{ -webkit-transform:translate(0,0)}
+	90%,100%{ -webkit-transform:translate(0,1rem)}
+}
+
+
+.V-page.five .color{
+	background:url(../images/car-5-color.png?1) no-repeat;
+	background-size:100% auto;
+	width:6.08rem;
+	height:4.24rem;
+	position:absolute;
+	left:.78rem;
+	top:7.78rem;
+}
+.V-page.five .phone{
+	background:url(../images/phone.png?1) no-repeat;
+	background-size:100% auto;
+	width:5.12rem;
+	height:2.69rem;
+	position:absolute;
+	left:1.28rem;
+	top:4.36rem;
+}
+.V-page.five.show .phone{
+	-webkit-animation:car5phone 2.8s forwards .3s;
+	opacity:0;
+}
+@-webkit-keyframes car5phone{
+	0%,24%{ -webkit-transform:translate(6rem,2rem);opacity:0;}
+	44%{ -webkit-transform:translate(-0.09rem,-0.03rem);opacity:1;}
+	60%,70%{ -webkit-transform:translate(0,0)}
+	90%,100%{ -webkit-transform:translate(0,0.6rem);opacity:1}
+}
+
+.V-page.five.show .color{
+	-webkit-animation:carColor 3.2s ease;
+}
+@-webkit-keyframes carColor{
+	0%,65%{ opacity:0; -webkit-transform:translateY(-2.6rem)}
+}
+.V-page.five .rainbox{
+	-webkit-animation:fadeIn 2s ease-out;
+	width:7.5rem;
+	height:6rem;
+	position:absolute;
+	top:3.5rem;
+	left:0;
+	overflow:hidden;
+	-webkit-mask-image: -webkit-radial-gradient(rgba(0,0,0,1) 50%,rgba(0,0,0,0) 80%);
+	display:none;
+}
+.V-page.five.show .rainbox{
+	display:block;
+}
+@-webkit-keyframes fadeIn{
+	0%,70%{ opacity:0;}
+}
+.V-page.five .rainbow{
+	position:absolute;
+	top:0;
+	left:50%;
+	-webkit-transform:translateX(-50%);
+	opacity:.75;
 }

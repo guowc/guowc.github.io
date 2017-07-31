@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <meta name="format-detection" content="telephone=no,email=no,adress=no">
-<link rel="stylesheet" href="css/style.css?55">
-<title></title>
+<link rel="stylesheet" href="css/style.css?70">
+<title>海马M6</title>
 <script>
 	;(function(win, doc) {
 		var UA = navigator.userAgent,
@@ -37,6 +37,7 @@
 </script>
 </head>
 <body class="">
+<audio class="music js-music" src="music.mp3" preload autoplay loop></audio>
 <div class="W-loading" id="js-loading">
 	<div class="back"></div>
 	<div class="base"></div>
@@ -104,7 +105,6 @@
 			<p class="text text-1">人体工程学座椅</p>
 			<p class="text text-2">多功能方向盘</p>
 		</div>
-
 	</div>
 	<div class="V-page four js-page">
 		<div class="album">
@@ -124,8 +124,19 @@
 			<span class="item js-item"><b></b></span>
 		</div>
 	</div>
-	<div class="V-page js-page">
-		<p class="test">P5</p>
+	<div class="V-page five js-page">
+		<div class="slogan"></div>
+		<div class="light"></div>
+		<div class="cover"></div>
+		<div class="cover-color"></div>
+		<div class="rainbox">
+			<canvas id="js-rainbow" class="rainbow"></canvas>
+		</div>
+		<div class="sub"></div>
+		<div class="text"></div>
+		<div class="car"></div>
+		<div class="color"></div>
+		<div class="phone"></div>
 	</div>
 	<div class="V-page six js-page">
 		<div class="cover"></div>
@@ -134,7 +145,14 @@
 		<div class="shape-1"></div>
 		<div class="shape-2"></div>
 		<div class="machine">
-			<div class="video"></div>
+			<div class="videobox">
+				<div class="video">
+				</div>
+				<div class="line-1"></div>
+				<div class="line-2"></div>
+				<div class="line-3"></div>
+			</div>
+
 			<div class="os"></div>
 		</div>
 		<div class="sign"></div>
@@ -188,14 +206,104 @@
 		<div class="slogan"></div>
 		<div class="car"></div>
 		<div class="action">
-			<span class="btn">进入官网</span>
-			<span class="btn">点击购买</span>
+			<a href="http://www.ihaima.com/frmm6index.aspx#;s=index" class="btn">进入官网</a>
+			<a href="http://www.ihaima.com/mall/frmmallcarview.aspx?ct=%E6%B5%B7%E9%A9%ACM6" class="btn">点击购买</a>
 		</div>
 	</div>
 </div>
 <div class="W-arrow" id="js-arrow"></div>
 <script src="js/zepto.min.js"></script>
 <script src="js/pxloader.js"></script>
+<script>
+var c = document.getElementById('js-rainbow');
+var w = c.width = window.innerWidth,
+    h = c.height = window.innerHeight,
+    ctx = c.getContext( '2d' );
+
+
+    opts = {
+      chars: '|'.split(''),
+      font: '12px monospace',
+      charSize: 14,
+      lineHeight: 10,
+
+      hueSpeed: 2,
+      repaintAlpha: .1,
+
+      stripesParXxY: .1,
+      stripeSpeed: .5,
+      beforeSpawning: 50
+    },
+
+    tick = 0,
+    endX = ( w / opts.charSize + 1 ) |0,
+    endY = ( h / opts.lineHeight + 1 ) |0,
+    sum = w + h,
+    stripes = [];
+
+ctx.font = opts.font;
+
+function loop() {
+
+  window.requestAnimationFrame( loop );
+
+  tick += opts.hueSpeed;
+
+  ctx.fillStyle = 'rgba(0,0,0,alp)'.replace( 'alp', opts.repaintAlpha );
+  ctx.fillRect( 0, 0, w, h );
+
+  stripes.map( function( stripe ){ stripe.step(); } );
+}
+
+function Stripe(){
+
+  this.reset();
+}
+Stripe.prototype.reset = function() {
+
+  this.x = ( Math.random() * endX ) |0;
+  this.y = -Math.random() * opts.beforeSpawning;
+}
+Stripe.prototype.step = function() {
+
+  this.y += opts.stripeSpeed;
+
+  drawLetter( this.x, this.y|0 );
+
+  if( this.y > endX )
+    this.reset();
+}
+
+function drawLetter( x, y ){
+
+  x *= opts.charSize;
+  y *= opts.lineHeight;
+
+  ctx.fillStyle = 'hsl(hue,80%,50%)'.replace( 'hue', ( x + y ) / sum * 360 + tick );
+  ctx.fillText( opts.chars[ ( Math.random() * opts.chars.length ) |0 ], x, y );
+}
+
+for( var i = 0; i < endX*endX * opts.stripesParXxY; ++i )
+  stripes.push( new Stripe );
+
+loop();
+
+window.addEventListener( 'resize', function(){
+
+  w = c.width = window.innerWidth;
+  h = c.height = window.innerHeight;
+  ctx.fillRect( 0, 0, w, h );
+  ctx.font = opts.font;
+
+  endX = ( w / opts.charSize + 1 ) |0;
+  endY = ( h / opts.lineHeight + 1 ) |0;
+  sum = w + h;
+
+  stripes.length = 0;
+  for( var i = 0; i < endX*endY * opts.stripesParXxY; ++i )
+    stripes.push( new Stripe );
+})
+</script>
 <script>
 var element = {
 	$body : $('body'),
@@ -208,7 +316,8 @@ var element = {
 	$tagbox : $('#js-tagbox'),
 	$road : $('#js-road'),
 	$item : $('.js-item'),
-	$album : $('.js-album')
+	$album : $('.js-album'),
+	$music : $('.js-music'),
 }
 var state = {
 	curPage : 0,
@@ -268,6 +377,7 @@ element.$loadingBtn.bind('tap',function(){
 		element.$body.addClass('loaded')
 	}
 })
+
 $(function(){
 	var Engine = function(){}
 	Engine.prototype = {
@@ -278,6 +388,9 @@ $(function(){
 		},
 		events : function(){
 			var self = this
+			window.addEventListener('touchstart',function(){
+				element.$music[0].play()
+			})
 			element.$road[0].pauseAnimations()
 			element.$stage.bind('swipeUp swipeDown',function(e){
 				if(e.type == 'swipeUp'){
@@ -349,5 +462,6 @@ $(function(){
 	app.init()
 })
 </script>
+<script src="https://s22.cnzz.com/z_stat.php?id=1262833831&web_id=1262833831" language="JavaScript"></script>
 </body>
 </html>

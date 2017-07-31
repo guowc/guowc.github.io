@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>口袋妖怪微信版-快来成为小精灵大师！</title>
+<script>
+
+</script>
+<link rel="stylesheet" type="text/css" href="css/style.css?15">
+<script src="http://webapi.amap.com/maps?v=1.3&key=464e2c3addc64c5894994afe0bbdca21"></script>
+<script>
+/*我司设计稿基准w:640 @2x
+ *前端计算时页面宽度基准320，font-size:20px
+ *依此递增iphone6: fs = 375/320*20
+*/
+;(function(win,doc){
+    var UA = navigator.userAgent,
+        isAndroid = /android|adr/gi.test(UA),
+        isIos = /iphone|ipod|ipad/gi.test(UA) && !isAndroid; //据说某些国产机的UA会同时包含android iphone 字符
+    var docEl = doc.documentElement;
+    var refreshRem =function (){
+        var w =docEl.getBoundingClientRect().width || 320;
+        var fs = w/320 * 20;
+        fs = fs > 40 ? 40 : fs;
+        docEl.style.fontSize = fs+'px';
+    },refreshRemId;
+    win.addEventListener('resize', function() {
+        clearTimeout(refreshRemId);
+        refreshRemId = setTimeout(refreshRem, 100);
+    }, false);
+    refreshRem();
+})(window,document);
+</script>
+</head>
+<img src="images/go_ball_s.png" class="Image share" alt="loadimg">
+<img src="images/share.png" class="Image share" alt="shareImg">
+<body class="State">
+<div class="View section State" id="J_section">
+    <div class="Frame map" id="gomap"></div>
+    <div class="Widget ball J_touchBtn" id="J_ball"><div class="ball"></div></div>
+    <div class="Widget compass">
+        <div class="pin" id="J_pin"></div>
+    </div>
+    <div class="Widget user J_touchBtn" id="J_userBtn">
+        <div class="avatar avatar_1"></div>
+    </div>
+    <div class="Widget bag J_touchBtn" id="J_bagBtn">
+        <div class="bag"></div>
+    </div>
+    <div class="Widget timer">
+        <p class="text">精灵刷新 <span class="t" id="J_timer">00:00</span></p>
+    </div>
+    <div class="Widget rank J_touchBtn" id="J_rankBtn"></div>
+</div>
+<div class="Modal pushmsg" id="J_pushMsg">
+    <div class="inner"><span class="close">不再提示</span><p class="text">欢迎来到精灵世界~</p></div>
+</div>
+<div class="Modal award" id="J_modalAward">
+    <div class="databox">
+        <p class="text">恭喜你获得</p>
+        <p class="pname">小精灵</p>
+        <div class="pokemon">
+            <img class="img" src="" alt="img">
+        </div>
+        <div class="btnbox">
+            <span class="confirm">收下了</span>
+        </div>
+    </div>
+</div>
+<div class="Modal catch State" id="J_catchBox">
+    <div class="monster" id="J_catchTexture">
+        <img class="texture" src="http://api0.map.bdimg.com/images/blank.gif" alt="">
+    </div>
+    <div class="grass"></div>
+    <div class="property">
+        <div class="topic">
+            <div class="Widget stars">
+                <div class="star"></div>
+            </div>
+        </div>
+    </div>
+    <p class="name">出现了 ! 野生<span class="pm"></span></p>
+    <div class="ballbox J_touchBtn" id="J_catchBall">
+        <div class="ball"></div>
+    </div>
+</div>
+<div class="Modal alert" id="J_alert">
+    <div class="frame">
+        <p class="heading">系统提示</p>
+        <span class="confirm"><em>好的</em></span>
+    </div>
+</div>
+<div class="Modal mask J_mask"></div>
+<div class="Modal bag J_modal" id="J_modalBag">
+    <ul class="tab" id="J_menuTab">
+        <li class="active"><span class="item"></span></li>
+        <li><span class="item"></span></li>
+    </ul>
+    <div class="board J_bagBox" id="J_pokemonBox">
+        <ul class="List pokemon clearfix" id="J_pokemonList"></ul>
+        <span class="load">数据加载中</span>
+    </div>
+    <div class="board J_bagBox" id="J_pokedexBox" style="display:none">
+        <div class="scrollbox">
+            <div class="Module progress" id="J_progress">
+                <div class="probox">
+                    <div class="probar" style="width:40%"></div>
+                </div>
+                <p class="protxt">081/151</p>
+            </div>
+            <ul class="List pokedex clearfix" id='J_pokedexList'></ul>
+        </div>
+    </div>
+</div>
+<div class="Modal user J_modal" id="J_modalUser">
+    <p class="location"><i class="ico"></i><span class="city">未知</span></p>
+    <div class="avatar">
+        <img src="images/transparent.gif" alt="avatar">
+    </div>
+    <div class="board">
+        <p class="location">训练师</p>
+        <p class="name hero">加载中</p>
+        <p class="location">获得成就</p>
+        <p class="name medal J_medal">加载中</p>
+    </div>
+</div>
+
+<div class="Modal guide" id="J_modalGuide">
+    <div class="damu"></div>
+    <div class="roles">
+        <div class="role role-male selected J_setRole" data-sex="1">
+            <div class="figure"></div>
+        </div>
+        <div class="role role-female J_setRole" data-sex="0">
+            <div class="figure"></div>
+        </div>
+    </div>
+    <div class="pokes">
+        <div class="figure">
+            <img src="images/pokemon_big/PM_animation_001.png" alt="" id="J_setFirstFigure">
+        </div>
+        <div class="option">
+            <div class="ball J_setFirstPoke selected" data-number="001"></div>
+            <div class="ball J_setFirstPoke" data-number="007"></div>
+            <div class="ball J_setFirstPoke" data-number="004"></div>
+        </div>
+    </div>
+    <div class="dialog" id="J_typeBox">
+        <p class="text" id="J_typeText"></p>
+        <em class="next" id="J_typeNext"></em>
+    </div>
+</div>
+<div class="Modal pokedex" id="J_modalPokedex">
+    <div class="card">
+        <div class="namebox">
+            <p class="name_cn"></p>
+            <p class="name_jp"></p>
+        </div>
+        <div class="pokebox" id="J_pokebox">
+            <img class="pokeimg" id="J_pokeimg" src="" alt="">
+            <div class="Widget stars">
+                <div class="star"></div>
+            </div>
+        </div>
+        <div class="propbox">
+            <div class="num"></div>
+            <div class="prop"></div>
+        </div>
+        <p class="Widget timer" id="J_distTips"><b class="t">TIPS </b>捕捉半径<span class="t">500</span>米 当前距离<span class="t" id="J_dist">0</span>米</p>
+        <span class="meetbtn" id="J_meetBtn">捕捉</span>
+    </div>
+</div>
+<div class="Modal ranking J_modal" id="J_modalRank">
+    <div class="heading"><span class="text">精灵大师榜</span></div>
+    <div class="View ranking" id="J_rankBox">
+        <ul class="List ranking" id="J_rankList"></ul>
+        <span class="load" id="J_rankLoad"></span>
+    </div>
+</div>
+<!-- <div class="Modal loading" id="J_pageload">
+    <div class="screen"><span class="ball ball-hook"></span></div>
+    <div class="screen"><span class="ball"></span></div>
+</div> -->
+<span class="Module warning" id="J_walkwarn"></span>
+<script src="js/zepto.min.js"></script>
+<script src="http://h5.meitu.com/js/console.min.js"></script>
+<script src="js/pokedex.js"></script>
+<script src="js/iscroll.js"></script>
+<script>
+// alert("由于服务器流量过小，导致访问速度过慢，升级服务器中，带来不便敬请谅解！")
+var API = {
+    getGlassPokemons : 'http://www.guowc.cc/api/pokemonGlass/getGlassPokemons',
+    getMyPokemons : 'http://www.guowc.cc/api/pokemonCatch/getMyPokemons',
+    getRefreshTime : 'http://www.guowc.cc/api/pokemonGlass/getRefreshTime',
+    getRank : 'http://www.guowc.cc/api/sysUser/getIndex',
+    catchPokemon : 'http://www.guowc.cc/api/pokemonCatch/catchPokemon',
+    login : 'http://www.guowc.cc/api/sysUser/login',
+    mock : 'http://www.guowc.cc/api/sysUser/login?openid=o3aw6v1QLA6R7B0w6vPBfL9Ti8Mw'
+}
+var MEDAL = [
+    '见习训练师',
+    '初级训练师',
+    '中级训练师',
+    '高级训练师',
+    '青铜训练师',
+    '白银训练师',
+    '黄金训练师',
+    '钻石训练师',
+    '小精灵大师',
+    '精灵之心',
+];
+</script>
+<script src="js/game.js?13"></script>
+</html>

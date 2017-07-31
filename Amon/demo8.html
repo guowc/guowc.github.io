@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<title>口袋妖怪微信版-快来成为小精灵大师！</title>
+<link rel="stylesheet" type="text/css" href="css/style.css?15">
+<script src="http://webapi.amap.com/maps?v=1.3&key=464e2c3addc64c5894994afe0bbdca21"></script>
+<script>
+;(function(win,doc){
+    var UA = navigator.userAgent,
+        isAndroid = /android|adr/gi.test(UA),
+        isIos = /iphone|ipod|ipad/gi.test(UA) && !isAndroid;
+    var docEl = doc.documentElement;
+    var refreshRem =function (){
+        var w =docEl.getBoundingClientRect().width || 320;
+        var fs = w/320 * 20;
+        fs = fs > 40 ? 40 : fs;
+        docEl.style.fontSize = fs+'px';
+    },refreshRemId;
+    win.addEventListener('resize', function() {
+        clearTimeout(refreshRemId);
+        refreshRemId = setTimeout(refreshRem, 100);
+    }, false);
+    refreshRem();
+})(window,document);
+</script>
+<script>
+const Api = {
+    getGlassPokemons : 'http://www.guowc.cc/api/pokemonGlass/getGlassPokemons',
+    getMyPokemons : 'http://www.guowc.cc/api/pokemonCatch/getMyPokemons',
+    getRefreshTime : 'http://www.guowc.cc/api/pokemonGlass/getRefreshTime',
+    getRank : 'http://www.guowc.cc/api/sysUser/getIndex',
+    catchPokemon : 'http://www.guowc.cc/api/pokemonCatch/catchPokemon',
+    login : 'http://www.guowc.cc/api/sysUser/login',
+    mock : 'http://www.guowc.cc/api/sysUser/login?openid=o3aw6v1QLA6R7B0w6vPBfL9Ti8Mw'
+}
+</script>
+</head>
+<body class="State">
+<div class="View section State" id="J_section">
+    <div class="Frame map" id="js-map"></div>
+    <div class="Widget compass">
+        <div class="pin" id="js-pin"></div>
+    </div>
+</div>
+<div class="Modal pokedex js-modal" id="js-modal-pokedex">
+    <div class="card">
+        <div class="namebox">
+            <p class="name_cn"></p>
+            <p class="name_jp"></p>
+        </div>
+        <div class="pokebox">
+            <img class="pokeimg" src="" alt="">
+            <div class="Widget stars">
+                <div class="star"></div>
+            </div>
+        </div>
+        <div class="propbox">
+            <div class="num"></div>
+            <div class="prop"></div>
+        </div>
+        <p class="Widget timer tips"><b class="t">TIPS </b>捕捉半径<span class="t">500</span>米 当前距离<span class="t dist">0</span>米</p>
+        <span id="js-btn-catch" class="catchbtn">捕捉</span>
+    </div>
+</div>
+<div class="Modal catch js-modal" id="js-modal-catch">
+    <div class="monster">
+        <img class="texture" src="http://api0.map.bdimg.com/images/blank.gif" alt="">
+    </div>
+    <div class="grass"></div>
+    <div class="property">
+        <div class="topic">
+            <div class="Widget stars">
+                <div class="star"></div>
+            </div>
+        </div>
+    </div>
+    <p class="name">出现了 ! 野生<span class="pname"></span></p>
+    <div class="ballbox">
+        <div class="ball"></div>
+    </div>
+</div>
+<div class="Modal award" id="js-modal-award">
+    <div class="databox">
+        <p class="text">恭喜你获得</p>
+        <p class="pname">小精灵</p>
+        <div class="pokemon">
+            <img class="img" src="" alt="img">
+        </div>
+        <div class="btnbox">
+            <span class="confirm">收下了</span>
+        </div>
+    </div>
+</div>
+<div class="Modal alert" id="js-modal-alert">
+    <div class="frame">
+        <p class="heading">系统提示</p>
+        <span class="confirm"><em>好的</em></span>
+    </div>
+</div>
+<script src="js/zepto.min.js"></script>
+<script src="js/pokedex.js"></script>
+<script>
+var Element = {
+    $body : $("body"),
+    $pokedex : $("#js-modal-pokedex"),
+    $catch : $("#js-btn-catch"),
+    $catchBox : $("#js-modal-catch"),
+    $modal : $(".js-modal"),
+    $award : $("#js-modal-award"),
+    $alert : $("#js-modal-alert"),
+}
+var State = {
+    heroPoint : [],
+    markers : [],
+    bag : [],
+    catching : false,
+}
+var Common = {
+    gomap : {},
+}
+var Method = {
+    fetch : function(url,param,callback){
+        var cbk = callback || function(){};
+        $.ajax({
+            url : url,
+            dataType : 'jsonp',
+            data : param,
+            success:function(data){
+                cbk(data);
+            }
+        })
+    },
+    getPid : function(pid){
+        return pid.length == 1 ? '00' + pid : pid.length == 2 ? '0' + pid : pid
+    },
+    random : function(x){
+        return Math.random() < x ;
+    },
+    loadImg : function(img,callback){
+        var cbk = callback || {};
+        var image = new Image();
+        image.src = img;
+        image.onload = function(){
+            cbk();
+        }
+    }
+}
+
+var Game = function() {};
+Game.prototype = {
+    init : function() {
+        this.createMap()
+        this.createCompass()
+        this.getMyPokemons()
+    },
+    createMap : function() {
+        //地图初始化
+        Common.gomap = new AMap.Map('js-map', {
+            zoomEnable : false,
+            zoom:17,
+            center: [118.18088, 24.4896],
+            mapStyle : 'amap://styles/e6fa21422698f8a28585158d9d075f1d',
+        });
+        this.localMap();
+    },
+    localMap : function() {
+        var self = this
+        //Geo持续定位插件
+        Common.gomap.plugin('AMap.Geolocation',function(){
+            var geo = new AMap.Geolocation({
+                showButton: false,
+                showCircle: false,
+                markerOptions : {
+                    content : '<div class="Symbol hero"></div>',
+                }
+            });
+            Common.gomap.addControl(geo);
+
+            //首次定位成功
+            geo.getCurrentPosition(function(status,result){
+                console.log(result);
+                State.heroPoint.lng = result.position.lng;
+                State.heroPoint.lat = result.position.lat;
+                self.getPokemon(State.heroPoint)
+            });
+            geo.watchPosition();
+            AMap.event.addListener(geolocation, 'complete', function(result){
+                console.log(result); //持续定位成功
+            });
+            AMap.event.addListener(geolocation, 'error', function(result){
+                console.log(result); //定位失败
+            });
+        })
+    },
+    getPokemon : function(point) {
+        var self = this
+        Method.fetch(Api.getGlassPokemons,{ lng:point.lng,lat:point.lat },function(data){
+            var res = data.data;
+            for(var i = 0; i < res.length; i++){
+                self.addPokemon(res[i]);
+            }
+        });
+    },
+    addPokemon : function(data) {
+        var self = this;
+        var nid = parseInt(data.number);
+        var pid = Method.getPid(data.number); //获取精灵编号（格式化'12'=>'012'）;
+        var id = data.id;
+        var marker =  new AMap.Marker({
+            map: Common.gomap,
+    		position: [data.position_x, data.position_y],
+            icon: new AMap.Icon({
+                size: new AMap.Size(40, 40),
+                imageSize : new AMap.Size(40, 40),
+                image: "images/pokemon/PM_icon_"+ pid +".png",
+            }),
+            extData : {
+                nid : nid,
+                id  : id,
+            }
+        });
+        marker.on('click',function(e){
+            self.clickPokemon(e)
+        })
+    },
+    clickPokemon : function(e){
+        var self = this;
+        var data = e.target.getExtData();
+        self.initPokecard(data.nid,e.target);
+    },
+    initPokecard : function(nid, target){
+        var self = this;
+        var $card = Element.$pokedex,
+            $catch = Element.$catch;
+        var data = Pokedex[nid];
+        var props = '';
+        var imgUrl = 'images/pokemon_big/PM_animation_'+ data.number +'.png';
+
+        for(var i = 0; i< data.properties.length; i++){
+            var color = Pokedexcolor[data.properties[i]].split(',');
+            props += '<div class="item" style="background:'+ color[1] +';border-color:'+ color[0] +'">'+ data.properties[i] +'</div>';
+        }
+
+        $card.find('.name_cn').text(data.name);
+        $card.find('.name_jp').text(data.name_jp + data.name_en);
+        $card.find('.star')[0].className = 'star star_' + data.star;
+        $card.find('.num').text('No.' + data.number);
+        $card.find('.prop').html(props);
+        $card.find('.pokebox').removeClass('loaded');
+        Method.loadImg(imgUrl, function() {
+            $card.find('.pokeimg').attr('src',imgUrl);
+            $card.find('.pokebox').addClass('loaded');
+        });
+        $card.addClass('show');
+        $card.off().on('touchend',function(e){
+            $(this).removeClass('show');
+            e.preventDefault();
+        })
+        if(target) {
+            var ext = target.getExtData();
+            var pa = target.getPosition(),
+                pb = [State.heroPoint.lng,State.heroPoint.lat];
+            var dist = parseInt(pa.distance(pb));
+
+            $card.addClass('catch');
+            $catch.off();
+            if( dist < 500 ) {
+                $card.find('.tips').hide();
+                if(State.bag.indexOf(data.number) != -1){
+                    $catch.removeClass().addClass('ownbtn').text('已获得');
+                }else{
+                    $catch.removeClass().addClass('catchbtn').text('捕捉');
+                    $catch.on('touchend',function(){
+                        target.setMap(null);
+                        self.meetPokemon(ext.nid,ext.id)
+                    })
+                }
+            }else{
+                $card.find('.dist').text(dist);
+                $card.find('.tips').show();
+                $catch.removeClass().addClass('overbtn').text('走近点啊亲');
+            }
+        }else{
+            $card.removeClass('catch');
+            $card.find('.tips').hide();
+        }
+    },
+    meetPokemon : function(nid,id){
+        var self = this
+        Element.$modal.removeClass('show');
+        Element.$body.addClass('State catching');
+        Element.$catchBox.find('.texture').attr('src','images/pokemon_big/PM_animation_' + Pokedex[nid].number + '.png');
+        Element.$catchBox.find('.pname').text(Pokedex[nid].name);
+        Element.$catchBox.find('.star')[0].className = 'star star_' + Pokedex[nid].star;
+        Element.$catchBox.find('.ballbox').off().on('touchend',function(){
+            self.catchPokemon(nid,id)
+        })
+    },
+    catchPokemon : function(nid,id){
+        var self = this;
+        var name = Pokedex[nid].name,
+            pid = Pokedex[nid].number,
+            star = Pokedex[nid].star,
+            rate = 0.8 -  star / 10;
+
+        if(State.catching) return;
+
+        if(Method.random(rate)){
+            Element.$catchBox.addClass('catchwin');
+            Method.fetch(Api.catchPokemon,{ id : id },function(){
+                console.log('捕捉成功！')
+            });
+            setTimeout(function(){
+                self.awardBox('images/pokemon_big/PM_animation_' + pid + '.png',name,function(){
+                    Element.$body.removeClass();
+                    Element.$catchBox.removeClass('catchwin');
+                    State.catching = false;
+                });
+            },3200);
+        }else{
+            Element.$catchBox.addClass('catchfail');
+            Method.fetch(Api.catchPokemon,{ id : id , flag : true},function(){
+                console.log('捕捉失败！')
+            });
+            setTimeout(function(){
+                self.alertBox(name + ' 逃跑了!',function(){
+                    Element.$body.removeClass();
+                    Element.$catchBox.removeClass('catchfail');
+                    State.catching = false;
+                });
+            },1200);
+        }
+        State.catching = true;
+    },
+    awardBox : function(img,name,callback){
+        var cbk = callback || function(){};
+        Element.$award.addClass('show');
+        Element.$award.find('.img').attr('src',img);
+        Element.$award.find('.pname').text(name);
+        Element.$award.find('.confirm').bind('tap',function(){
+            Element.$award.removeClass('show');
+            cbk();
+        });
+    },
+    alertBox : function(title,callback){
+        var cbk = callback || function(){};
+        Element.$alert.addClass('show');
+        Element.$alert.find('.heading').text(title);
+        Element.$alert.find('.confirm').bind('tap',function(){
+            Element.$alert.removeClass('show');
+            cbk();
+        });
+    },
+    getMyPokemons : function(){
+        Method.fetch(Api.getMyPokemons,{},function(data){
+            for(var i = 0 ;i < data.data.length; i++){
+                State.bag.push(Method.getPid(data.data[i].number));
+            }
+        });
+    },
+    createCompass : function() {
+        //创建罗盘
+        if (window.DeviceOrientationEvent) {
+            window.addEventListener("deviceorientation", function(event){
+                var dir =  event.webkitCompassHeading;
+                $("#js-pin").css("-webkit-transform",'rotate('+ (360 - dir) +'deg)');
+            }, false);
+        }
+    }
+}
+var Go = new Game();
+Go.init();
+
+</script>
+</html>
