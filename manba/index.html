@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-select:0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<title></title>
+<style>
+  *{padding:0;margin:0}
+  html,body{
+    background:#3a2208;
+    overflow:hidden;
+  }
+  .Canvas,.Debugger{
+    position:absolute;
+    top:0;
+  }
+  .Debugger:after{
+    content:'';
+    background:url('res/kuang.png') no-repeat;
+    width:58px;
+    height:10px;
+    position:absolute;
+    bottom:560px;
+    right:377px;
+  }
+  .score{
+    position:absolute;
+    left:50%;
+    width:200px;
+    margin-left:-100px;
+    top:100px;
+    font-size:80px;
+    font-weight:700;
+    color:#fff;
+  }
+  .text{
+    position:absolute;
+    left:50%;
+    width:200px;
+    margin-left:-100px;
+    font-size:18px;
+    top:200px;
+    color:#fff;
+    font-weight:100;
+    opacity:0.7;
+  }
+</style>
+</head>
+<body>
+<div id="canvas" class="Canvas"></div>
+<div class="Debugger" id="debugger">
+  <p class="score" id="score">0</p>
+  <p class="text">score</p>
+</div>
+
+<script src="http://f2er.meitu.com/gwc/lib/pixi.min.js"></script>
+<script src="http://f2er.meitu.com/gwc/lib/matter.min.js"></script>
+<script>
+// 0 - matterjs
+var Render = Matter.Render
+var World = Matter.World
+var Bodies = Matter.Bodies
+var Body = Matter.Body
+var Composites = Matter.Composites
+
+var engine = Matter.Engine.create()
+var world = engine.world
+world.gravity.y = 1.6
+
+// 1 - 调试器
+var render = Render.create({
+  element: document.getElementById('debugger'),
+  engine: engine,
+  options: {
+    width: 1200,
+    height: 800,
+    wireframes: false,
+    background:'rgba(0,0,0,0)'
+  }
+})
+var App, Stage
+var ball
+var shoting = false, score = 0
+var scoreEl = document.getElementById('score')
+
+var Game = function(){
+  this.init()
+};
+Game.prototype = {
+  init : function(){
+    // 2 - 初始化PIXI canvas
+    var canvas = document.getElementById('canvas')
+    App = new PIXI.Application({
+        width: 1200,
+        height: 800,
+        transparent: true
+    })
+    Stage = App.stage
+    canvas.appendChild(App.view)
+
+    // 3 - 创建球场背景
+    const court = PIXI.Sprite.from('res/place.png');
+    court.y = 111
+    Stage.addChild(court)
+
+    // 4 - 创建篮板、地板（静态刚体）
+    var floor = Bodies.rectangle(760, 500, 200, 10, {
+      isStatic: true,
+      render: { visible: false}
+    })
+    var rebound = Bodies.rectangle(840, 186, 10, 140, {
+      isStatic: true,
+      render: { visible: false}
+    })
+    // 5 - 创建篮框2个关键碰撞点（静态刚体）
+    var hoop1 = Bodies.circle(766, 234, 4, {
+      isStatic: true,
+      render: {
+        visible: false,
+        fillStyle: '#89ff3a',
+        opacity:.8
+      }
+    })
+    var hoop2 = Bodies.circle(822, 234, 4, {
+      isStatic: true,
+      render: {
+        visible: false,
+        fillStyle: '#89ff3a',
+        opacity:.8
+      }
+    })
+    // 6 - 创建篮网
+    var nets =  Composites.softBody(764, 234, 8, 5, 0, 0, false, 4, { // 篮球网
+        firction: 1, // 摩擦力
+        frictionAir: 0.08, // 空气摩擦力
+        restitution: 0.0001, // 弹性
+        render: { visible: false },
+        collisionFilter: { group: Body.nextGroup(true) }
+    }, {
+        render: { lineWidth: 2, strokeStyle: "#fff" },
+        stiffness: 1.4
+    })
+    nets.bodies[0].isStatic = true;
+    nets.bodies[7].isStatic = true;
+    World.add(world, [
+        floor,
+        rebound,
+        hoop1,
+        hoop2,
+        nets
+    ]);
+
+    // 7 - 启动引擎和渲染器
+    Matter.Engine.run(engine)
+    Matter.Render.run(render)
+
+    // 8 - 启动刷新器
+    Matter.Events.on(engine, 'afterUpdate', (e) => {
+      this.update()
+    })
+  },
+  shot (x, y, fx, fy) {
+    // 11 - 创建篮球刚体
+    ball = Bodies.circle(x, y, 24, {
+      restitution: 0.6,
+      density:2,
+      firction: 1,
+      render: {
+          sprite: {
+              texture: 'res/ball.png'
+          }
+      }
+    })
+    World.add(world, ball)
+    // 12 - 施加初始向量
+    Body.setVelocity(ball, { x: fx, y: fy });
+    // 13 - 施加角速度向量
+    Body.setAngularVelocity(ball, -0.1);
+  },
+  update() {
+    if (ball && Math.abs(ball.position.x - 794) < 10 && ball.position.y > 240 && ball.position.y < 280) {
+      if (!shoting) return
+      // World.remove(world, ball)
+      score++
+      scoreEl.innerText = score
+      shoting = false
+    }
+  },
+}
+var game = new Game();
+
+// 10 - 获取篮球初始发射向量
+var startX, startY, endX, endY, power
+window.addEventListener('mousedown', function(e){
+  startX = e.clientX
+  startY = e.clientY
+})
+window.addEventListener('mouseup', function(e){
+  shoting = true
+  endX = e.clientX
+  endY = e.clientY
+  var fx = (endX - startX) / 10,
+      fy = (endY - startY) / 10
+  game.shot(startX, startY, fx, fy)
+})
+</script>
+
+</body>
+</html>
