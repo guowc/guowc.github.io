@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<link rel="stylesheet" href="css/style.css">
+<title></title>
+</head>
+<body>
+<div class="Loader" id="loader">
+  <div class="shoes"><div class="tips">请戴上耳机</div></div>
+  <div class="play" id="play"></div>
+</div>
+<div class="Poster" id="poster"></div>
+<div class="Stage" id="stage">
+  <div class="Lightbox">
+    <div class="score a" id="score">
+      <i class="n0"></i>
+      <i class="n0"></i>
+      <i class="n0"></i>
+    </div>
+    <div class="score b">
+      <i class="n9"></i>
+      <i class="n9"></i>
+      <i class="n9"></i>
+    </div>
+    <div class="time">
+      <i class="n0"></i>
+      <i class="n4"></i>
+      <i class="dot"></i>
+      <i class="n0"></i>
+      <i class="n0"></i>
+    </div>
+  </div>
+  <div id="canvas" class="Canvas">
+    <div class="Court" id="court"></div>
+  </div>
+  <div class="Physic" id="physic"></div>
+</div>
+<div class="Mask" id="mask"></div>
+<div class="Record" id="record">
+</div>
+<div class="Aside" id="aside">
+</div>
+<div class="Bigtxt" id="bigtxt">
+  <p>你见过凌晨4点的洛杉矶吗?</p>
+  <p class="en">Have you seen Los Angeles at 4 AM?</p>
+</div>
+<div class="Endtxt" id="endtxt">
+</div>
+<div class="Restart" id="restart">KEEP GOING</div>
+<div class="Author">
+  <div class="bubble">
+    <p>插画: 冬眠的熊（<a href="http://xiangxdx.lofter.com/">Lofter</a>）</p>
+    <p>开发: Guowc（<span>wx:weicheng000</span>）</p>
+    <p class="st">致敬伟大的篮球运动员 - 科比·布莱恩特</p>
+  </div>
+</div>
+
+<script>
+var START = [
+  {
+    en: 'At seventeen time NBA ALLSTAR',
+    cn: '17次全明星'
+  },
+  {
+    en: 'The third high score in NBA history',
+    cn: 'NBA得分榜第3位'
+  },
+  {
+    en: 'The 2008 MVP',
+    cn: '2008年MVP'
+  },
+  {
+    en: 'Two time NBA Final’s MVP',
+    cn: '二次总决赛MVP'
+  },
+  {
+    en: 'Five time NBA champion',
+    cn: '五次NBA总冠军'
+  },
+  {
+    en: 'A six-six guard from Lower Merion high school',
+    cn: '来自马里昂高中的6尺6寸后卫'
+  },
+  {
+    en: 'Where he won the title in 1996',
+    cn: '1996年为他们赢得冠军的'
+  },
+  {
+    en: 'Number 24 - Kobe Bryant！',
+    cn: '24号 - 科比·布莱恩特！'
+  },
+]
+var NEWS = [
+  {
+    en: 'Basketball fans',
+    cn: '篮球迷们'
+  },
+  {
+    en: 'Kobe Bryant was killed at helicopter crash',
+    cn: '科比·布莱恩特在直升机坠毁中丧生'
+  },
+  {
+    en: 'Please join us in the moment silence for kobe Bryant',
+    cn: '让我们一起为科比默哀'
+  },
+  {
+    en: 'Rest and peace, mamba.',
+    cn: '安息吧, 曼巴'
+  },
+  {
+    en: 'What can i say, mamba out.',
+    cn: ''
+  },
+]
+var RECORD = [
+  {
+    en: 'Good job man.',
+    cn: '干的漂亮！'
+  },
+  {
+    en: 'Don’t stop, keep shooting.',
+    cn: '别停下来, 继续投'
+  },
+  {
+    en: 'I would rather go 0-30 from 0-9.',
+    cn: '我宁愿30投0中, 也不愿意9投0中'
+  },
+  {
+    en: 'Failure is more painful than death.',
+    cn: '失败比死亡更痛苦'
+  },
+  {
+    en: 'If you are afraid of failure, you will fail.',
+    cn: '如果你害怕失败, 你就会失败'
+  },
+  {
+    en: 'My greatest enemy is myself.',
+    cn: '最大的敌人, 是你自己'
+  },
+  {
+    en: 'Im the best.',
+    cn: '我是最强的'
+  },
+  {
+    en: 'If you really want it.',
+    cn: '只要心够绝'
+  },
+  {
+    en: 'You are not my opponent.',
+    cn: '你, 不是我的对手'
+  },
+  {
+    en: 'Somebody has to win, so why not be me?',
+    cn: '总是有人要赢的, 为什么不能是我呢'
+  },
+  {
+    en: 'Boos do not block dunks.',
+    cn: '嘘声又盖不了我帽'
+  },
+  {
+    en: 'What I do now is to be more perfect.',
+    cn: '我现在所做的一切, 都是为了追求更加完美'
+  },
+  {
+    en: 'Second place means the first loser.',
+    cn: '第二名就意味着你是头号输家'
+  },
+  {
+    en: 'Heros comes and go, but legends are forever.',
+    cn: '英雄是一时的, 但传奇是一世的'
+  },
+  {
+    en: 'I don’t want to do second Jordan. I just want to be the first Kobe.',
+    cn: '我不想做第二个乔丹, 我只想做第一个科比'
+  },
+  {
+    en: 'If people have made history an easy job to do, why bother trying to.',
+    cn: '如果创造历史轻而易举, 人们何苦对此费心尽力'
+  },
+  {
+    en: 'If you work hard, the dream will come true.',
+    cn: '如果你努力了, 梦想就会实现'
+  },
+  {
+    en: 'Maybe the dream won’t come true, but it will come better.',
+    cn: '也许梦想不会成真, 但更好的会到来',
+  },
+  {
+    en: 'Some of life, you have to go to the great challenges.',
+    cn: '生命的有些时候, 你必须去挑战伟大'
+  },
+  {
+    en: 'I’m never going to retreat, my dictionary without compromise.',
+    cn: '我从来没打算退缩, 我的字典没有妥协'
+  },
+  {
+    en: 'What I do is just repeating.',
+    cn: '我所做的, 只是不停的重复'
+  },
+  {
+    en: 'keep moving, keep going!',
+    cn: '继续移动, 继续向前走！'
+  },
+  {
+    en: 'What can i say, mamba out.',
+    cn: ''
+  }
+]
+var ENDING = [
+  {
+    en: 'Heros comes and go, but legends are forever.',
+    cn: '英雄是一时的，但传奇是永恒的'
+  },
+  {
+    en: 'Mamba, never out',
+    cn: ''
+  }
+]
+</script>
+<script src="js/pixi-legacy.js"></script>
+<script src="js/matter.min.js"></script>
+<script src="js/howler.min.js"></script>
+<script src="js/Tween.min.js"></script>
+<script src="js/index.js"></script>
+
+</body>
+</html>
