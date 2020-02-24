@@ -494,3 +494,64 @@ body{
   font-size:12px;
   padding-top:5px;
 }
+.Loading{
+  position:absolute;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  background:rgba(0,0,0,0.3);
+  transition:all .5s;
+  visibility:hidden;
+  opacity:0;
+}
+.Loading.show{
+  opacity:1;
+  visibility:visible;
+}
+.Loading.show .body{
+  transform:scale(1);
+}
+.Loading .body{
+  transition:transform .5s;
+  transform:scale(0.5);
+  width:120px;
+  height:40px;
+  background:rgba(255,255,255,.1);
+  border-radius:5px;
+  left:50%;
+  top:50%;
+  position:absolute;
+  margin:-60px 0 0 -20px;
+  line-height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#ffcd51;
+  font-size:14px;
+}
+.Loading .icon{
+  width:14px;
+  height:14px;
+  border:#ffcd51 2px solid;
+  border-radius:100%;
+  margin-right:6px;
+  position:relative;
+  animation:rotate 1s linear infinite;
+}
+@keyframes rotate {
+  0%{ transform:rotate(0deg)}
+  100%{ transform:rotate(360deg)}
+}
+.Loading .icon:after{
+  content:'';
+  width:5px;
+  height:5px;
+  left:50%;
+  margin-left:-2px;
+  border-radius:100%;
+  background:#ffcd51;
+  position:absolute;
+  display:block;
+  top:-3px;
+}

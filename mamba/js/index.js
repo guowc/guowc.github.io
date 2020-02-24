@@ -69,6 +69,7 @@ var bigEl = document.getElementById('bigtxt')
 var endEl = document.getElementById('endtxt')
 var resEl = document.getElementById('restart')
 var guideEl = document.getElementById('guide')
+var loadingEl = document.getElementById('loading')
 
 var soundsInited = false
 var Sound
@@ -527,9 +528,11 @@ function bonus() {
   asideEl.className = 'Aside'
   asideEl.innerHTML = ''
   trigger = true
+  loadingEl.className = 'Loading show'
   var mambaout = new Howl({
     src: ['sounds/mambaout.mp3'],
     onload: function() {
+      loadingEl.className = 'Loading'
       setTimeout(()=>{
         mambaout.play()
         mamba.setNews()
