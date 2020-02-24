@@ -9,7 +9,7 @@ console.log('')
 console.log(`你见过凌晨4点的洛杉矶吗？`);
 console.log(`非凡的成就，往往伴随着非凡的孤独`);
 console.log(`我所做的，就是一直重复、重复、重复`);
-console.log(`我们见证了一个时代的终结，但，信仰不灭`);
+console.log(`这是是一个时代的终结，但，信仰不灭`);
 console.log(`Mamba, never out`);
 console.log(`%c=====================================`, 'color:#aaa');
 console.log(`%c彩蛋：投中999球完成训练，触发隐藏彩蛋`, 'color:#03A9F4');
