@@ -10,6 +10,34 @@ html,body{
 body{
   /* transform:scale(0.8); */
 }
+.Guide{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  color:#fff;
+  margin-top:-100px;
+  line-height:1.5;
+  opacity:0;
+  visibility:hidden;
+  transition:all 1s;
+}
+.Guide.show{
+  visibility:visible;
+  opacity:1;
+}
+.Guide b{
+  color:#ffcd51;
+}
+.Guide p{
+  text-align:center;
+  font-size:14px;
+  opacity:0.6;
+  animation:guide 1.2s ease-in-out infinite;
+}
+@keyframes guide {
+  30%{ opacity:0.3}
+}
 .Mask{
   background:#100819;
   position:absolute;
