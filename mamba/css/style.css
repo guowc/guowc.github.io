@@ -412,7 +412,7 @@ body{
   position:absolute;
   left:50%;
   top:50%;
-  margin:-20px 0 0 -75px;
+  margin:40px 0 0 -75px;
   border-radius:30px;
   text-align:center;
   background:#e9b32f;
@@ -422,7 +422,7 @@ body{
 }
 .Restart.show{
   opacity:1;
-  transition:opacity 2s 8s;
+  transition:opacity 3s 3s;
 }
 .Restart::before{
   /* content:''; */
