@@ -530,7 +530,7 @@ function bonus() {
   trigger = true
   loadingEl.className = 'Loading show'
   var mambaout = new Howl({
-    src: ['sounds/mambaout.mp3'],
+    src: ['http://mtapplet-z0.bkt.clouddn.com/mambaout.mp3'],
     onload: function() {
       loadingEl.className = 'Loading'
       setTimeout(()=>{
