@@ -454,6 +454,9 @@ Mamba.prototype = {
         localStorage.setItem('score', score)
         this.updateScore(score)
         guideEl.className = 'Guide'
+        if (score == 999) {
+          bonus()
+        }
       }
     }
 
@@ -516,23 +519,25 @@ window.addEventListener('keyup', function(e){
   if (trigger) return
   keys.push(e.keyCode)
   if (keys[0] + keys[1] === 102 || Math.abs(keys[0] - keys[1]) === 2){
-    var posterEl = document.getElementById('poster')
-    asideEl.className = 'Aside'
-    asideEl.innerHTML = ''
-    trigger = true
-    var mambaout = new Howl({
-      src: ['sounds/mambaout.mp3'],
-      onload: function() {
-        setTimeout(()=>{
-          mambaout.play()
-          mamba.setNews()
-        }, 2000)
-        document.body.className = 'Mambaout'
-      }
-    });
-
+    bonus()
   }
 })
+function bonus() {
+  var posterEl = document.getElementById('poster')
+  asideEl.className = 'Aside'
+  asideEl.innerHTML = ''
+  trigger = true
+  var mambaout = new Howl({
+    src: ['sounds/mambaout.mp3'],
+    onload: function() {
+      setTimeout(()=>{
+        mambaout.play()
+        mamba.setNews()
+      }, 2000)
+      document.body.className = 'Mambaout'
+    }
+  });
+}
 
 playEl.addEventListener('click', function(){
   loaderEl.remove()
