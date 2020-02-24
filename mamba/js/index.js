@@ -7,17 +7,18 @@ console.log("%c| |\\ \\    _| |_   | |   ", 'color:#ddd')
 console.log("%c\\_| \\_|(_)\\___/(_)\\_| ", 'color:#ddd')
 console.log('')
 console.log(`你见过凌晨4点的洛杉矶吗？`);
+console.log(`这是一个枯燥的投篮训练`);
+console.log(`也是科比每天都在重复做的事`);
 console.log(`非凡的成就，往往伴随着非凡的孤独`);
-console.log(`我所做的，就是一直重复、重复、重复`);
-console.log(`这是是一个时代的终结，但，信仰不灭`);
-console.log(`Mamba, never out`);
+console.log(`这是一个时代的终结`);
+console.log(`但，信仰不灭`);
 console.log(`%c=====================================`, 'color:#aaa');
 console.log(`%c彩蛋：投中999球完成训练，触发隐藏彩蛋`, 'color:#03A9F4');
 console.log(`%c如果你累了，试着同时按下键盘的2和4键，也可触发彩蛋`, 'color:#eee')
 console.log(`%c=====================================`, 'color:#aaa');
 console.log('')
 console.log(`%c开发者：Guowc（微信weicheng000）`, 'color:#4CAF50')
-console.log(`%c插画师：冬眠的熊 https://weibo.com/u/2178987865`, 'color:#4CAF50')
+console.log(`%c插画师：冬眠的熊 http://xiangxdx.lofter.com`, 'color:#4CAF50')
 
 // 0 - matterjs
 var Render = Matter.Render
@@ -56,6 +57,7 @@ var playState = false
 var balls = [], sprites
 var shoting = false
 var score = 0
+var jsonLoaded = false
 var stageEl = document.getElementById('stage')
 var maskEl = document.getElementById('mask')
 var scoreEl = document.getElementById('score')
@@ -75,18 +77,19 @@ var startDJ
 var ending = localStorage.getItem('ending')
 if (ending) {
   playState = true
-  setTimeout(()=>{
-    maskEl.className = 'Mask hide'
-    loaderEl.className = "Loader hide"
-  }, 1000)
+  var tk = setInterval(()=>{
+    if (jsonLoaded) {
+      maskEl.className = 'Mask hide'
+      loaderEl.className = "Loader hide"
+      clearInterval(tk)
+    }
+  }, 500)
 } else {
   startDJ = new Howl({
     src: ['sounds/start.mp3'],
   });
   startDJ.on('load', () => {
-    setTimeout(function(){
-      loaderEl.className = "Loader loaded"
-    }, 1000)
+    loaderEl.className = "Loader loaded"
   })
 }
 
@@ -103,7 +106,7 @@ window.addEventListener('mousedown', function(){
 })
 var st, dt = 0
 var Kobe
-var ballSprite = new PIXI.Sprite.from('res/ball.png');
+var ballTemp = PIXI.Sprite.from('res/ball.png');
 
 var Mamba = function(){
   this.init()
@@ -293,7 +296,6 @@ Mamba.prototype = {
       var say = RECORD[index]
       var tpl = '<p class="en">'+ say.en +'</p><p class="cn">'+ say.cn +'</p>'
       recordEl.innerHTML = tpl
-
       // recordEl.className = 'Record'
       // setTimeout(function(){
       //   recordEl.className = 'Record show'
@@ -340,6 +342,7 @@ Mamba.prototype = {
     App.loader
     .add(file)
     .load(function(){
+      jsonLoaded = true
       const frames = [];
 
       for (let i = 1; i <= 37; i++) {
@@ -419,7 +422,7 @@ Mamba.prototype = {
     })
     World.add(world, bodies)
     var sprite = new PIXI.Container
-    var ball = new PIXI.Sprite.from('res/ball.png')
+    var ball = PIXI.Sprite.from('res/ball.png');
     ball.anchor.set(.5)
     var shadow = PIXI.Sprite.from('res/shadow.png');
     shadow.anchor.set(.5)
