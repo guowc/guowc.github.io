@@ -87,7 +87,7 @@ if (ending) {
   }, 500)
 } else {
   startDJ = new Howl({
-    src: ['sounds/start.mp3'],
+    src: ['http://mtapplet-z0.bkt.clouddn.com/mambastart.mp3'],
   });
   startDJ.on('load', () => {
     loaderEl.className = "Loader loaded"
