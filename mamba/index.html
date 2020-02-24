@@ -63,7 +63,11 @@
 <div class="Loading" id="loading">
   <div class="body"><i class="icon"></i>加载中...</div>
 </div>
-
+<script>
+if(/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+    alert('暂不支持移动端，请用PC浏览器访问')
+}
+</script>
 <script>
 var START = [
   {
@@ -233,6 +237,5 @@ var ENDING = [
 <script src="https://cdn.bootcss.com/howler/2.1.2/howler.min.js"></script>
 <script src="js/Tween.min.js"></script>
 <script src="js/index.js?8"></script>
-
 </body>
 </html>
