@@ -510,7 +510,7 @@ stageEl.addEventListener('mouseup', function(e){
   // },850)
 })
 window.addEventListener('resize', function(){
-  location.reload(true)
+  // location.reload(true)
 })
 var keys = [], trigger = false
 window.addEventListener('keydown', function(e){
